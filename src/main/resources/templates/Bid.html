@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<header class = "topBar">
+    <picture class ="logo" src="../img/Logo.png"> </picture>
+    <h1 class="Number">+79819823125</h1>
+    <i class="bi bi-telephone-fill"></i> <!-- Заполненная иконка телефона -->
+    <!-- Заполненная иконка корзины -->
+</header>
+<div class="container">
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a th:href="@{/#Block1}">Диагностика и ремонт</a></li>
+                <li><a th:href="@{/#Block2}">Запчасти</a></li>
+                <li><a th:href="@{/#Block3}">Консультации</a></li>
+                <li><a th:href="@{/#Block4}" >Обслуживание</a></li><!--                    <i class="bi bi-cart-fill"></i>-->
+                <li><i class="bi bi-cart-fill icon-large"></i></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="line"></div>
+    <div class = "mainBlogBid">
+        <form class="SendForm" action="#" th:action="@{/Sendform}" th:object="${sendForm}" method="post">
+            <div>Оформление заявки</div>
+
+            <input type="text" placeholder="Введите ваше имя" th:field="*{name}" id="Name"/>
+            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            <br/>
+
+            <input type="text" placeholder="Введите номер двигателя" th:field="*{motor_number}" id="motorNumber"/>
+            <br/>
+
+            <input type="number" placeholder="Введите номер телефона" th:field="*{phone_number}" id="PhoneNumber"/>
+            <div th:if="${#fields.hasErrors('phone_number')}" th:errors="*{phone_number}" class="error"></div>
+            <br/>
+
+            <input type="email" class="text-field__input" placeholder="Введите вашу почту" th:field="*{email}" id="email"/>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+            <br/>
+
+            <textarea placeholder="Опишите проблему" th:field="*{description}" id="Problem"></textarea>
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error"></div>
+            <br/>
+
+            <button type="submit">Отправить заявку</button>
+        </form>
+    </div>
+</div>
+<div class="FooterBid">
+</div>
+</body>
+</html>
+<!DOCTYPE html>

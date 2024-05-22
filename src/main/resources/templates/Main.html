@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+</head>
+<body>
+<header class = "topBar">
+    <picture class ="logo" src="../img/Logo.png"> </picture>
+    <h1 class="Number">+79819823125</h1>
+    <i class="bi bi-telephone-fill"></i> <!-- Заполненная иконка телефона -->
+     <!-- Заполненная иконка корзины -->
+</header>
+    <div class="container">
+        <header class="navbar">
+            <nav>
+                <ul>
+                    <li><a href="#Block1">Обслуживание</a></li>
+                    <li><a href="#Block2">Диагностика и ремонт</a></li>
+                    <li><a href="#Block3">Консультации</a></li>
+                    <li><a href="#Block4">Запчасти</a></li>
+<!--                    <i class="bi bi-cart-fill"></i>-->
+                    <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id= "Busket" ></a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="line"></div>
+        <div class="carousel">
+            <div class="carousel-items">
+                <div   class="carousel-item"  style="background-image: url('../img/RemSPB.JPG');">
+                    <div class="carousel-item-content">Рем зона Питер</div>
+                </div>
+                <div   class="carousel-item" style="background-image: url('../img/RemKotlas.JPG');">
+                    <div class="carousel-item-content">Рем зона Котлас</div>
+                </div>
+                <div  class="carousel-item active"  style="background-image: url('../img/Diesel.JPG');">
+                    <div class="carousel-item-content">О нас</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-container">
+            <div data-aos="zoom-in" class="hero--info1" >
+                <div id="Block1"></div>
+                <a th:href="@{/Bid}"> </a>3
+                <h1>Обслуживание</h1>
+                <h2>Текст обслуживания  </h2>
+            </div>
+            <div data-aos="zoom-in" class="hero--info2" >
+                <div id="Block2"></div>
+                <a th:href="@{/Bid}"> </a>
+                <h1>Мы занимаемся диагностикой и ремонтом</h1>
+                <h2 >Текст ремонт</h2>
+            </div>
+            <div data-aos="zoom-in" class="hero--info3" >
+                <div id="Block3"></div>
+                <a th:href="@{/Bid}"> </a>
+                <h1>Консультации</h1>
+                <h2>Текст консультаций</h2>
+            </div>
+            <div  data-aos="zoom-in" class="hero--info4" >
+                <div id="Block4"></div>
+                <a th:href="@{/Catalog}"> </a>
+                <h1>Запчасти</h1>
+                <h2>Текст запчасти</h2>
+            </div>
+            <div data-aos="zoom-in" style="position:relative;overflow:hidden;"  >
+                <a href="https://yandex.ru/maps/2/saint-petersburg/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;"></a>
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=30.311144%2C59.956057&mode=whatshere&whatshere%5Bpoint%5D=30.311167%2C59.955998&whatshere%5Bzoom%5D=17.49&z=16.82" class = "map"></iframe>
+            </div>
+        </div>
+
+    </div>
+<!--        <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/2/saint-petersburg/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Санкт‑Петербург</a><a href="https://yandex.ru/maps/2/saint-petersburg/?feedback=object%2Fadd&feedback-context=map.context&ll=30.310444%2C59.955870&utm_medium=mapframe&utm_source=maps&z=17.57" style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?feedback=object%2Fadd&feedback-context=map.context&ll=30.310444%2C59.955870&z=17.57" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>-->
+<!--    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A<Идентификатор вашей карты>&width=500&height=400&lang=ru_RU&scroll=false"></script>-->
+
+    <div class="Footer">
+    </div>
+<script>
+    AOS.init();
+</script>
+<script src="/js/Slider.js"></script>
+</body>
+</html>
+<!DOCTYPE html>

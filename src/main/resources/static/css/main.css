@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400  ;
+}
+h2 {
+    font-weight: 200;
+}
+a {
+    text-decoration: none;
+
+}
+img {
+    max-width: 100%  ;
+}
+.container {
+    /*width: 1400px;*/
+    margin: 0 auto;
+    /*background: linear-gradient(white, #f5f5f5 50%, #808080);*/
+    /*height: 10000px;*/
+        /* Градиент от более темно-серого к светло-серому, затем к белому */
+    background: linear-gradient(#808080, #f5f5f5 50%, white);
+}
+header nav {
+    float: revert ;
+    /*width: 50%;*/
+}
+header nav ul {
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+}
+header nav ul li {
+    display: inline-block;
+}
+header nav ul li a:hover {
+      border-bottom: 5px   solid #F1A947;
+}
+header nav ul li.active {
+    content: '';
+    display:   block;
+    width: 40px;
+    height: 5px;
+    background: #F1A947;
+    border-radius: 10px;
+
+}
+.button {
+    background:  #F1A947;
+    color: #fff;
+    border-radius:  50px;
+    padding: 15px 30px  ;
+    border:  0;
+    transition:  all 500ms ease;
+}
+.button:hover {
+    cursor: pointer;
+    transform:  scale(1.1);
+}
+
+.navbar { /* Ширина вашего sidebar */
+    width: 100%;
+    position: sticky;
+    top: 0;
+    height: 5vh;
+    /*!*top: 100px;*!*/
+    /*left: 0;*/
+    background-color:white;/* Цвет фона вашей навигационной панели */
+    color: black; /* Цвет текста */
+    /*padding: 10px 0;*/
+    z-index: 1000;
+    /*text-align: center; !* Центрирование текста *!*/
+    /* Цвет фона вашего sidebar */
+}
+
+.navbar nav {
+    padding: 10px 10%;
+}
+.navbar .bi {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.0rem;
+    /* или любой другой размер, который вам нужен */
+}
+.topBar .bi {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    font-size: 2.25rem;
+    right: 26.5%;
+}
+.line {
+    position: sticky;
+    top: 5vh; /* Высота вашего навигационного меню */
+    width: 100%;
+    height: 1px;
+    background-color: #283277;
+    z-index: 999;
+}
+
+/*.container {*/
+/*    margin-top: 0px;*/
+/*    position: relative*/
+/*}*/
+
+/* image 8 */
+
+/*position: absolute;*/
+/*width: 148px;*/
+/*height: 91px;*/
+/*left: 129px;*/
+/*top: 14px;*/
+
+/*background: url(image.png);*/
+/*filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));*/
+/*border-radius: 20px;*/
+
+.topBar {
+    box-sizing: border-box;
+    position: relative;
+    /*width: 1512px;*/
+    height: 7.8vh;
+    left: 0px;
+    top: 0px;
+    background: #283277;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.topBar .logo {
+    position: absolute; /* Позиционирование элемента абсолютно */
+    top: 50%; /* Сдвигаем логотип на 50% от верхнего края родительского элемента */
+    left: 12%; /* Отступ слева */
+    transform: translateY(-50%); /* Корректируем положение логотипа по вертикали */
+    width: 20%; /* Ширина логотипа */
+    height:80%; /* Высота логотипа */
+    background-image: url("../img/Logo.png"); /* Путь к изображению логотипа */
+    background-size: contain; /* Размер изображения */
+    background-repeat: no-repeat; /* Не повторять изображение */
+    display: block; /* Блочный элемент */
+}
+
+.topBar .Number {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 8%;
+    color: white;
+
+}
+.topBar span {
+    height:auto;
+    width: auto;
+    background-image: url("../img/Logo.png");
+    z-index: 20000;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 90vh;
+}
+
+.carousel-items {
+    display: flex;
+    width: 300%; /* Если у вас три слайда, то ширина должна быть 300% (100% * 3) */
+    height: 100%;
+    transition: transform 1.5s ease;
+}
+
+.carousel-item {
+    flex: 0 0 33.3333%; /* Если у вас три слайда, то каждый слайд будет 33.3333% ширины .carousel-items */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover; /* Заполняет блок без искажения пропорций изображения */
+    background-position: center; /* Центрует изображение */
+    display: flex; /* Для центрирования контента */
+    align-items: center; /* Вертикально центрирует контент внутри слайда */
+    justify-content: center; /* Горизонтально центрирует контент внутри слайда */
+}
+
+.carousel-item-content {
+    z-index: 2; /* Устанавливаем z-index выше, чтобы текст был поверх фонового изображения */
+    color: white; /* Если ваш текст темный и не виден на изображении, поменяйте цвет на более контрастный */
+    padding: 20px; /* Добавляем отступы для текста */
+    background: rgba(0, 0, 0, 0.5); /* Добавляем черный полупрозрачный фон для читаемости текста */
+    border-radius: 10px; /* Скругляем углы для лучшего визуального эффекта */
+}
+
+.carousel-item.active {
+    opacity: 1;
+    position: relative;
+}
+
+/* Чтобы скрыть неактивные слайды */
+.carousel-item:not(.active) {
+    display: none;
+}
+
+
+/*image 13 */
+.hero-container {
+    width: 80%;
+    margin: auto;
+    position: relative;
+    /*overflow: hidden;*/
+
+    /*flex: auto;*/
+    /*flex-direction: column;*/
+}
+.hero--info1, .hero--info2, .hero--info3, .hero--info4 {
+    position: relative;
+    height: 50vh;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+    color: white;
+    border-radius: 20px;
+}
+#Block1, #Block2, #Block3, #Block4{
+    position: absolute;
+    margin-top: -25vh;
+}
+.hero--info1 a, .hero--info2 a, .hero--info3 a, .hero--info4 a, .Successfulnesses a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease
+}
+.hero--info1:hover, .hero--info2:hover, .hero--info3:hover, .hero--info4:hover, .Successfulnesses:hover  {
+    transform: scale(1.15);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Добавление тени */
+}
+
+
+.hero--info1 {
+    background-image: url(../img/Service.jpeg);
+}
+.hero--info2 {
+    background-image: url(../img/Diagnostic.png);
+
+}
+.hero--info3 {
+    background-image: url(../img/Consultation.jpg);
+}
+.hero--info4 {
+    background-image: url(../img/Parts.png);
+}
+.map {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    height: 50vh;
+    border-radius: 20px;
+}
+.Footer {
+    margin-top: 20px;
+    position: relative;
+    height: 10vh;
+    bottom:0;
+    width:100%;
+    background: #283277;
+}
+.mainBlogBid {
+    position: relative;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../img/TNVD.jpeg");
+}
+.FooterBid {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 10vh; /* Высота футера может быть фиксированной */
+        background-color: #283277; /* Пример цвета фона футера */
+}
+
+
+.SendForm, .Successfulnesses {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute; /* Если форма должна быть по центру страницы, используйте absolute вместе с fixed. */
+    background: #F1A947;
+    height: auto; /* Если вы хотите, чтобы высота подстраивалась под содержимое, используйте auto */
+    width: 40%;
+    border-radius: 50px;
+    padding: 40px; /* Добавлен отступ внутри формы */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Добавлено тень для лучшего визуального разделения формы от фона */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Выравнивание элементов формы по центру */
+}
+.SendForm div, .Successfulnesses  div {
+    padding: 10px;
+    margin: auto;
+    height: 10%;
+    font-size: 5vh;
+    color: #283277;
+}
+#motorNumber::-webkit-outer-spin-button,
+#motorNumber::-webkit-inner-spin-button,
+#PhoneNumber::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#motorNumber #PhoneNumber {
+    -moz-appearance: textfield;
+}
+.SendForm input[type=number],
+.SendForm input[type=email],
+.SendForm input[type=text] {
+    width: 90%; /* Ширина инпутов соответствует ширине формы с учётом padding */
+    padding: 10px; /* Добавлен отступ внутри инпутов */
+    margin-bottom: 20px; /* Добавлен отступ между инпутами */
+    border: 1px solid #ccc; /* Граница вокруг инпутов */
+    border-radius: 5px; /* Скругление углов инпутов */
+}
+
+.SendForm #Problem {
+    height: 10vh;
+    resize: vertical; /* Позволяет пользователю изменять размер поля только вертикально */
+}
+
+
+.SendForm textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* Убедитесь, что высота достаточна, чтобы пользователь видел, что это многострочное поле */
+    height: 100px;
+}
+
+.SendForm button[type=submit] {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #2A2A2A; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Удаление стандартной границы кнопки */
+    border-radius: 5px; /* Скругление углов кнопки */
+    transition: background-color 0.3s ease; /* Анимация при наведении */
+}
+
+.SendForm button[type=submit]:hover {
+    background-color: #404040; /* Цвет фона кнопки при наведении */
+}
+
+.SendForm .error {
+    color: red; /* Цвет текста сообщения об ошибке */
+    font-size: 0.8rem;
+    width: 90%; /* Ширина чтобы соответствовать полям ввода */
+    margin-top: -10px; /* Отрицательный отступ сверху для приближения к полю ввода */
+    margin-bottom: 20px; /* Отступ снизу для разграничение от следующего поля ввода */
+    text-align: left;
+    z-index: 100000;
+}
+/*.text-field__icon {*/
+/*    position: relative;*/
+/*}*/
+/*.text-field__icon::before {*/
+/*    content: '';*/
+/*    color: #bdbdbd;*/
+/*    position: absolute;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    top: 0;*/
+/*    bottom: 0;*/
+/*    left: 0.625rem;*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*}*/
+/*.text-field__icon .text-field__input {*/
+/*    padding-left: 2rem;*/
+/*}*/
+/*!* email значок *!*/
+/*.text-field__icon_email::before {*/
+/*    content: '@';*/
+/*}*/
+/*.button {*/
+/*    padding: 0.5em 2em; !* Расстояние от текста до края *!*/
+/*    font-size: 0.9em; !* Размер шрифта *!*/
+/*    background-color: #323e4e; !* Цвет фона *!*/
+/*    color: #fff; !* Цвет текста *!*/
+/*    border: none; !* Убираем рамку *!*/
+/*}*/

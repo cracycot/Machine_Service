@@ -11,20 +11,30 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String Category;
+    private String category;
+    private String article;
     private int price;
     private int inStock;
+
+    public String getLocalId() {
+        return article;
+    }
+
+    public void setLocalId(String article) {
+        this.article = article;
+    }
     public Product(String name, String category, int price, int inStock) {
         this.name = name;
-        Category = category;
+        this.category = category;
         this.price = price;
         this.inStock = inStock;
     }
     public Product() {
         this.name = "";
-        Category = "";
+        category = "";
         this.price = 10000000;
         this.inStock = 0;
+        this.article = "";
     }
 
     public void setId(Long id) {
@@ -48,11 +58,11 @@ public class Product {
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(String category) {
-        Category = category;
+        this.category = category;
     }
 
     public int getPrice() {

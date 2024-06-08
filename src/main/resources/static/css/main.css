@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&family=Wix+Madefor+Display:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 html {
     scroll-behavior: smooth;
+    font-family: 'Plex', sans-serif;
 }
 
 
@@ -166,54 +169,50 @@ header nav ul li.active {
     background-image: url("../img/Logo.png");
     z-index: 20000;
 }
-
-.carousel {
+.swiper {
     position: relative;
     overflow: hidden;
     width: 100%;
     height: 90vh;
+
 }
 
-.carousel-items {
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    background-size: cover;
+    background-position: center;
+    background-imageopacity: 0.5;
+    /* Центрирование элементов слайда */
     display: flex;
-    width: 300%; /* Если у вас три слайда, то ширина должна быть 300% (100% * 3) */
-    height: 100%;
-    transition: transform 1.5s ease;
+    justify-content: center;
+    align-items: center;
 }
-
-.carousel-item {
-    flex: 0 0 33.3333%; /* Если у вас три слайда, то каждый слайд будет 33.3333% ширины .carousel-items */
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-size: cover; /* Заполняет блок без искажения пропорций изображения */
-    background-position: center; /* Центрует изображение */
-    display: flex; /* Для центрирования контента */
-    align-items: center; /* Вертикально центрирует контент внутри слайда */
-    justify-content: center; /* Горизонтально центрирует контент внутри слайда */
-}
-
 .carousel-item-content {
-    z-index: 2; /* Устанавливаем z-index выше, чтобы текст был поверх фонового изображения */
-    color: white; /* Если ваш текст темный и не виден на изображении, поменяйте цвет на более контрастный */
-    padding: 20px; /* Добавляем отступы для текста */
-    background: rgba(0, 0, 0, 0.5); /* Добавляем черный полупрозрачный фон для читаемости текста */
-    border-radius: 10px; /* Скругляем углы для лучшего визуального эффекта */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
 }
-
-.carousel-item.active {
-    opacity: 1;
-    position: relative;
+.sub-title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 60px; /* Размер шрифта */
+    color: white;
+    text-shadow: 0 0 3px black, /* Горизонтальное и вертикальное смещение тени, радиус размытия и цвет */
+    0 0 4px #1d1d1d, /* Добавляем несколько слоёв тени для большего свечения */
+    0 0 5px #2e2e2e,
+    0 0 6px grey;
 }
+.description {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 3px black,
 
-/* Чтобы скрыть неактивные слайды */
-.carousel-item:not(.active) {
-    display: none;
 }
-
-
 /*image 13 */
 .hero-container {
     width: 80%;
@@ -248,7 +247,7 @@ header nav ul li.active {
     height: 100%;
     transition: transform 0.3s ease, box-shadow 0.3s ease
 }
-.hero--info1:hover, .hero--info2:hover, .hero--info3:hover, .hero--info4:hover, .Successfulnesses:hover  {
+.hero--info1:hover, .hero--info2:hover, .hero--info3:hover, .hero--info4:hover  {
     transform: scale(1.15);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Добавление тени */
 }
@@ -270,8 +269,10 @@ header nav ul li.active {
 .map {
     position: relative;
     margin-top: 20px;
-    width: 100%;
+    width: 90%;
     height: 50vh;
+    left: 50%;
+    transform:translateX(-50%);
     border-radius: 20px;
 }
 .Footer {
@@ -382,6 +383,16 @@ header nav ul li.active {
     margin-bottom: 20px; /* Отступ снизу для разграничение от следующего поля ввода */
     text-align: left;
     z-index: 100000;
+}
+.Catalog_name {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 60px;
+}
+.catalog {
+    position: relative;
+    margin: auto;
+    left: 50%;
 }
 /*.text-field__icon {*/
 /*    position: relative;*/

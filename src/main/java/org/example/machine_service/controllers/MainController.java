@@ -4,12 +4,16 @@ package org.example.machine_service.controllers;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Null;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.entities.SendForm;
 import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.repositories.ProductRepo;
 import org.example.machine_service.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,10 +115,23 @@ public class MainController  {
         }
     }
     @GetMapping("/Catalog")
-    public String catalogProduct(Model model) {
-        Iterable<Product> elements =  productRepo.findAll();
+    public String catalogProduct(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+                                 @RequestParam(value = "search", required = false) String search,
+                                 @RequestParam(value = "size", defaultValue = "3") int size) {
+        Pageable pageable = (Pageable) PageRequest.of(page - 1, size);
+        Page<Product> elements;
+        if (search == null) {
+            elements = productService.searchAllProducts(pageable);
+        }
+        else {
+            elements = productService.searchProduct(search, pageable);
+        }
         model.addAttribute("title", "Каталог");
         model.addAttribute("items", elements);
+        model.addAttribute("page", elements);
+        model.addAttribute("currentPage", elements.getNumber() + 1); // +1 потому что Page индексируется с 0
+        model.addAttribute("totalPages", elements.getTotalPages());
+        model.addAttribute("pageSize", elements.getSize());
         return "Catalog";
     }
     @GetMapping("/Basket")
@@ -124,6 +141,7 @@ public class MainController  {
         // If the basket is null, initialize a new one and add it to the session.
         if (basket == null) {
             basket = new ArrayList<>();
+
             session.setAttribute("basket", basket);
         }
         model.addAttribute("items", basket);

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${title}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,50 +15,85 @@
     <h1 class="Number">+79819823125</h1>
     <i class="bi bi-telephone-fill"></i> <!-- Заполненная иконка телефона -->
     <!-- Заполненная иконка корзины -->
+
 </header>
 <div class="container">
     <header class="navbar">
         <nav>
             <ul>
-                <li><a th:href="@{/#Block1}">Диагностика и ремонт</a></li>
-                <li><a th:href="@{/#Block2}">Запчасти</a></li>
+                <li><a th:href="@{/#Block1}">Обслуживание</a></li>
+                <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>
                 <li><a th:href="@{/#Block3}">Консультации</a></li>
-                <li><a th:href="@{/#Block4}" >Обслуживание</a></li><!--                    <i class="bi bi-cart-fill"></i>-->
-                <li><i class="bi bi-cart-fill icon-large"></i></li>
+                <li><a th:href="@{/#Block4}" >Запчасти</a></li><!--                    <i class="bi bi-cart-fill"></i>-->
+                <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id= "Busket" ></a></li>
             </ul>
         </nav>
     </header>
     <div class="line"></div>
-    <div class = "catalog">
-        <ul>
-            <ul>
-                <li th:each="item : ${items}">
-                    <span th:text="${item.name}">Item Name:</span>
-                    <!-- Обратите внимание на data-product-id и удаление атрибута action -->
-                    <button type="button" class="add-to-cart-btn" th:data-product-id="${item.id}">Добавить в корзину</button>
-                </li>
-            </ul>
-<!--            <li th:each="item : ${items}">-->
-<!--                <span th:text="${item.name}">Item Name:</span>-->
-<!--                <form th:action="@{/add-to-basket}" method="post">-->
-<!--                    &lt;!&ndash;                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />&ndash;&gt;-->
-<!--                    &lt;!&ndash;                    <input type="hidden" th:name="productId" th:value="${item.id}" />&ndash;&gt;-->
-<!--                    <button type="submit">Добавить в корзину</button>-->
-<!--                </form>-->
+    <div class = "Catalog_name">Каталог</div>
+
+    <div class="search-container">
+        <form id="searchForm">
+            <input type="text" placeholder="Поиск по артикулу..." name="search" id="searchInput">
+            <button type="button" id="searchButton">Поиск</button>
+        </form>
+
+        <!--        <form id="searchForm" th:action="@{/Catalog}" method="GET">-->
+<!--            <input type="text" placeholder="Поиск по артикулу..." name="search" id="searchInput" th:value="${search}">-->
+<!--            <button type="submit" id="searchButton">Поиск</button>-->
+<!--        </form>-->
+    </div>
+    <div class="catalog">
+        <ul id="itemsList">
+<!--            th:each="item : ${items}">-->
+<!--            <li>-->
+<!--                <span th:text="${item.name}">Item Name</span>-->
+<!--                &lt;!&ndash; Предполагается, что у элемента списка есть ID и имя &ndash;&gt;-->
+<!--                <button type="button" class="add-to-cart-btn" th:data-product-id="${item.id}">Добавить в корзину</button>-->
 <!--            </li>-->
         </ul>
-<!--        <ul>-->
-<!--            <li th:each="item : ${items}">-->
-<!--                <span th:text="${item.name}">Item Name:</span>-->
-<!--                <button th:action=""></button>-->
-<!--            </li>-->
-<!--        </ul>-->
-    </div>
+        <div class="pagination">
+            <span id="currentPage">1</span>
+            <button id="prevPage">Предыдущая</button>
+            <button id="nextPage">Следующая</button>
 
-</div>
-<div class="FooterBid">
+            <!-- Предыдущая страница -->
+<!--            <span id="currentPage" th:text="${currentPage}">1</span>-->
+<!--            <a th:if="${currentPage > 1}" th:href="@{/Catalog(page=${currentPage - 1}, size=${pageSize})}" id="prevPage">Предыдущая</a>-->
+<!--            <a th:if="${currentPage < totalPages}" th:href="@{/Catalog(page=${currentPage + 1}, size=${pageSize})}" id="nextPage">Следующая</a>-->
+        </div>
+    </div>
+    <div class="Footer">
+    </div>
+    <script src="/js/AJAX.js"></script>
+    <script src="/js/ajaxFilter.js"></script>
 </div>
 </body>
-<script src="/js/AJAX.js"></script>
 </html>
 <!DOCTYPE html>
+
+
+<!--    <div class="search-container">-->
+<!--        <form id="searchForm">-->
+<!--            <input type="text" placeholder="Поиск по артикулу..." name="article" id="searchInput">-->
+<!--            <button type="submit" id="searchButton">Поиск</button>-->
+<!--        </form>-->
+<!--        <div id="results">Результаты поиска здесь...</div>-->
+<!--    </div>-->
+
+<!--    <div class="catalog">-->
+<!--        <ul id="itemsList">-->
+<!--            &lt;!&ndash; Теперь элементы добавляются динамически через JavaScript &ndash;&gt;-->
+<!--        </ul>-->
+<!--        <div class="pagination">-->
+<!--            &lt;!&ndash; Интерполяция Thymeleaf для создания ссылок на страницы &ndash;&gt;-->
+<!--            &lt;!&ndash; Если это не первая страница, покажем кнопку "Предыдущая" &ndash;&gt;-->
+<!--            <a th:if="${page.number > 1}"-->
+<!--               th:href="@{/product/searchproduct(page=${page.number - 1}, search=${searchQuery})}" id="prevPage">Предыдущая</a>-->
+<!--            &lt;!&ndash; Текущая страница &ndash;&gt;-->
+<!--            <span id="currentPage" th:text="${page.number + 1}">1</span>-->
+<!--            &lt;!&ndash; Если это не последняя страница, покажем кнопку "Следующая" &ndash;&gt;-->
+<!--            <a th:if="${page.number < page.totalPages - 1}"-->
+<!--               th:href="@{/product/searchproduct(page=${page.number + 1}, search=${searchQuery})}" id="nextPage">Следующая</a>-->
+<!--        </div>-->
+<!--    </div>-->

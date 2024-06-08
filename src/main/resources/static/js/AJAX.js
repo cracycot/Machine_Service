@@ -35,5 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
+// document.addEventListener('DOMContentLoaded', function(){
+//     document.getElementById('searchButton').addEventListener('click', function(){
+//         var searchValue = document.getElementById('searchInput').value;
+//         fetch('/product/searchproduct?id=' + searchValue)
+//             .then(response => response.text())
+//             .then(data => {
+//                 document.getElementById('results').innerHTML = data;
+//             })
+//             .catch(error => console.error(error));
+//     });
+// });
 // // Не забудьте объявить переменную csrfToken в вашем коде или получить её значение из метатегов или скрытого input поля

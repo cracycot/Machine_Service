@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${title}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -22,16 +22,15 @@
                 <li><a href="#Block2">Запчасти</a></li>
                 <li><a href="#Block3">Консультации</a></li>
                 <li><a href="#Block4">Обслуживание</a></li>
-                <!--                    <i class="bi bi-cart-fill"></i>-->
-                <li><i class="bi bi-cart-fill icon-large"></i></li>
+                <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id= "Busket" ></a></li>
             </ul>
         </nav>
     </header>
     <div class="line"></div>
     <div class = "mainBlogBid">
         <div class="Successfulnesses">
-            <a th:href="@{/}"> </a>
-            <div class="Messaage" th:text="${message}"> </div>
+            <a th:href="@{/}"></a>
+            <div class="Messaage" th:text="${message}"></div>
         </div>
     </div>
 </div>

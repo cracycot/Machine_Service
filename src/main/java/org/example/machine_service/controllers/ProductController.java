@@ -2,13 +2,21 @@ package org.example.machine_service.controllers;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+import java.util.List;
+
 @RestController
 @RequestMapping("product")
 public class ProductController {
     @Autowired
     private ProductService productService;
+
     @GetMapping("/home")
     public ResponseEntity CheckCorrect() {
         try {
@@ -17,8 +25,9 @@ public class ProductController {
             return ResponseEntity.badRequest().body("произошла ошибка");
         }
     }
+
     @GetMapping("/getproduct")
-    public ResponseEntity GetProduct(@RequestParam  Long id) {
+    public ResponseEntity GetProduct(@RequestParam Long id) {
         try {
             Product product = productService.get_product(id);
             return ResponseEntity.ok().body(product);
@@ -26,6 +35,21 @@ public class ProductController {
             return ResponseEntity.badRequest().body("произошла ошибка");
         }
     }
+
+//    @GetMapping("/searchproduct")
+//    public ResponseEntity SearchProduct(@RequestParam String id,
+//                                        @RequestParam(value = "page", defaultValue = "1") int page,
+//                                        @RequestParam(value = "size", defaultValue = "10") int size
+//    ) {
+//        try {
+//            Pageable pageable = PageRequest.of(page - 1, size);
+//            Page<Product> products = productService.searchProduct(id, pageable);
+//            return ResponseEntity.ok().body(products);
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body("произошла ошибка");
+//        }
+//    }
+
     @PostMapping("/create")
     public ResponseEntity CreateProduct(@RequestBody Product product) {
         try {
@@ -36,6 +60,7 @@ public class ProductController {
             return ResponseEntity.badRequest().body("неверная запись");
         }
     }
+
     @PatchMapping("/updateproduct")
     public ResponseEntity UpdateProduct(@RequestParam Long id, @RequestBody Product product) {
         try {
@@ -55,6 +80,7 @@ public class ProductController {
             return ResponseEntity.badRequest().body("произошла ошибка");
         }
     }
+
     @DeleteMapping("/deleteproduct")
     public ResponseEntity DeleteProduct(@RequestParam Long id) {
         try {
@@ -64,5 +90,26 @@ public class ProductController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("произошла ошибка");
         }
+    }
+
+    @GetMapping("/searchproduct")
+    public ResponseEntity<List<Product>> searchProduct(
+            @RequestParam(value = "search", required = false) String search,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "3") int size) {
+
+        Pageable pageable = (Pageable) PageRequest.of(page - 1, size); // Постраничное отображение
+        Page<Product> products;
+
+        if (search != null && !search.isEmpty()) {
+            products = productService.searchProduct(search, pageable);
+        } else {
+            products = productService.searchAllProducts(pageable);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Total-Pages", String.valueOf(products.getTotalPages()));
+
+        return new ResponseEntity<>(products.getContent(), headers, HttpStatus.OK);
     }
 }

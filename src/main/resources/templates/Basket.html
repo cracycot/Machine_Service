@@ -10,9 +10,14 @@
 <body>
 <header class = "topBar">
     <picture class ="logo" src="../img/Logo.png"> </picture>
-    <h1 class="Number">+79819823125</h1>
-    <i class="bi bi-telephone-fill"></i> <!-- Заполненная иконка телефона -->
-    <!-- Заполненная иконка корзины -->
+    <h1 class="Number">
+        <a href="https://wa.me/+79117202500" class="whatsapp">
+            <i class="bi bi-telephone-fill"></i>
+            +79117202500
+        </a>
+    </h1>
+
+
 </header>
 <div class="container">
     <header class="navbar">
@@ -21,20 +26,62 @@
                 <li><a th:href="@{/#Block1}">Обслуживание</a></li>
                 <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>
                 <li><a th:href="@{/#Block3}">Консультации</a></li>
-                <li><a th:href="@{/#Block4}" >Запчасти</a></li><!--                    <i class="bi bi-cart-fill"></i>-->
-<!--                <li><i class="bi bi-cart-fill icon-large"></i></li>-->
+                <li><a th:href="@{/#Block4}" >Запчасти</a></li>
             </ul>
         </nav>
     </header>
     <div class="line"></div>
     <div class="productsBasket">
-        <li th:each="item : ${items}">
-            <span th:text="${item.name}">Item Name:</span>
-        </li>
+        <div class="basket">Корзина</div>
+        <div class="contact-form">
+            <p>Введите вашу почту/телефон:</p>
+            <form class="contact-form-submit" onsubmit="return serializeAndSendData()">
+                <input type="text" name="contactInfo" placeholder="Email или телефон" required>
+                <button class="send-order" type="button" onclick="serializeAndSendData()">Оформить заказ</button>
+            </form>
+        </div>
+        <ul class="order-list">
+            <div class="order-nav">
+                <ul class="order-nav-ul">
+                    <li class="item">Название</li>
+                    <li class="item">Артикул</li>
+                    <li class="item">Цена</li>
+                    <li class="item">В корзине</li>
+                </ul>
+            </div>
+            <li class="order-products" th:each="item : ${items}">
+                <div class = "item-sel">
+                    <span class="name" th:text="${item.key}">Item Name:</span>
+                </div>
+                <div class = "item-sel">
+                    <span class="article" th:text="${item.value[2]}"></span>
+                </div>
+                <div class = "item-sel">
+                    <span class="number-in-stock" th:text="${item.value[3]}"></span>
+                </div>
+                <div class = "item-sel">
+                    <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
+                    <span class="number-in-basket" th:text="${item.value[0]}"></span>
+                    <button class = "increase-key"onclick="increaseQuantity(this)">+</button>
+                </div>
+            </li>
+        </ul>
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+            <!-- Сюда можно вставить код анимации, например, спиннер -->
+            <div class="spinner"></div>
+        </div>
+        <div id="orderModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Ваш заказ успешно отправлен!</p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="FooterBid">
 </div>
+<script src="/js/buttons-basket.js">
+</script>
 </body>
 </html>
 <!DOCTYPE html>

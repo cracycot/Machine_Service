@@ -12,10 +12,12 @@
 <body>
 <header class = "topBar">
     <picture class ="logo" src="../img/Logo.png"> </picture>
-    <h1 class="Number">+79819823125</h1>
-    <i class="bi bi-telephone-fill"></i> <!-- Заполненная иконка телефона -->
-    <!-- Заполненная иконка корзины -->
-
+    <h1 class="Number">
+        <a href="https://wa.me/+79117202500 " class="whatsapp">
+            <i class="bi bi-telephone-fill"></i>
+            +79117202500
+        </a>
+    </h1>
 </header>
 <div class="container">
     <header class="navbar">
@@ -30,42 +32,56 @@
         </nav>
     </header>
     <div class="line"></div>
-    <div class = "Catalog_name">Каталог</div>
-
-    <div class="search-container">
-        <form id="searchForm">
-            <input type="text" placeholder="Поиск по артикулу..." name="search" id="searchInput">
-            <button type="button" id="searchButton">Поиск</button>
-        </form>
-
-        <!--        <form id="searchForm" th:action="@{/Catalog}" method="GET">-->
-<!--            <input type="text" placeholder="Поиск по артикулу..." name="search" id="searchInput" th:value="${search}">-->
-<!--            <button type="submit" id="searchButton">Поиск</button>-->
-<!--        </form>-->
-    </div>
-    <div class="catalog">
-        <ul id="itemsList">
-<!--            th:each="item : ${items}">-->
-<!--            <li>-->
-<!--                <span th:text="${item.name}">Item Name</span>-->
-<!--                &lt;!&ndash; Предполагается, что у элемента списка есть ID и имя &ndash;&gt;-->
-<!--                <button type="button" class="add-to-cart-btn" th:data-product-id="${item.id}">Добавить в корзину</button>-->
-<!--            </li>-->
-        </ul>
-        <div class="pagination">
-            <span id="currentPage">1</span>
-            <button id="prevPage">Предыдущая</button>
-            <button id="nextPage">Следующая</button>
-
-            <!-- Предыдущая страница -->
-<!--            <span id="currentPage" th:text="${currentPage}">1</span>-->
-<!--            <a th:if="${currentPage > 1}" th:href="@{/Catalog(page=${currentPage - 1}, size=${pageSize})}" id="prevPage">Предыдущая</a>-->
-<!--            <a th:if="${currentPage < totalPages}" th:href="@{/Catalog(page=${currentPage + 1}, size=${pageSize})}" id="nextPage">Следующая</a>-->
+    <div class="main-catalog">
+        <div class = "Catalog_name">Каталог</div>
+        <div class="search-container">
+            <form id="searchForm">
+                <input type="text" placeholder="Поиск по артикулу..." name="search" id="searchInput">
+            </form>
+        </div>
+        <div class="filter-container">
+            <h2>Фильтры</h2>
+            <form id="filterForm">
+                <label for="brand">Бренд:</label>
+                <div class="input-group">
+                    <select id="brand" name="brand">
+                        <option value="">Выберите бренд</option>
+                        <option value="perkins">PERKINS</option>
+                        <option value="caterpillar">CATERPILLAR</option>
+                        <option value="motor">MOTOR</option>
+                        <option value="bosh">BOSH</option>
+                    </select>
+                </div>
+                <div class="price">Цена</div>
+                <div class="input-group">
+                    <input type="number" id="priceFrom" name="priceFrom" placeholder="От" min="0">
+                    <input type="number" id="priceTo" name="priceTo" placeholder="До" min="0">
+                </div>
+                <button type="submit">Применить фильтры</button>
+            </form>
+        </div>
+        <div class="catalog">
+            <span id="totalPages" style="display: none;" th:text= "${totalPages}"></span>
+            <div class="catalog-nav">
+                <ul class="catalog-nav-ul">
+                    <li class="item">Название</li>
+                    <li class="item">Бренд</li>
+                    <li class="item">Артикул</li>
+                    <li class="item">Цена</li>
+                    <li class="item">В наличии</li>
+                </ul>
+            </div>
+            <ul id="itemsList">
+            </ul>
+            <div class="pagination">
+                <span id="currentPage">1</span>
+                <button id="prevPage">Предыдущая</button>
+                <button id="nextPage">Следующая</button>
+            </div>
         </div>
     </div>
-    <div class="Footer">
-    </div>
-    <script src="/js/AJAX.js"></script>
+    <div class="FooterCatalog"></div>
+    <script src="/js/add-to-basket.js"></script>
     <script src="/js/ajaxFilter.js"></script>
 </div>
 </body>

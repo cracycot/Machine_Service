@@ -15,19 +15,13 @@ public class Product {
     private String article;
     private int price;
     private int inStock;
-
-    public String getLocalId() {
-        return article;
-    }
-
-    public void setLocalId(String article) {
-        this.article = article;
-    }
-    public Product(String name, String category, int price, int inStock) {
+    public Product(String name, String category, String article, int price, int inStock) {
         this.name = name;
         this.category = category;
+        this.article = article;
         this.price = price;
         this.inStock = inStock;
+
     }
     public Product() {
         this.name = "";
@@ -60,9 +54,16 @@ public class Product {
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
     }
 
     public int getPrice() {

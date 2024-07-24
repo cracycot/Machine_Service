@@ -80,9 +80,8 @@ public class ProductController {
             return ResponseEntity.badRequest().body("произошла ошибка");
         }
     }
-
     @DeleteMapping("/deleteproduct")
-    public ResponseEntity DeleteProduct(@RequestParam Long id) {
+    public ResponseEntity<?> DeleteProduct(@RequestParam Long id) {
         try {
             Product delete_product = productService.get_product(id);
             productService.delete_product(delete_product);
@@ -92,17 +91,57 @@ public class ProductController {
         }
     }
 
+//    @DeleteMapping("/deleteproduct")
+//    public ResponseEntity DeleteProduct(@RequestParam Long id) {
+//        try {
+//            Product delete_product = productService.get_product(id);
+//            productService.delete_product(delete_product);
+//            return ResponseEntity.ok().body("продукт удален");
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body("произошла ошибка");
+//        }
+//    }
+    @GetMapping("/getallproducts")
+    public ResponseEntity<?> GetAllProducts(
+                                             @RequestParam(value = "page", defaultValue = "1") int page,
+                                             @RequestParam(value = "size", defaultValue = "5") int size)  {
+        Pageable pageable = (Pageable) PageRequest.of(page - 1, size);
+        Page<Product> products = productService.searchAllProducts(pageable);
+        return new ResponseEntity<>(products.getContent(), HttpStatus.OK);
+    }
     @GetMapping("/searchproduct")
     public ResponseEntity<List<Product>> searchProduct(
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "3") int size) {
+            @RequestParam(value = "size", defaultValue = "5") int size) {
 
         Pageable pageable = (Pageable) PageRequest.of(page - 1, size); // Постраничное отображение
         Page<Product> products;
 
         if (search != null && !search.isEmpty()) {
             products = productService.searchProduct(search, pageable);
+        } else {
+            products = productService.searchAllProducts(pageable);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Total-Pages", String.valueOf(products.getTotalPages()));
+
+        return new ResponseEntity<>(products.getContent(), headers, HttpStatus.OK);
+    }
+    @GetMapping("/filterproduct")
+    public ResponseEntity<List<Product>> filterProduct(
+            @RequestParam(value = "search", required = false) String search,
+            @RequestParam(value = "min", defaultValue = "0") int min,
+            @RequestParam(value = "max", defaultValue = "100000000") int max,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+
+        Pageable pageable = (Pageable) PageRequest.of(page - 1, size); // Постраничное отображение
+        Page<Product> products;
+
+        if (search != null && !search.isEmpty()) {
+            products = productService.searchProductCategoryPrice(search, min, max, pageable);
         } else {
             products = productService.searchAllProducts(pageable);
         }

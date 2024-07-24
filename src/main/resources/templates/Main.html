@@ -19,9 +19,12 @@
 <body>
 <header class = "topBar">
     <picture class ="logo" src="../img/Logo.png"> </picture>
-    <h1 class="Number">+79819823125</h1>
-    <i class="bi bi-telephone-fill"></i> <!-- Заполненная иконка телефона -->
-     <!-- Заполненная иконка корзины -->
+    <h1 class="Number">
+        <a href="https://wa.me/+79117202500" class="whatsapp">
+            <i class="bi bi-telephone-fill"></i>
+            +79117202500
+        </a>
+    </h1>
 </header>
     <div class="container">
         <header class="navbar">
@@ -39,22 +42,38 @@
         <div class="line"></div>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), url('../img/Diesel.JPG'); ">
+                <div class="swiper-slide" >
+                    <img class="carousel-img" src = '../img/Diesel.JPG'>
                     <div class="carousel-item-content">
-                        <h1 class = "sub-title">О нас</h1>
-                        <div class = "description">Мы MOTORSERVICE занимаемся ремонтом и обслуживанием различного промышленного оборудования</div>
+                        <div class="carousel-text">
+                            <h1 class = "sub-title">О нас</h1>
+                            <div class = "description">ООО «Моторсервис» предоставляет полный спектр услуг по ремонту промышленных дизельных и газовых двигателей.</div>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide"   style="background-image: url('../img/RemSPB.JPG');">
+                <div class="swiper-slide" >
+                    <img class="carousel-img" src = '../img/RemSPB.JPG'>
                     <div class="carousel-item-content">
-                        <h1 class = "sub-title">Ремонтная зона в Санкт-Петербурге</h1>
-                        <div class = "description">Мы предоставляем услуги в Санкт-Петербурге</div>
+                        <div class="carousel-text">
+                            <h1 class = "sub-title">Преимущества сотрудничества с нами</h1>
+                            <div class = "description">
+                                <ul>
+                                    <li>Профессиональные специалисты с опытом работы;</li>
+                                    <li>Современное оборудование и инструменты;</li>
+                                    <li>Гарантия качества выполненных работ;</li>
+                                    <li>Индивидуальный подход к каждому клиенту.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide" style="background-image: url('../img/RemKotlas.JPG');">
+                <div class="swiper-slide" >
+                    <img class="carousel-img" src = '../img/RemKotlas.JPG'>
                     <div class="carousel-item-content">
-                        <h1 class = "sub-title">Ремонтная зона в Котласе</h1>
-                        <div class = "description">Мы предоставляем услуги в городе Котлас</div>
+                        <div class="carousel-text">
+                            <h1 class = "sub-title">Наши ремзоны</h1>
+                            <div class = "description">ООО «Моторсервис» предоставляет полный спектр услуг в Санкт-Петербурге и Котласе</div>
+                        </div>
                     </div>
                 </div>
 
@@ -65,47 +84,80 @@
             <!-- Если нужна пагинация -->
             <div class="swiper-pagination"></div>
         </div>
-        <div class="hero-container">
-            <div data-aos="zoom-in" class="hero--info1" >
-                <div id="Block1"></div>
-                <a th:href="@{/Bid}"> </a>3
-                <h1 data-aos="fade-right">Обслуживание</h1>
-                <h2>Текст обслуживания  </h2>
+        <main class = "main">
+            <div class="container">
+                <div class="content" id="Block1">
+                    <div class="content-text"  data-number="01" >
+                        <div class="content-subtitle">Качество</div>
+                        <div class="content-title">Обслуживание</div>
+                        <p>Если вы хотите провести разовое техническое обслуживание вашей техники,
+                            мы готовы выполнить эту задачу быстро и качественно. Мы проверим все основные
+                            узлы и компоненты, проведём необходимые регулировки и замены, а также дадим
+                            рекомендации по дальнейшему обслуживанию.</p>
+                        <a class="content-application" th:href="@{/Bid}">Оставить заявку</a>
+                    </div>
+                    <div class="content-img">
+                        <img src="../img/first.JPG" alt="обслуживание">
+                    </div>
+                </div>
+                <div class="content" id="Block2">
+                    <div class="content-text"  data-number="02" >
+                        <div class="content-subtitle">Надежность</div>
+                        <div class="content-title">Диагностика и ремонт</div>
+                        <p>После проведения диагностики ни одна потенциальная проблема не останется без внимания.
+                            Мы тщательно проверим все ключевые системы и функции электростанции, чтобы выявить возможные
+                            неисправности и заранее составить план работ по их устранению.</p>
+                        <a class="content-application" th:href="@{/Bid}">Оставить заявку</a>
+                    </div>
+                    <div class="content-img">
+                        <img src="../img/second.JPG" alt="обслуживание">
+                    </div>
+                </div>
+                <div class="content"  id="Block3">
+                    <div class="content-text"  data-number="03">
+                        <div class="content-subtitle">Высокий профессионализм</div>
+                        <div class="content-title">Консультации</div>
+                        <p>Наши специалисты всегда готовы помочь вам с любыми вопросами о
+                            неисправностях техники или подборе запчастей. Вы можете обратиться
+                            к нам по телефону или лично в офисе. Мы всегда на связи и готовы оказать
+                            помощь в любое время</p>
+                        <a class="content-application" th:href="@{/Bid}">Оставить заявку</a>
+                    </div>
+                    <div class="content-img">
+                        <img src="../img/third.jpeg" alt="обслуживание">
+                    </div>
+                </div>
+                <div class="content" id="Block4">
+                    <div class="content-text"  data-number="04" >
+                        <div class="content-subtitle">Гарантии</div>
+                        <div class="content-title">Каталог</div>
+                        <p>Мы предлагаем только европейские и американские запчасти для двигателей, поскольку заботимся о долговечности вашей техники.
+                            Все поставляемые нами детали проходят строгий контроль качества и имеют гарантию 1 год.
+                            Мы ценим ваше время и стараемся сделать процесс заказа максимально удобным.
+                        </p>
+<!--                        <div class="content-application" th:href="@{/Catalog}">Перейти в каталог</div>-->
+                        <a class="content-application" th:href="@{/Catalog}">Перейти в каталог</a>
+                    </div>
+                    <div class="content-img">
+                        <img src="../img/Diesel.JPG" alt="обслуживание">
+                    </div>
+                </div>
             </div>
-            <div data-aos="zoom-in" class="hero--info2" >
-                <div id="Block2"></div>
-                <a th:href="@{/Bid}"> </a>
-                <h1 data-aos="fade-right">Мы занимаемся диагностикой и ремонтом</h1>
-                <h2 >Текст ремонт</h2>
+            <div class="brands">Мы работаем с брендами
+                <ul>
+                    <li><img src="../img/brands/CAT.png" alt="CAT"></li>
+                    <li><img src="../img/brands/PERKINS.png" alt="PERKINS"></li>
+                    <li><img src="../img/brands/MOTOR.png" alt="MOTOR"></li>
+                </ul>
             </div>
-            <div data-aos="zoom-in" class="hero--info3" >
-                <div id="Block3"></div>
-                <a th:href="@{/Bid}"> </a>
-                <h1 data-aos="fade-right">Консультации </h1>
-                <h2>Текст консультаций</h2>
-            </div>
-            <div  data-aos="zoom-in" class="hero--info4" >
-                <div id="Block4"></div>
-                <a th:href="@{/Catalog}"> </a>
-                <h1 data-aos="fade-right">Запчасти</h1>
-                <h2>Текст запчасти</h2>
-            </div>
-
-        </div>
-        <div data-aos="zoom-in" style="position:relative;overflow:hidden;"  >
-            <a href="https://yandex.ru/maps/2/saint-petersburg/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;"></a>
-            <iframe src="https://yandex.ru/map-widget/v1/?ll=30.311144%2C59.956057&mode=whatshere&whatshere%5Bpoint%5D=30.311167%2C59.955998&whatshere%5Bzoom%5D=17.49&z=16.82" class = "map"></iframe>
-        </div>
-
+        </main>
     </div>
-<!--        <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/2/saint-petersburg/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Санкт‑Петербург</a><a href="https://yandex.ru/maps/2/saint-petersburg/?feedback=object%2Fadd&feedback-context=map.context&ll=30.310444%2C59.955870&utm_medium=mapframe&utm_source=maps&z=17.57" style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?feedback=object%2Fadd&feedback-context=map.context&ll=30.310444%2C59.955870&z=17.57" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>-->
-<!--    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A<Идентификатор вашей карты>&width=500&height=400&lang=ru_RU&scroll=false"></script>-->
+    <div class="Footer"></div>
 
-    <div class="Footer">
-    </div>
 <script>
     AOS.init();
 </script>
+
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="/js/Slider.js"></script>
 </body>

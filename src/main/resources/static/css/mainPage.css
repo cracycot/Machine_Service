@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Yrsa:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: 'Yrsa';
+    background-color: #0B1D26;
+    background-image: url("../img/phone4.jpg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    color: white;
+}
+.container-wide {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 15px;
+}
+.row {
+    display: flex;
+}
+.space-between {
+    justify-content: space-between;
+}
+.align-center {
+    align-items: center;
+}
+
+
+/*HEADER*/
+.header {
+    padding-top: 64px;
+    padding-bottom: 843px;
+}
+.logo {
+    /*position: absolute; !* Позиционирование элемента абсолютно *!*/
+    /*top: 50%; !* Сдвигаем логотип на 50% от верхнего края родительского элемента *!*/
+    /*left: 12%; !* Отступ слева *!*/
+    transform: translateY(-50%); /* Корректируем положение логотипа по вертикали */
+    /*width: 20%; !* Ширина логотипа *!*/
+    /*height:80%; !* Высота логотипа *!*/
+    width: 78px;
+    height: 50px;
+    background-image: url("../img/Logo.png"); /* Путь к изображению логотипа */
+    background-size: contain; /* Размер изображения */
+    background-repeat: no-repeat; /* Не повторять изображение */
+    display: block; /* Блочный элемент */
+
+}
+.nav-wrapper {
+    margin-bottom: 198px;
+}
+.nav {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.nav ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type:none;
+
+}
+.nav li + li {
+    margin-left: 40px;
+}
+
+.nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease-in;
+
+}
+.nav a:hover {
+    color: #FBD784;
+}
+.phone {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+/*HERO*/
+
+.hero {
+    /*display: block; //возможео коммент*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 980px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+    transition: transform 0.8s cubic-bezier(0.660, 0.215, 0.295, 1.640);
+}
+.hero:hover {
+    transform: translateY(-5%);
+}
+.hero-name {
+    position: relative;
+    font-weight: 800;
+    padding-left: 104px;
+    font-size: 18px;
+    line-height: 1.222;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #FBD784;
+}
+.hero-name::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    content: "";
+    width: 72px;
+    height: 2px;
+    background-color: #FBD784;
+}
+.hero-title {
+    margin-bottom: 32px;
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 80px;
+    line-height: 1.136;
+    text-transform: capitalize;
+    color: white;
+
+}
+.hero-scroll {
+    display: inline-block;
+    position: relative;
+    padding-right: 32px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.222;
+    color: white;
+}
+.hero-scroll::after {
+    width: 16px;
+    height: 24px;
+    display: block;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-image: url("../img/icons/arrow-down.png");
+}
+/*MAIN*/
+.container {
+    max-width: 1492px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.main {
+    margin-top: -400px;
+}
+/*CONTAINER*/
+
+.content {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.content:nth-child(even) {
+    flex-direction: row-reverse;
+}
+.content-text {
+    position: relative;
+    padding-left: 150px;
+    max-width: 782px;
+}
+
+.content-subtitle {
+    position: relative;
+    font-weight: 800;
+    padding-left: 96px;
+    font-size: 18px;
+    line-height: 1.222;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #FBD784;
+}
+.content-subtitle::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    content: "";
+    width: 72px;
+    height: 2px;
+    background-color: #FBD784;
+}
+.content-title {
+    margin-bottom: 27px;
+    max-width: 555px;
+    font-family: "Playfair Display", serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 1.2;
+    color: white;
+}
+.content-text p {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.78;
+    color: white;
+}
+.content-application {
+    display: inline-block;
+    position: relative;
+    padding-right: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.222;
+    color: #FBD784;
+}
+.content-application::after {
+    width: 24px;
+    height: 16px;
+    display: block;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-image: url("../img/icons/arrow_right.png");
+}
+.content-text::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(-50%);
+    display: block;
+    content: attr(data-number);
+    width: 240px;
+    height: 240px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 240px;
+    line-height: 1;
+    color: rgba(255,255,255, 0.1);
+
+}
+/*.content-img {*/
+/*    max-width: 550px; !* Желаемая ширина изображений *!*/
+/*    max-height: 720px;*/
+/*    object-fit: cover;*/
+/*}*/

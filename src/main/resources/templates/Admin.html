@@ -1,0 +1,161 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>Admin Panel</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Welcome to Admin Panel</h1>-->
+
+<!--&lt;!&ndash; Список продуктов &ndash;&gt;-->
+<!--<table>-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>ID</th>-->
+<!--    <th>Name</th>-->
+<!--    <th>Category</th>-->
+<!--    <th>Article</th>-->
+<!--    <th>Price</th>-->
+<!--    <th>In Stock</th>-->
+<!--    <th>Actions</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr th:each="product : ${products}">-->
+<!--    <td th:text="${product.id}"></td>-->
+<!--    <td th:text="${product.name}"></td>-->
+<!--    <td th:text="${product.category}"></td>-->
+<!--    <td th:text="${product.article}"></td>-->
+<!--    <td th:text="${product.price}"></td>-->
+<!--    <td th:text="${product.inStock}"></td>-->
+<!--    <td>-->
+<!--      &lt;!&ndash; Кнопка для удаления продукта &ndash;&gt;-->
+<!--      <form th:action="@{/product/deleteproduct}" method="post">-->
+<!--        <input type="hidden" name="id" th:value="${product.id}" />-->
+<!--        <input type="submit" value="Delete" />-->
+<!--      </form>-->
+<!--      &lt;!&ndash; Кнопка для редактирования продукта &ndash;&gt;-->
+<!--      <a th:href="@{/admin/product/edit/{id}(id=${product.id})}">Edit</a>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+
+<!--&lt;!&ndash; Форма для добавления нового продукта &ndash;&gt;-->
+<!--<form action="/product/create" method="post">-->
+<!--  <input type="text" name="name" placeholder="Name" required />-->
+<!--  <input type="text" name="category" placeholder="Category" required />-->
+<!--  <input type="text" name="article" placeholder="Article" required />-->
+<!--  <input type="number" name="price" placeholder="Price" required />-->
+<!--  <input type="number" name="inStock" placeholder="In Stock" required />-->
+<!--  <input type="submit" value="Create Product" />-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Админ панель</title>
+</head>
+<body>
+<h1>Админ панель</h1>
+
+<!-- Список продуктов -->
+<table>
+  <thead>
+  <tr>
+    <th>ID (серверная информация)</th>
+    <th>Название</th>
+    <th>Категория</th>
+    <th>Артикул</th>
+    <th>Цена</th>
+    <th>В наличии</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Пример использования th:each в вашем текущем контексте -->
+  <tr th:each="product : ${products}">
+    <td th:text="${product.id}"></td>
+    <td th:text="${product.name}"></td>
+    <td th:text="${product.category}"></td>
+    <td th:text="${product.article}"></td>
+    <td th:text="${product.price}"></td>
+    <td th:text="${product.inStock}"></td>
+    <td>
+      <!-- Кнопка для удаления продукта -->
+      <!-- Кнопка для редактирования продукта -->
+      <div class="data-id" style="display: none;" th:text="${product.id}"></div>
+      <button onclick="deleteProduct()">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Форма для добавления нового продукта -->
+<form action="/product/create" method="post">
+  <input type="text" name="name" placeholder="Название" required />
+  <input type="text" name="category" placeholder="Бренд" required />
+  <input type="text" name="article" placeholder="Артикул" required />
+  <input type="number" name="price" placeholder="Цена" required />
+  <input type="number" name="inStock" placeholder="Кол-во в наличии" required />
+  <input type="submit" value="Добавить в каталог" />
+</form>
+<script>
+  function deleteProduct(button) {
+    if (!confirm('Вы уверены, что хотите удалить этот продукт?')) {
+      return;
+    }
+    var productId = document.querySelector('.data-id').innerText;;
+    console.log(productId);
+    fetch(`/product/deleteproduct?id=${productId}`, {
+      method: 'DELETE', // Или 'DELETE', если ваш сервер поддерживает такой метод для этого действия
+      headers: {
+        'Content-Type': 'application/json',
+        // 'X-CSRF-TOKEN': 'ВАШ_CSRF_ТОКЕН' // Включите этот заголовок, если у вас включена CSRF защита
+      },
+      // Тело запроса не обязательно, если вы отправляете ID как часть строки запроса
+    })
+            .then(response => {
+              if(response.ok) {
+                window.location.reload(); // Перезагрузите страницу, чтобы отражать изменения
+              } else {
+                alert('Ошибка при удалении продукта');
+              }
+            })
+            .catch(error => {
+              console.error('Ошибка:', error);
+            });
+  }
+  document.querySelector('form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const product = {
+      name: formData.get('name'),
+      category: formData.get('category'),
+      article: formData.get('article'),
+      price: parseFloat(formData.get('price')),
+      inStock: parseInt(formData.get('inStock'))
+    };
+
+    try {
+      const response = await fetch('/product/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+      });
+
+      if (response.ok) {
+        console.log('Продукт сохранен');
+      } else {
+        console.error('Ошибка при сохранении продукта');
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  });
+</script>
+</body>
+</html>

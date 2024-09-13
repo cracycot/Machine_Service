@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.*;
 
 @Controller
-public class MainController  {
+public class MainController {
     @Autowired
     private EmailService emailService;
     @Autowired
@@ -33,13 +33,14 @@ public class MainController  {
     private ProductRepo productRepo;
 
     @GetMapping("/")
-    public  String MainPage(HttpSession session, Model model) {
+    public String MainPage(HttpSession session, Model model) {
         if (session.getAttribute("basket") == null) {
             session.setAttribute("basket", new HashMap<Product, Integer>());
         }
         model.addAttribute("title", "Главная страница");
         return "Main";
     }
+
     @PostMapping("/add-to-basket")
     public ResponseEntity<?> addToBasket(@RequestParam Long productId, HttpSession session) throws ProductNotFindException {
         // Попытаться получить корзину из сессии.
@@ -57,7 +58,7 @@ public class MainController  {
         if (product != null) {
             String productName = product.getName();
             // Проверить, есть ли продукт уже в корзине
-            if (basket.containsKey(productName) && ((Integer)(basket.get(productName)).get(0) < (Integer)(basket.get(productName)).get(4))) {
+            if (basket.containsKey(productName) && ((Integer) (basket.get(productName)).get(0) < (Integer) (basket.get(productName)).get(4))) {
                 // Обновить существующее количество продукта
                 List<Object> existingEntry = basket.get(productName);
                 existingEntry.set(0, (Integer) existingEntry.get(0) + 1); // Увеличить количество на 1
@@ -76,10 +77,12 @@ public class MainController  {
         // Вернуть успешный ответ.
         return ResponseEntity.ok().body(Collections.singletonMap("result", "success"));
     }
+
     @PostMapping("/basket/increase")
     public ResponseEntity<?> increaseQuantity(@RequestParam String productName, HttpSession session) {
         return updateQuantity(session, productName, 1);
     }
+
     @PostMapping("/basket/decrease")
     public ResponseEntity<?> decreaseQuantity(@RequestParam String productName, HttpSession session) {
         return updateQuantity(session, productName, -1);
@@ -107,24 +110,28 @@ public class MainController  {
         }
         return ResponseEntity.notFound().build();
     }
+
     @GetMapping("/Bid")
     public String BidPage(Model model) {
         model.addAttribute("title", "Оформление заявки");
         model.addAttribute("sendForm", new SendForm()); // Добавляем 'sendForm' в модель
         return "Bid";
     }
+
     @GetMapping("/Success")
     public String SuccessPage(Model model) {
         model.addAttribute("title", "Спасибо за заявку");
         model.addAttribute("message", "Спасибо за заявку, Вам перезвонят");
         return "SuccessError";
     }
+
     @GetMapping("/Error")
     public String ErrorPage(Model model) {
         model.addAttribute("title", "Что-то пошло не так");
         model.addAttribute("message", "Что-то пошло не так, попробуйте позже");
         return "SuccessError";
     }
+
     @GetMapping("/Sendform")
     public String showForm(Model model) {
         SendForm sendForm = new SendForm();
@@ -136,7 +143,7 @@ public class MainController  {
     @PostMapping("/Sendform")
     public String submitForm(@ModelAttribute("sendForm") @Valid SendForm sendForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return"Bid";
+            return "Bid";
         }
         try {
             emailService.sendHtmlMessage(
@@ -150,7 +157,8 @@ public class MainController  {
             return "redirect:/Error";
         }
     }
-//    @PostMapping("/SendOrder")
+
+    //    @PostMapping("/SendOrder")
 //    public ResponseEntity<Object> sendOrder(@RequestBody OrderRequest orderRequest) {
 //        HashMap<String, List<Object>> basket = orderRequest.getBasket();
 //        String contact = orderRequest.getContact();
@@ -178,19 +186,31 @@ public class MainController  {
 
     @GetMapping("/CleanBasket")
     public ResponseEntity<?> cleanBasket(HttpSession session) {
-        session.setAttribute("basket", new HashMap<String, List<Object>>() );
+        session.setAttribute("basket", new HashMap<String, List<Object>>());
         return ResponseEntity.ok().build();
     }
+
     // Внутренний класс для десериализации
     private static class OrderRequest {
         private HashMap<String, List<Object>> basket;
         private String contact;
 
         // Геттеры и сеттеры
-        public HashMap<String, List<Object>> getBasket() { return basket; }
-        public void setBasket(HashMap<String, List<Object>> basket) { this.basket = basket; }
-        public String getContact() { return contact; }
-        public void setContact(String contact) { this.contact = contact; }
+        public HashMap<String, List<Object>> getBasket() {
+            return basket;
+        }
+
+        public void setBasket(HashMap<String, List<Object>> basket) {
+            this.basket = basket;
+        }
+
+        public String getContact() {
+            return contact;
+        }
+
+        public void setContact(String contact) {
+            this.contact = contact;
+        }
     }
 
 
@@ -202,8 +222,7 @@ public class MainController  {
         Page<Product> elements;
         if (search == null) {
             elements = productService.searchAllProducts(pageable);
-        }
-        else {
+        } else {
             elements = productService.searchProduct(search, pageable);
         }
         model.addAttribute("title", "Каталог");
@@ -214,9 +233,10 @@ public class MainController  {
         model.addAttribute("pageSize", elements.getSize());
         return "Catalog";
     }
+
     @GetMapping("/Basket")
     public String basket(Model model, HttpSession session) {
-        HashMap<String, List<Object>> basket = ( HashMap<String, List<Object>>) session.getAttribute("basket");
+        HashMap<String, List<Object>> basket = (HashMap<String, List<Object>>) session.getAttribute("basket");
 
         // If the basket is null, initialize a new one and add it to the session.
         if (basket == null) {
@@ -227,6 +247,7 @@ public class MainController  {
         model.addAttribute("items", basket);
         return "Basket";
     }
+
     @GetMapping("/MainPage")
     public String MainPage(Model model) {
         return "MainPage";

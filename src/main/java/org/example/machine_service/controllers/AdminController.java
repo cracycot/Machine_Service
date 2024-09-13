@@ -16,6 +16,7 @@ public class AdminController {
 
     @Autowired
     private ProductService productService;
+
     @GetMapping // Маршрут для получения главной страницы админ-панели
     public String admin(Model model) {
         // Обращение к сервису для получения страницы с товарами

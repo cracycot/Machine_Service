@@ -38,6 +38,7 @@ public class EmailService {
 
         mailSender.send(mimeMessage);
     }
+
     public void sendOrder(HashMap<String, List<Object>> basket, String contact) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();

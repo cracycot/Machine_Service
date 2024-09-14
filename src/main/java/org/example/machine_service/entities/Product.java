@@ -15,14 +15,16 @@ public class Product {
     private String article;
     private int price;
     private int inStock;
+
     public Product(String name, String category, String article, int price, int inStock) {
         this.name = name;
-        this.category = category;
+        this.category = category.toLowerCase();
         this.article = article;
         this.price = price;
         this.inStock = inStock;
 
     }
+
     public Product() {
         this.name = "";
         category = "";
@@ -54,8 +56,9 @@ public class Product {
     public String getCategory() {
         return category;
     }
+
     public void setCategory(String category) {
-        this.category = category;
+        this.category = category.toLowerCase();
     }
 
     public String getArticle() {

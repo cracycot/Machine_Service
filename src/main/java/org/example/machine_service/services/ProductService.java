@@ -11,21 +11,22 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.Optional;
+
 @Service
 public class ProductService {
     @Autowired
     private ProductRepo productRepo;
     @Autowired
     private ProductFilter productFilter;
-    public Product create_product(Product product) {
+
+    public void create_product(Product product) {
 
         if (productRepo.findByName(product.getName()) != null) {
             String s = product.getName();
             System.out.println(s);
-            return product;
+            return;
         }
-        System.out.println("222222");
-        return productRepo.save(product);
+        productRepo.save(product);
     }
 
     public Product get_product(Long id) throws ProductNotFindException {
@@ -35,13 +36,26 @@ public class ProductService {
         }
         return productOptional.get();
     }
-    public Product update_product(Product product) {
+
+    public void update_product(Product product) {
         Product savedProduct = productRepo.save(product);
-        return savedProduct;
     }
-    public Page<Product> searchProduct(String searchTerm, Pageable pageable) {
-        return productFilter.findByArticleContaining(searchTerm, pageable);
+
+    public Page<Product> searchProduct(String searchTerm, String brand, int min, int max, Pageable pageable) {
+        System.out.println(min + " " + max);
+        if (searchTerm != null && !searchTerm.isEmpty()) {
+            if (brand != null && !brand.isEmpty()) {
+                System.out.println(searchTerm);
+                return productFilter.findBySearchTermAndCategoryAndPrice(searchTerm, brand, min, max, pageable);
+            }
+            return productFilter.findBySearchTermAndPriceRange(searchTerm, min, max, pageable);
+        } else if (brand != null && !brand.isEmpty()) {
+            return productFilter.findByCategoryAndPriceRange(brand, min, max, pageable);
+        } else {
+            return productFilter.findBySearchTermAndPriceRange(null, min, max, pageable);
+        }
     }
+
     public Page<Product> searchProductCategoryPrice(String search, int min, int max, Pageable pageable) {
         return productFilter.findBySearchTermAndPriceRange(search, min, max, pageable);
     }
@@ -54,6 +68,7 @@ public class ProductService {
     public ArrayList<Product> searchAllProductsWithOutPagination() {
         return (ArrayList<Product>) productRepo.findAll();
     }
+
     public void delete_product(Product product) {
         productRepo.delete(product);
     }

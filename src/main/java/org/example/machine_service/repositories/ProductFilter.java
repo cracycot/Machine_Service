@@ -12,8 +12,16 @@ public interface ProductFilter extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.article LIKE %:searchTerm%")
     Page<Product> findByArticleContaining(String searchTerm, Pageable pageable);
 
-    @Query("SELECT p FROM Product p WHERE (:search IS NULL OR p.name LIKE %:search% OR p.category LIKE %:search%) AND p.price BETWEEN :min AND :max")
+    @Query("SELECT p FROM Product p WHERE (:search IS NULL OR p.article LIKE %:search% OR p.category LIKE %:search%) AND p.price BETWEEN :min AND :max")
     Page<Product> findBySearchTermAndPriceRange(@Param("search") String search, @Param("min") int min, @Param("max") int max, Pageable pageable);
 
+    @Query("SELECT p FROM Product p WHERE (:brand IS NULL OR p.category LIKE %:brand%) AND p.price BETWEEN :min AND :max")
+    Page<Product> findByCategoryAndPriceRange(@Param("brand") String brand, @Param("min") int min, @Param("max") int max, Pageable pageable);
 
+
+    @Query("SELECT p FROM Product p WHERE " +
+            "(:search IS NULL OR p.article LIKE %:search%) AND " +
+            "(:brand IS NULL OR p.category = :brand) AND " +
+            "(p.price BETWEEN :min AND :max)")
+    Page<Product> findBySearchTermAndCategoryAndPrice(@Param("search") String search,@Param("brand") String brand, @Param("min") int min, @Param("max") int max, Pageable pageable);
 }

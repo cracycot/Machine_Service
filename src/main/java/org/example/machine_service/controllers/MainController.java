@@ -218,12 +218,14 @@ public class MainController {
     public String catalogProduct(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
                                  @RequestParam(value = "search", required = false) String search,
                                  @RequestParam(value = "size", defaultValue = "5") int size) {
-        Pageable pageable = (Pageable) PageRequest.of(page - 1, size);
+        Pageable pageable =  PageRequest.of(page - 1, size);
         Page<Product> elements;
+        elements = productService.searchAllProducts(pageable);
         if (search == null) {
-            elements = productService.searchAllProducts(pageable);
+            System.out.println(2);
         } else {
-            elements = productService.searchProduct(search, pageable);
+            System.out.println("1");
+//            elements = productService.searchProduct(search, pageable);
         }
         model.addAttribute("title", "Каталог");
         model.addAttribute("items", elements);

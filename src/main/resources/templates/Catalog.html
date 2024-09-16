@@ -2,6 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${title}"/>
+    <link rel="icon" href="../img/Logo.png" type="image/x-icon">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -46,10 +47,14 @@
                 <div class="input-group">
                     <select id="brand" name="brand">
                         <option value="">Выберите бренд</option>
-                        <option value="perkins">PERKINS</option>
                         <option value="caterpillar">CATERPILLAR</option>
-                        <option value="motor">MOTOR</option>
-                        <option value="bosh">BOSH</option>
+                        <option value="cummins">Cummins</option>
+                        <option value="detroitdiesel">DetroitDiesel</option>
+                        <option value="fgwilson">FGWilson</option>
+                        <option value="perkins">Perkins</option>
+                        <option value="maxiforce">Maxiforce</option>
+                        <option value="redat">Redat</option>
+                        <option value="volvopenta">VolvoPenta</option>
                     </select>
                 </div>
                 <div class="price">Цена</div>
@@ -57,7 +62,10 @@
                     <input type="number" id="priceFrom" name="priceFrom" placeholder="От" min="0">
                     <input type="number" id="priceTo" name="priceTo" placeholder="До" min="0">
                 </div>
-                <button type="submit">Применить фильтры</button>
+                <div class="buttons-group">
+                    <button type="submit">Применить фильтры</button>
+                    <button type="button" id="resetFilters">Сбросить фильтры</button>
+                </div>
             </form>
         </div>
         <div class="catalog">
@@ -74,8 +82,8 @@
             <ul id="itemsList">
             </ul>
             <div class="pagination">
-                <span id="currentPage">1</span>
                 <button id="prevPage">Предыдущая</button>
+                <span id="currentPage">1</span>
                 <button id="nextPage">Следующая</button>
             </div>
         </div>

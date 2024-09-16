@@ -79,8 +79,6 @@ header nav ul li.active {
     position: sticky;
     top: 0;
     height: 5vh;
-    /*!*top: 100px;*!*/
-    /*left: 0;*/
     background-color:white;/* Цвет фона вашей навигационной панели */
     color: black; /* Цвет текста */
     /*padding: 10px 0;*/
@@ -92,7 +90,7 @@ header nav ul li.active {
 .navbar nav {
     padding: 10px 10%;
 }
-.navbar .bi {
+.navbar #Busket {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -115,6 +113,108 @@ header nav ul li.active {
     background-color: #283277;
     z-index: 999;
 }
+
+/*@media (max-aspect-ratio: 4/3) {*/
+/*    .navbar .nav{*/
+/*        height: 4vh;*/
+/*    }*/
+/*}*/
+
+/* Основной стиль для навигации */
+/*.navbar {*/
+/*    width: 100%;*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*    height: 5vh;*/
+/*    background-color: white;*/
+/*    color: black;*/
+/*    z-index: 1000;*/
+/*}*/
+
+/*.navbar nav {*/
+/*    display: flex;*/
+/*    justify-content: space-between; !* Выровнять элементы по горизонтали *!*/
+/*    align-items: center; !* Выровнять по вертикали *!*/
+/*    padding: 10px 10%;*/
+/*}*/
+
+/*.navbar nav ul {*/
+/*    list-style: none;*/
+/*    display: flex;*/
+/*    gap: 20px; !* Расстояние между кнопками *!*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.navbar nav ul li {*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.navbar .bi {*/
+/*    font-size: 2.0rem;*/
+/*}*/
+
+/*.Number .bi {*/
+/*    color: black;*/
+/*    top: 55%;*/
+/*    transform: translateY(-50%);*/
+/*    width: 24px;*/
+/*    height: 12px;*/
+/*}*/
+
+/*!* Линия под навигацией *!*/
+/*.line {*/
+/*    position: sticky;*/
+/*    top: 5vh; !* Высота навигационного меню *!*/
+/*    width: 100%;*/
+/*    height: 1px;*/
+/*    background-color: #283277;*/
+/*    z-index: 999;*/
+/*}*/
+
+/* Медиа-запрос для телефонов (высокие экраны с малым соотношением сторон) */
+@media (max-aspect-ratio: 4/3) {
+    .navbar nav ul {
+        display: flex; /* Используем flexbox для выравнивания */
+        align-items: center; /* Центрируем элементы по вертикали */
+        justify-content: center; /* Центрируем элементы по горизонтали */
+        gap: 10px;
+        height: 100%; /* Делаем высоту списка равной высоте navbar */
+    }
+    .navbar nav {
+        padding: 20px;
+    }
+
+    .navbar {
+        height: 6vh; /* Высота навигации */
+        display: flex; /* Flex для выравнивания содержимого */
+        align-items: center; /* Центрирование содержимого по вертикали */
+        justify-content: center; /* Центрирование содержимого по горизонтали */
+    }
+    .navbar .bi {
+        color: black;
+        width: 24px;
+        height: 12px;
+    }
+
+    .navbar nav ul li {
+        font-size: 1.3rem; /* Увеличенный размер текста */
+        padding: 10px 15px; /* Увеличенный размер кнопок */
+    }
+    .navbar #Busket {
+        position: relative; /* Переопределяем позиционирование */
+        top: 0;
+        transform: none; /* Отключаем смещение */
+        font-size: 2.0rem; /* Изменяем размер иконки */
+        /* Другие стили для мобильной версии */
+    }
+
+
+    .navbar {
+        height: 6vh; /* Увеличиваем высоту навигации на телефонах */
+    }
+}
+
 
 /*.container {*/
 /*    margin-top: 0px;*/
@@ -272,11 +372,8 @@ header nav ul li.active {
 /*.container {*/
 /*    transition: transform 0.8s cubic-bezier(0.660, 0.215, 0.295, 1.640);*/
 /*}*/
-/*.container:hover {*/
-/*    transform: translateY(-5%);*/
-/*}*/
 .content {
-    margin-top: 200px;
+    margin-top: 250px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -285,10 +382,27 @@ header nav ul li.active {
 .content:nth-child(even) {
     flex-direction: row-reverse;
 }
+
+.content-img img{
+    width: 400px;
+    height: 600px;
+    /*min-height: 10vh;*/
+    /*max-height: 500px; !* Ограничиваем высоту изображений *!*/
+    /*width: 200px; !* Оставляем ширину адаптивной *!*/
+}
 .content-text {
     position: relative;
     padding-left: 150px;
+    padding-right: 30px;
     max-width: 782px;
+}
+
+@media (max-aspect-ratio: 4/3) {
+    .content-text {
+        max-width: 40vw;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
 }
 
 .content-subtitle {
@@ -349,6 +463,13 @@ header nav ul li.active {
     transform: translateY(-50%);
     background-image: url("../img/icons/arrow_right.png");
 }
+
+
+@media (max-aspect-ratio: 4/3) {
+    .content-application {
+        font-size: 30px;
+    }
+}
 .content-text::before {
     position: absolute;
     left: 0;
@@ -365,30 +486,51 @@ header nav ul li.active {
     color: rgba(0,0,0, 0.1);
 
 }
-.brands {
-    margin-top: 200px;
-    text-align: center;
-}
-.brands {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 48px;
-    line-height: 1.2;
-    color: black;
-}
-.brands ul{
+.brands ul {
     margin-top: 27px;
     list-style-type: none;
     padding-left: 0;
     margin-left: 0;
-    display:flex;
+    display: flex;
+    flex-wrap: wrap; /* Позволяет переносить элементы на новую строку */
     justify-content: center; /* Горизонтальное выравнивание: отцентровка */
-    align-items: center
+    align-items: center;
 }
+
+.brands li {
+    margin: 20px; /* Увеличиваем отступы между иконками */
+}
+
 .brands img {
-    height: 100px;
+    height: 150px;
     width: 250px;
 }
+
+.brands {
+    margin-top: 200px;
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1.2;
+    color: black;
+}
+
+
+/*.brands ul{*/
+/*    margin-top: 27px;*/
+/*    list-style-type: none;*/
+/*    padding-left: 0;*/
+/*    margin-left: 0;*/
+/*    display:flex;*/
+/*    justify-content: center; !* Горизонтальное выравнивание: отцентровка *!*/
+/*    align-items: center*/
+/*}*/
+/*.brands img {*/
+/*    height: 150px;*/
+/*    width: 250px;*/
+/*}*/
 /*.hero-container {*/
 /*    width: 80%;*/
 /*    margin: auto;*/
@@ -564,7 +706,7 @@ header nav ul li.active {
 /*CATALOG*/
 
 .main-catalog {
-    margin-top: 40px;
+    margin-top: 5vh;
     margin-right: 10%;
     margin-left: 10%;
 }
@@ -575,17 +717,17 @@ header nav ul li.active {
 }
 .catalog {
     min-width: 550px;
+    min-height: 55vh;
     margin-top: -200px;
     left: 40%;
     position: relative;
-    min-height: 40vh;
     height: 100%;
     width: 60%;
-
 }
 .catalog-nav {
     width: 87%;
     height: 40px;
+    min-height: 2vh;
     background-color: #FBD784;
     border-radius: 5px;
 }
@@ -612,16 +754,19 @@ header nav ul li.active {
     width: 15%;
 }
 #itemsList {
-    margin-top: 15px;
+    min-height: 30vh;
+    height: auto;
+    margin-top: 1vh;
     left:0;
     list-style-type: none;
     padding: 0;
 }
 #itemsList li {
+    /*font-size: 1em;*/
     background: white;
     margin-top: 10px;
     padding: 5px;
-    height: 35px;
+    height: 5vh;
     display: flex; /* Активируем Flexbox */
     flex-direction: row; /* Элементы в ряд */
     justify-content: flex-start;
@@ -635,6 +780,7 @@ header nav ul li.active {
     margin-right: 5%;
 }
 #itemsList .item {
+    font-size: 16px;
     width: 15%;
     margin-right: 5%; /* Добавляем небольшой отступ справа от каждого элемента */
 }
@@ -646,6 +792,9 @@ header nav ul li.active {
     margin-left: 3px;
     width: 150px;
     height: 30px;
+    min-height: 2vh;
+    font-size: 24px;
+    /*min-width: 10vw;*/
     background-color: #FBD784;
     display: flex;
     justify-content: center;
@@ -661,6 +810,7 @@ header nav ul li.active {
 .filter-container {
     margin-top: 20px;
     min-width: 200px;
+    min-height: 10vh;
     width: 12%;
     background-color: #FBD784;
     border-radius: 5px;
@@ -669,6 +819,8 @@ header nav ul li.active {
     padding-left: 5px;
 }
 #filterForm {
+    width: 90%;
+    height: 100%;
     padding: 5px;
 }
 .filter-container .price {
@@ -676,6 +828,8 @@ header nav ul li.active {
 }
 .filter-container  input{
     width: 50px;
+    min-height: 2vh;
+    min-width: 40%;
     border: none; /* Убираем границу поля ввода */
     outline: none;
     padding: 2px;/* Убираем контур при фокусе */
@@ -684,12 +838,25 @@ header nav ul li.active {
 }
 .filter-container button {
     margin: 10px auto 0;
+    width: 48%; /* Чтобы кнопки занимали по половине ширины */
+    height: 40px; /* Сделаем кнопки повыше */
+    font-size: 16px; /* Увеличим размер шрифта для удобства */
+    border: none;
+    border-radius: 5px;
+}
+#brand {
+    min-height: 2vh;
+}
+.filter-container .buttons-group {
+    display: flex;
+    justify-content: space-between; /* Кнопки будут на одной линии */
+    margin-top: 10px;
 }
 
 .add-to-cart-btn {
+    width: 20%;
     border: none;
     font-family: 'Lato';
-    font-size: 12px;
     color: inherit;
     background: none;
     cursor: pointer;
@@ -759,6 +926,7 @@ header nav ul li.active {
 
 /*PAGINATION*/
 .pagination {
+    margin-top: 1vh;
     display: flex;
     align-items: center;
     justify-content: center;/* Выравнивание элементов по вертикали */ /* Горизонтальное центрирование содержимого */
@@ -777,6 +945,8 @@ header nav ul li.active {
     border: none; /* Убираем границу кнопки */
     background-color: #FBD784; /* Цвет фона кнопок */
     color: #000; /* Цвет текста кнопок */
+    min-height: 2vh;
+    min-width: 5vh;
     padding: 10px 15px; /* Внутренний отступ кнопок */
     margin: 0 5px; /* Маргин между элементами внутри .pagination */
     cursor: pointer; /* Курсор в виде указателя */
@@ -787,7 +957,6 @@ header nav ul li.active {
 .pagination button:hover {
     background-color: #ecc967; /* Цвет фона кнопок при наведении */
 }
-
 
 
 /*MODAL*/

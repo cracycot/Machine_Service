@@ -31,21 +31,24 @@ function increaseQuantity(button) {
         .catch(error => console.error('Ошибка: ', error));
 }
 
+
 function decreaseQuantity(button) {
     const liElement = button.closest('li');
     const productName = liElement.querySelector('.name').innerText;
     const numberInBasket = liElement.querySelector('.number-in-basket');
     const currentPageElementBasket = document.getElementById("currentPageBasket");
+    let currentPage = parseInt(currentPageElementBasket.innerText, 10);
     const basketDecrease = {
         productName: productName,
-        page: parseInt(currentPageElementBasket.innerText) // Обязательно преобразуйте в число
+        page: currentPage
     };
+
     fetch('/basket/decrease', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json', // Указываем правильный тип
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(basketDecrease) // Отправляем JSON-строку
+        body: JSON.stringify(basketDecrease)
     })
         .then(response => {
             if (!response.ok) {
@@ -54,25 +57,33 @@ function decreaseQuantity(button) {
             return response.json();
         })
         .then(data => {
-            if (data && data.items) {
-                updateBasketCatalog(data.items);
+            // Обновляем отображение корзины
+            updateBasketCatalog(data.items);
+
+            // Если есть элементы, уменьшаем их количество на экране
+            if (data.items.length > 0) {
+                console.log('Количество товара уменьшено');
+                let currentValue = parseInt(numberInBasket.innerText) || 0;
+                let newValue = Math.max(0, currentValue - 1);
+                numberInBasket.innerText = newValue;
+
+                if (newValue <= 0) {
+                    liElement.remove();
+                }
+
+                const totalPages = data.totalPages;
+                checkPaginationButtonsBasket(currentPage, totalPages);
             } else {
-                console.error('Данные о товарах не найдены в ответе сервера');
+                // Если на текущей странице нет элементов, переходим на предыдущую страницу
+                if (currentPage > 1) {
+                    loadBasketProducts(currentPage - 1);
+                } else {
+                    // Если нет предыдущей страницы и корзина пуста
+                    alert('Корзина пуста');
+                }
             }
-            console.log('Количество товара уменьшено');
-            let currentValue = parseInt(numberInBasket.innerText) || 0;
-            let newValue = Math.max(0, currentValue - 1);
-            numberInBasket.innerText = newValue;
-
-            if (newValue <= 0) {
-                liElement.remove();
-            }
-
-            const totalPages = data.totalPages;
-            checkPaginationButtonsBasket(parseInt(document.getElementById('currentPageBasket').innerText, 10), totalPages);
         })
         .catch(error => console.error('Ошибка: ', error));
-
 }
 
 
@@ -114,9 +125,16 @@ function serializeAndSendData() {
 
     return false;
 }
+
 function updateBasketCatalog(items) {
     const itemsContainer = document.querySelector('#itemsContainer');
     itemsContainer.innerHTML = '';
+
+    if (items.length === 0) {
+        // Если элементов нет, показать сообщение
+        itemsContainer.innerHTML = '<p>Корзина пуста</p>';
+        return;
+    }
 
     items.forEach(item => {
         const listItem = document.createElement('li');
@@ -137,7 +155,7 @@ function updateBasketCatalog(items) {
                 <span class="number-in-basket">${item.inBasket}</span>
                 <button class="increase-key" onclick="increaseQuantity(this)">+</button>
             </div>
-            `;
+        `;
 
         itemsContainer.appendChild(listItem);
     });
@@ -156,7 +174,21 @@ function checkPaginationButtonsBasket(currentPage, totalPages) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+function loadBasketProducts(page = 1) {
+    const url = `/basket/products?page=${page}&size=5`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            updateBasketCatalog(data.items);
+            document.getElementById('currentPageBasket').innerText = data.currentPage;
+            checkPaginationButtonsBasket(data.currentPage, data.totalPages);
+        })
+        .catch(error => console.error('Ошибка:', error));
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
     const prevPageBasket = document.getElementById("prevPageBasket");
     const currentPageElementBasket = document.getElementById("currentPageBasket");
     const nextPageBasket = document.getElementById("nextPageBasket");
@@ -165,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let totalPages = parseInt(totalPagesElement.innerText, 10);
     console.log(totalPages);
 
-    prevPageBasket.addEventListener("click", function() {
+    prevPageBasket.addEventListener("click", function () {
         let currentPage = parseInt(currentPageElementBasket.innerText, 10);
         if (currentPage > 1) {
             const newPage = currentPage - 1;
@@ -174,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    nextPageBasket.addEventListener("click", function() {
+    nextPageBasket.addEventListener("click", function () {
         let currentPage = parseInt(currentPageElementBasket.innerText, 10);
         if (currentPage < totalPages) {
             const newPage = currentPage + 1;
@@ -182,23 +214,6 @@ document.addEventListener("DOMContentLoaded", function() {
             checkPaginationButtonsBasket(newPage, totalPages);
         }
     });
-
-    function loadBasketProducts(page = 1) {
-        const url = `/basket/products?page=${page}&size=5`;
-        console.log("отправил запрос на basket")
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                updateBasketCatalog(data.items);
-                currentPageElementBasket.innerText = data.currentPage;
-                totalPages = data.totalPages;
-                checkPaginationButtonsBasket(data.currentPage, data.totalPages);
-            })
-            .catch(error => console.error('Ошибка:', error));
-    }
-
-
 
     let initialPage = parseInt(currentPageElementBasket.innerText, 10);
     checkPaginationButtonsBasket(initialPage, totalPages);

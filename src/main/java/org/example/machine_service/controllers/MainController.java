@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -248,6 +249,42 @@ public class MainController {
         }
         model.addAttribute("items", basket);
         return "Basket";
+    }
+    @GetMapping("/basket/products")
+    public ResponseEntity<Map<String, Object>> getBasketProducts(
+            HttpSession session,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size) {
+
+        HashMap<String, List<Object>> basket = (HashMap<String, List<Object>>) session.getAttribute("basket");
+        if (basket == null) {
+            basket = new HashMap<>();
+        }
+
+        List<Map<String, Object>> itemsList = new ArrayList<>();
+        for (Map.Entry<String, List<Object>> entry : basket.entrySet()) {
+            Map<String, Object> itemMap = new HashMap<>();
+            itemMap.put("name", entry.getKey());
+            itemMap.put("quantity", entry.getValue().get(0));
+            itemMap.put("article", entry.getValue().get(2));
+            itemMap.put("price", entry.getValue().get(3));
+            itemMap.put("inStock", entry.getValue().get(4));
+            itemsList.add(itemMap);
+        }
+
+        int totalItems = itemsList.size();
+        int totalPages = (int) Math.ceil((double) totalItems / size);
+
+        int start = (page - 1) * size;
+        int end = Math.min(start + size, totalItems);
+        List<Map<String, Object>> pageItems = itemsList.subList(start, end);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("items", pageItems);
+        response.put("totalPages", totalPages);
+        response.put("currentPage", page);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/MainPage")

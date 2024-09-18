@@ -52,102 +52,91 @@ function decreaseQuantity(button) {
         })
         .catch(error => console.error('Ошибка: ', error));
 }
-function serializeAndSendData() {
+document.addEventListener("DOMContentLoaded", function() {
+    const prevPageBasket = document.getElementById("prevPageBasket");
+    const currentPageElementBasket = document.getElementById("currentPageBasket");
+    const nextPageBasket = document.getElementById("nextPageBasket");
 
-    document.getElementById('loadingSpinner').style.display = 'block';
+    const totalPagesElement = document.getElementById("totalPages");
+    let totalPages = parseInt(totalPagesElement.innerText, 10);
 
-    // Получаем контактную информацию
-    const contact = document.querySelector('input[name="contactInfo"]').value;
-
-    // Собираем данные корзины
-    let basket = {};
-    document.querySelectorAll('.order-products').forEach(item => {
-        const name = item.querySelector('.name').textContent;
-        const quantity = parseInt(item.querySelector('.number-in-basket').textContent) || 0;
-        const article = item.querySelector('.article').textContent;
-        const inStock = parseInt(item.querySelector('.number-in-stock').textContent) || 0;
-        basket[name] = [quantity, "NotDefined", article, "NotDefined", inStock]; // Оставляем место для данных, которые не указаны в текущем примере
+    prevPageBasket.addEventListener("click", function() {
+        let currentPage = parseInt(currentPageElementBasket.innerText, 10);
+        if (currentPage > 1) {
+            const newPage = currentPage - 1;
+            loadBasketProducts(newPage);
+        }
     });
 
-    // Предотвращаем переход на другую страницу
-    fetch('/SendOrder', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ basket, contact })
-    })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById('loadingSpinner').style.display = 'none';
-                clearBasket();
+    nextPageBasket.addEventListener("click", function() {
+        let currentPage = parseInt(currentPageElementBasket.innerText, 10);
+        if (currentPage < totalPages) {
+            const newPage = currentPage + 1;
+            loadBasketProducts(newPage);
+        }
+    });
 
-                return response.text();
-            }// Получаем текстовый ответ
-        })
-        .then(data => {
-            if (data) { // Проверяем, не пустой ли текст
-                // const jsonData = JSON.parse(data); // Превращаем текст в JSON
-                // console.log(jsonData); // Делаем что-то с обработанным JSON
-                window.location.href = '/Success'; // Добавлено перенаправление на страницу /Success
-            } else {
-                console.log("No data returned from the server");
-            }
-        })
-        .catch(error => {
-            document.getElementById('loadingSpinner').style.display = 'none';
-            console.error(error)});  // Обработка ошибки
-    return false;
-}
-function showOrderModal() {
-    let modal = document.getElementById("orderModal");
-    modal.style.display = "block";
+    function loadBasketProducts(page = 1) {
+        const url = `/basket/products?page=${page}&size=5`;
 
-    // Закрыть модальное окно при клике на (x)
-    let span = document.getElementsByClassName("close")[0];
-    span.onclick = function() {
-        modal.style.display = "none";
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                updateBasketCatalog(data.items);
+                currentPageElementBasket.innerText = data.currentPage;
+                totalPages = data.totalPages;
+                checkPaginationButtonsBasket(data.currentPage, data.totalPages);
+            })
+            .catch(error => console.error('Ошибка:', error));
     }
 
-    // Закрыть модальное окно при клике вне его
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    function updateBasketCatalog(items) {
+        const itemsContainer = document.querySelector('#itemsContainer');
+        itemsContainer.innerHTML = ''; // Очищаем текущий список товаров
+
+        items.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('order-products');
+
+            listItem.innerHTML = `
+            <div class="item-sel">
+                <span class="name">${item.name}</span>
+            </div>
+            <div class="item-sel">
+                <span class="article">${item.article}</span>
+            </div>
+            <div class="item-sel">
+                <span class="number-in-stock">${item.price}</span>
+            </div>
+            <div class="item-sel">
+                <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
+                <span class="number-in-basket">${item.quantity}</span>
+                <button class="increase-key" onclick="increaseQuantity(this)">+</button>
+            </div>
+        `;
+
+            itemsContainer.appendChild(listItem);
+        });
+    }
+
+
+
+    function checkPaginationButtonsBasket(currentPage, totalPages) {
+        if (currentPage <= 1) {
+            prevPageBasket.disabled = true;
+        } else {
+            prevPageBasket.disabled = false;
+        }
+
+        if (currentPage >= totalPages) {
+            nextPageBasket.disabled = true;
+        } else {
+            nextPageBasket.disabled = false;
         }
     }
-}
 
-function clearBasket() {
-    // Очистить содержимое HTML-элемента корзины
-    fetch('/CleanBasket',{
-        method: "GET",
-        headers: {
-        }
-        }
-    )
-    document.querySelector('.productsBasket').innerHTML = '';
-    // Можно также очистить данные корзины, если они хранятся в JavaScript
-}
-
-window.onload = function() {
-    var orderProducts = document.querySelectorAll('.order-products'); // Получаем все товары
-    var contactForm = document.querySelector('.contact-form');
-    var orderList =  document.querySelector('.order-list');
-    // Проверяем, есть ли элементы в списке товаров корзины
-    if(orderProducts.length === 0) {
-        // Если нет элементов, скрываем форму
-        contactForm.style.display = 'none';
-        orderList.style.display = 'none';
-
-
-        // Создаем и отображаем сообщение о том, что корзина пуста
-        var emptyBasketMessage = document.createElement('div');
-        emptyBasketMessage.innerHTML = "Вы пока не добавили товар в корзину";
-        emptyBasketMessage.className = 'empty-basket-message'; // Можете добавить стили для этого класса в CSS
-
-        //Добавляем сообщение прямо после .order-list
-        var orderList = document.querySelector('.order-list');
-        orderList.insertAdjacentElement('afterend', emptyBasketMessage);
-    }
-};
+    // Инициализируем состояние кнопок пагинации
+    let initialPage = parseInt(currentPageElementBasket.innerText, 10);
+    checkPaginationButtonsBasket(initialPage, totalPages);
+});
 

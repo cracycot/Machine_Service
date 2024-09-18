@@ -29,7 +29,6 @@
         </nav>
     </header>
     <div class="line"></div>
-
     <div class="productsBasket">
         <div class="basket">Корзина</div>
         <div class="contact-form">
@@ -48,7 +47,7 @@
                     <li class="item">В корзине</li>
                 </ul>
             </div>
-            <span id="totalPages" style="display: none;">2</span>
+            <span  id="totalPages" style="display: none;" th:text= "${totalPages}"></span>
             <span id="currentPage" style="display: none;">1</span>
             <div id="itemsContainer">
                 <li class="order-products">

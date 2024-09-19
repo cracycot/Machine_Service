@@ -86,46 +86,6 @@ function decreaseQuantity(button) {
         .catch(error => console.error('Ошибка: ', error));
 }
 
-
-function serializeAndSendData() {
-    const contactInfo = document.querySelector('input[name="contactInfo"]').value;
-
-    let basket = {};
-    document.querySelectorAll('.order-products').forEach(item => {
-        const name = item.querySelector('.name').innerText;
-        const quantity = parseInt(item.querySelector('.number-in-basket').innerText) || 0;
-        const article = item.querySelector('.article').innerText;
-        const price = parseFloat(item.querySelector('.number-in-stock').innerText) || 0;
-        const inStock = parseInt(item.querySelector('.number-in-stock').innerText) || 0;
-
-        basket[name] = [quantity, "Unknown Category", article, price, inStock];
-    });
-
-    const orderData = {
-        basket: basket,
-        contact: contactInfo
-    };
-
-    fetch('/SendOrder', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderData)
-    })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = '/Success';
-            } else {
-                console.error('Ошибка при отправке заказа');
-                alert('Произошла ошибка при отправке заказа. Попробуйте еще раз.');
-            }
-        })
-        .catch(error => console.error('Ошибка:', error));
-
-    return false;
-}
-
 function updateBasketCatalog(items) {
     const itemsContainer = document.querySelector('#itemsContainer');
     itemsContainer.innerHTML = '';
@@ -174,6 +134,75 @@ function checkPaginationButtonsBasket(currentPage, totalPages) {
     }
 }
 
+function clearBasket() {
+    fetch('/CleanBasket', {
+        method: 'GET'
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('Корзина очищена');
+                loadBasketProducts(1); // Load the first page with an empty basket
+            } else {
+                console.error('Ошибка при очистке корзины');
+            }
+        })
+        .catch(error => console.error('Ошибка:', error));
+}
+
+// Function to show order confirmation modal and redirect
+function showOrderModal() {
+    const orderModal = document.getElementById("orderModal");
+    orderModal.style.display = "block";
+
+    // Close the modal after 5 seconds and redirect to the main page
+    setTimeout(() => {
+        orderModal.style.display = "none";
+        window.location.href = '/';
+    }, 5000);
+}
+
+function serializeAndSendData() {
+    const contactInfo = document.querySelector('input[name="contactInfo"]').value;
+
+    let basket = {};
+    document.querySelectorAll('.order-products').forEach(item => {
+        const name = item.querySelector('.name').innerText;
+        const quantity = parseInt(item.querySelector('.number-in-basket').innerText) || 0;
+        const article = item.querySelector('.article').innerText;
+        const price = parseFloat(item.querySelector('.number-in-stock').innerText) || 0;
+        const inStock = parseInt(item.querySelector('.number-in-stock').innerText) || 0;
+
+        basket[name] = [quantity, "Unknown Category", article, price, inStock];
+    });
+
+    const orderData = {
+        basket: basket,
+        contact: contactInfo
+    };
+
+    fetch('/SendOrder', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+        .then(response => {
+            if (response.ok) {
+                // Show the order modal
+                clearBasket();
+                showOrderModal();
+
+            } else {
+                console.error('Ошибка при отправке заказа');
+                alert('Произошла ошибка при отправке заказа. Попробуйте еще раз.');
+            }
+        })
+        .catch(error => console.error('Ошибка:', error));
+
+    return false;
+}
+
 function loadBasketProducts(page = 1) {
     const url = `/basket/products?page=${page}&size=5`;
 
@@ -219,3 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
     checkPaginationButtonsBasket(initialPage, totalPages);
     loadBasketProducts()
 });
+
+function closeModal() {
+    document.getElementById("orderModal").style.display = "none";
+}

@@ -31,6 +31,7 @@
     <div class="line"></div>
     <div class="productsBasket">
         <div class="basket">Корзина</div>
+        <button class="clear-basket" onclick="clearBasket()">Очистить корзину</button> <!-- Clear Basket Button -->
         <div class="contact-form">
             <p>Введите вашу почту/телефон:</p>
             <form class="contact-form-submit" onsubmit="return serializeAndSendData()">
@@ -47,89 +48,10 @@
                     <li class="item">В корзине</li>
                 </ul>
             </div>
-            <span  id="totalPages" style="display: none;" th:text= "${totalPages}"></span>
+            <span id="totalPages" style="display: none;" th:text= "${totalPages}"></span>
             <span id="currentPage" style="display: none;">1</span>
             <div id="itemsContainer">
-                <li class="order-products">
-                    <div class="item-sel">
-                        <span class="name">Форсунки BOSH</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="article">523234</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="number-in-stock">23999</span>
-                    </div>
-                    <div class="item-sel">
-                        <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
-                        <span class="number-in-basket">1</span>
-                        <button class="increase-key" onclick="increaseQuantity(this)">+</button>
-                    </div>
-                </li>
-                <li class="order-products">
-                    <div class="item-sel">
-                        <span class="name">ТНВД BOSH 2 модель</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="article">514344</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="number-in-stock">49700</span>
-                    </div>
-                    <div class="item-sel">
-                        <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
-                        <span class="number-in-basket">1</span>
-                        <button class="increase-key" onclick="increaseQuantity(this)">+</button>
-                    </div>
-                </li>
-                <li class="order-products">
-                    <div class="item-sel">
-                        <span class="name">Кирил</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="article">dsf</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="number-in-stock">11</span>
-                    </div>
-                    <div class="item-sel">
-                        <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
-                        <span class="number-in-basket">1</span>
-                        <button class="increase-key" onclick="increaseQuantity(this)">+</button>
-                    </div>
-                </li>
-                <li class="order-products">
-                    <div class="item-sel">
-                        <span class="name">Кирилzdfdsf</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="article">dsf</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="number-in-stock">11</span>
-                    </div>
-                    <div class="item-sel">
-                        <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
-                        <span class="number-in-basket">1</span>
-                        <button class="increase-key" onclick="increaseQuantity(this)">+</button>
-                    </div>
-                </li>
-                <li class="order-products">
-                    <div class="item-sel">
-                        <span class="name">ТНВД ACM</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="article">943234</span>
-                    </div>
-                    <div class="item-sel">
-                        <span class="number-in-stock">73999</span>
-                    </div>
-                    <div class="item-sel">
-                        <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
-                        <span class="number-in-basket">1</span>
-                        <button class="increase-key" onclick="increaseQuantity(this)">+</button>
-                    </div>
-                </li>
+                <!-- Products List Here -->
             </div>
         </ul>
         <!-- Пагинация -->
@@ -141,9 +63,10 @@
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">
             <div class="spinner"></div>
         </div>
+        <!-- Order Sent Modal -->
         <div id="orderModal" class="modal" style="display:none;">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close" onclick="closeModal()">&times;</span>
                 <p>Ваш заказ успешно отправлен!</p>
             </div>
         </div>
@@ -153,4 +76,3 @@
 <script src="/js/buttons-basket.js"></script>
 </body>
 </html>
-

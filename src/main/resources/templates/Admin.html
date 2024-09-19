@@ -43,7 +43,19 @@
 <h2>Добавить новый продукт</h2>
 <form action="/product/create" method="post">
   <input type="text" name="name" placeholder="Название" required />
-  <input type="text" name="category" placeholder="Бренд" required />
+  <div class="input-group">
+    <select id="brand" name="category" required>
+      <option value="">Выберите бренд</option>
+      <option value="CATERPILLAR">CATERPILLAR</option>
+      <option value="Cummins">Cummins</option>
+      <option value="DetroitDiesel">DetroitDiesel</option>
+      <option value="FGWilson">FGWilson</option>
+      <option value="Perkins">Perkins</option>
+      <option value="Maxiforce">Maxiforce</option>
+      <option value="Redat">Redat</option>
+      <option value="VolvoPenta">VolvoPenta</option>
+    </select>
+  </div>
   <input type="text" name="article" placeholder="Артикул" required />
   <input type="number" name="price" placeholder="Цена" required />
   <input type="number" name="inStock" placeholder="Количество на складе" required />

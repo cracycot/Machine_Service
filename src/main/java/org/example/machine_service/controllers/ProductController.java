@@ -1,6 +1,8 @@
 package org.example.machine_service.controllers;
 
+import org.example.machine_service.DTO.StockResponse;
 import org.example.machine_service.entities.Product;
+import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("product")
@@ -37,6 +41,37 @@ public class ProductController {
             return ResponseEntity.badRequest().body("произошла ошибка");
         }
     }
+
+    // Increase stock by 1
+    @PostMapping("/increaseStock")
+    public ResponseEntity<StockResponse> increaseStock(@RequestParam("id") Long id) {
+        try {
+            Product product = productService.get_product(id);
+            product.setInStock(product.getInStock() + 1);
+            productService.update_product(product);
+            return ResponseEntity.ok(new StockResponse(product.getInStock()));
+        } catch (ProductNotFindException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StockResponse("Product not found"));
+        }
+    }
+
+    // Decrease stock by 1
+    @PostMapping("/decreaseStock")
+    public ResponseEntity<StockResponse> decreaseStock(@RequestParam("id")  Long id) {
+        try {
+            Product product = productService.get_product(id);
+            if (product.getInStock() > 1) { // Ensure stock does not go below 0
+                product.setInStock(product.getInStock() - 1);
+                productService.update_product(product);
+                return ResponseEntity.ok(new StockResponse(product.getInStock()));
+            } else {
+                return ResponseEntity.badRequest().body(new StockResponse("Stock cannot be less than 0"));
+            }
+        } catch (ProductNotFindException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StockResponse("Product not found"));
+        }
+    }
+
 
 //    @GetMapping("/searchproduct")
 //    public ResponseEntity SearchProduct(@RequestParam String id,

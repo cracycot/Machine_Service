@@ -36,11 +36,11 @@
 //         });
 //     });
 // });
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Предполагаем, что container - это родительский элемент, который уже есть на странице.
     var container = document.querySelector('body'); // Пример с использованием тега body как контейнера для делегирования
 
-    container.addEventListener('click', function(event) {
+    container.addEventListener('click', function (event) {
         // Используем метод closest, чтобы проверить, была ли нажата кнопка добавить в корзину или ее потомок
         var button = event.target.closest('.add-to-cart-btn');
         // Если нажатый элемент или его потомки не являются целевой кнопкой, прекращаем выполнение функции
@@ -67,7 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then((data) => {
-                if(data.result === 'success') {
+                if (data.result === 'success') {
+
+                    // showAddToBasketModal()
                     console.log('Товар успешно добавлен в корзину.');
                 } else {
                     console.error('Ошибка добавления товара в корзину');
@@ -78,15 +80,72 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 });
-// document.addEventListener('DOMContentLoaded', function(){
-//     document.getElementById('searchButton').addEventListener('click', function(){
-//         var searchValue = document.getElementById('searchInput').value;
-//         fetch('/product/searchproduct?id=' + searchValue)
-//             .then(response => response.text())
-//             .then(data => {
-//                 document.getElementById('results').innerHTML = data;
-//             })
-//             .catch(error => console.error(error));
-//     });
-// });
-// // Не забудьте объявить переменную csrfToken в вашем коде или получить её значение из метатегов или скрытого input поля
+
+function closeProductModal() {
+    document.getElementById("productModal").style.display = "none";
+}
+
+// function showAddToBasketModal() {
+//     const orderModal = document.getElementById("productModal");
+//     orderModal.style.display = "block";
+//
+//     // Close the modal after 5 seconds and redirect to the main page
+//     setTimeout(() => {
+//         orderModal.style.display = "none";
+//     }, 500);
+// }
+$(document).on('click', '.add-to-cart-btn', function(e){
+    e.preventDefault();
+    console.log('Клик по кнопке "Добавить в корзину"');
+
+    var button = $(this);
+    var productId = button.data('product-id');
+
+    // Отправляем запрос на сервер для добавления в корзину
+    $.ajax({
+        url: '/add-to-basket',
+        method: 'POST',
+        data: { productId: productId },
+        success: function(data) {
+            if (data.result === 'success') {
+                console.log('Товар успешно добавлен в корзину.');
+                // Запускаем анимацию
+                animateAddToCart(button);
+            } else {
+                console.error('Ошибка добавления товара в корзину');
+            }
+        },
+        error: function(error) {
+            console.error('Произошла ошибка:', error);
+        }
+    });
+});
+
+function animateAddToCart(button) {
+    var animtocart = $('<div class="animtocart"></div>');
+    $('body').append(animtocart);
+
+    var buttonOffset = button.offset();
+
+    animtocart.css({
+        'position' : 'absolute',
+        'background' : '#FBD784',
+        'width' : '25px',
+        'height' : '25px',
+        'border-radius' : '50%',
+        'z-index' : '9999999999',
+        'left' : buttonOffset.left + button.width() / 2 - 12.5,
+        'top' : buttonOffset.top + button.height() / 2 - 12.5,
+    });
+
+    var cart = $('#Busket').offset();
+
+    animtocart.animate({
+        top: cart.top + 'px',
+        left: cart.left + 'px',
+        width: 0,
+        height: 0
+    }, 800, function(){
+        $(this).remove();
+    });
+}

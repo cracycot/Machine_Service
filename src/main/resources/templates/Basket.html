@@ -31,12 +31,14 @@
     <div class="line"></div>
     <div class="productsBasket">
         <div class="basket">Корзина</div>
-        <button class="clear-basket" onclick="clearBasket()">Очистить корзину</button> <!-- Clear Basket Button -->
         <div class="contact-form">
-            <p>Введите вашу почту/телефон:</p>
             <form class="contact-form-submit" onsubmit="return serializeAndSendData()">
+                <p>Введите вашу почту/телефон:</p>
                 <input type="text" name="contactInfo" placeholder="Email или телефон" required>
-                <button class="send-order" type="button" onclick="serializeAndSendData()">Оформить заказ</button>
+                <div class="buttons-group">
+                    <button class="send-order" type="button" onclick="serializeAndSendData()">Оформить заказ</button>
+                    <button class="clear-basket" onclick="clearBasket()">Очистить корзину</button>
+                </div><!-- Clear Basket Button -->
             </form>
         </div>
         <ul class="order-list">
@@ -51,15 +53,15 @@
             <span id="totalPages" style="display: none;" th:text= "${totalPages}"></span>
             <span id="currentPage" style="display: none;">1</span>
             <div id="itemsContainer">
-                <!-- Products List Here -->
+            </div>
+
+            <!-- Пагинация -->
+            <div class="pagination">
+                <button id="prevPageBasket">Предыдущая</button>
+                <span id="currentPageBasket">1</span>
+                <button id="nextPageBasket">Следующая</button>
             </div>
         </ul>
-        <!-- Пагинация -->
-        <div class="pagination">
-            <button id="prevPageBasket">Предыдущая</button>
-            <span id="currentPageBasket">1</span>
-            <button id="nextPageBasket">Следующая</button>
-        </div>
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">
             <div class="spinner"></div>
         </div>

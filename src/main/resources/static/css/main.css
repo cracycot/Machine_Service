@@ -10,6 +10,12 @@ body {
     background: linear-gradient(to bottom, #283277, #ffffff);
 
 }
+input {
+    -webkit-user-select: text;  /* Для браузеров на базе WebKit (Chrome, Safari) */
+    -moz-user-select: text;     /* Для Firefox */
+    -ms-user-select: text;      /* Для Internet Explorer и Edge */
+    user-select: text;          /* Современный стандарт подумать над этим*/
+}
 * {
     margin: 0;
     padding: 0;
@@ -50,19 +56,19 @@ header nav ul li {
     display: inline-block;
 }
 header nav ul li a:hover {
-      border-bottom: 5px   solid #F1A947;
+      border-bottom: 5px   solid #FBD784;
 }
 header nav ul li.active {
     content: '';
     display:   block;
     width: 40px;
     height: 5px;
-    background: #F1A947;
+    background: #FBD784;
     border-radius: 10px;
 
 }
 .button {
-    background:  #F1A947;
+    background:  #FBD784;
     color: #fff;
     border-radius:  50px;
     padding: 15px 30px  ;
@@ -626,7 +632,7 @@ header nav ul li.active {
     min-width: 750px;
     transform: translate(-50%, -50%);
     position: absolute; /* Если форма должна быть по центру страницы, используйте absolute вместе с fixed. */
-    background: #F1A947;
+    background: #FBD784;
     height: auto; /* Если вы хотите, чтобы высота подстраивалась под содержимое, используйте auto */
     width: 40%;
     border-radius: 50px;
@@ -938,7 +944,9 @@ header nav ul li.active {
     background-color: #FBD784; /* Цвет фона для элемента с текущей страницей */
     padding: 0 10px; /* Внутренний отступ */
     border-radius: 5px; /* Скругление углов */
-    font-weight: bold; /* Сделать текст жирным */
+    font-weight: bold;
+    height: 1vh;
+    font-size: clamp(24px, 2.0vw, 48px);
 }
 
 .pagination button {
@@ -971,6 +979,12 @@ header nav ul li.active {
     overflow: auto; /* Прокрутка, если необходимо */
     background-color: rgb(0,0,0); /* Цвет фона */
     background-color: rgba(0,0,0,0.4); /* Цвет фона с непрозрачностью */
+}
+#productModal {
+    display: none;
+    z-index: 0;
+    position: relative;
+    width: 10vh;
 }
 
 /* Содержимое/текст модального окна */
@@ -1018,7 +1032,27 @@ header nav ul li.active {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 60px;
+}
 
+/*#itemsContainer {*/
+/*    position: relative; !* Устанавливаем родителю относительное позиционирование *!*/
+/*    height: 10vh; !* Высота родительского контейнера (можно настроить под ваши нужды) *!*/
+/*    width: 100%;*/
+/*}*/
+
+
+.basket-empty {
+    padding: 15px;
+    border-radius: 15px;
+    height: 2vh;
+    width: 20vw;
+    position: absolute;
+    background: #ffffff;
+     /* Абсолютное позиционирование */
+    top: 50%; /* Смещаем элемент на 50% сверху */
+    left: 50%; /* Смещаем элемент на 50% слева */
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .contact-form-submit {
@@ -1039,8 +1073,9 @@ header nav ul li.active {
     padding: 5px;
     background: white;
     margin-bottom: 5px;
+    display: flex; /* Включаем Flexbox */
+    align-items: center; /* Центрируем текст по вертикали */
     height: 35px;
-    display: flex; /* Активируем Flexbox */
     flex-direction: row; /* Элементы в ряд */
     justify-content: flex-start;
     margin-top: 10px;
@@ -1051,7 +1086,7 @@ header nav ul li.active {
 }
 .order-products .item-sel:last-child {
     width: 5%;
-    margin-right: 5%;
+    margin-left: 5%;
 }
 .order-products .item-sel {
     width: 12%;
@@ -1071,6 +1106,9 @@ header nav ul li.active {
 .order-nav {
     width: 95%;
     /*margin-top: -200px;*/
+    display: flex; /* Включаем Flexbox */
+    align-items: center; /* Центрируем текст по вертикали */
+    justify-content: center;
     min-width: 400px;
     height: 40px;
     background-color: #FBD784;
@@ -1115,6 +1153,13 @@ header nav ul li.active {
     background-color: #FBD784;
     border-radius: 5px;
 }
+
+.order-products span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+}
 .decrease-key {
     margin-right: 5px;
     width: 30%;
@@ -1135,6 +1180,113 @@ header nav ul li.active {
     background-color: #FBD784;
     border-radius: 5px;
     padding: 15px;
+
+}
+
+#currentPageBasket {
+    margin: 0 20px; /* Добавляет горизонтальный отступ между номером страницы и кнопками */
+    background-color: #FBD784; /* Цвет фона для элемента с текущей страницей */
+    padding: 0 10px; /* Внутренний отступ */
+    border-radius: 5px; /* Скругление углов */
+    font-weight: bold;
+    height: 2vh;
+    /*font-size: clamp(24px, 2.0vw, 48px);*/
+}
+
+@media (max-aspect-ratio: 4/3) {
+    .productsBasket {
+        height: 70vh;
+    }
+
+    .contact-form {
+        height: 10vh;
+        width: 25%;
+    }
+
+    .order-list {
+        margin-top: -250px;
+        width: 70%;
+        /*margin-left: 10ox; надо подумать как сделать*/
+    }
+    .contact-form p {
+        font-size: clamp(24px, 2.0vw, 48px);
+        width: 80%;
+        height: 2vh;
+    }
+    .contact-form-submit {
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+    }
+    .contact-form-submit input {
+        margin-top: 0.5vh;
+        display: flex;
+        height: 3vh;
+        width: 85%;
+        font-size: clamp(20px, 1vw, 48px);
+        text-align: center;
+        box-sizing: border-box;
+        /*margin: 0 auto;*/
+    }
+    .contact-form .buttons-group {
+        margin-top: 0.2vh;
+    }
+    .contact-form button {
+        height: 2vh;
+        width: 42%;
+        font-size: clamp(20px, 1vw, 48px);
+        border-radius: 5px;
+    }
+
+    .order-nav {
+        height: 4vh;
+        display: flex; /* Включаем Flexbox */
+        align-items: center; /* Центрируем текст по вертикали */
+        justify-content: center;
+
+    }
+
+    .order-nav-ul {
+        display: flex; /* Включаем Flexbox */
+        align-items: center; /* Центрируем текст по вертикали */
+        justify-content: center;
+        padding: 5px;
+        /*font-size: clamp(16px, 0.8vw, 40px);*/
+        font-size: clamp(24px, 2.0vw, 48px);
+    }
+
+    #itemsContainer {
+        height: 40vh;
+    }
+
+    #itemsContainer li {
+        height: 7vh;
+    }
+
+    .order-products {
+        font-size: clamp(16px, 3vw, 24px);
+    }
+
+    .pagination button {
+        font-size: clamp(24px, 2.0vw, 48px);
+    }
+
+    #currentPageBasket {
+        margin: 0 20px; /* Добавляет горизонтальный отступ между номером страницы и кнопками */
+        background-color: #FBD784; /* Цвет фона для элемента с текущей страницей */
+        padding: 0 10px; /* Внутренний отступ */
+        border-radius: 5px; /* Скругление углов */
+        font-weight: bold;
+        height: 1vh;
+        font-size: clamp(24px, 2.0vw, 48px);
+    }
+    .basket-empty {
+        text-align: center;
+        display: flex; /* Включаем Flexbox */
+        align-items: center; /* Центрируем текст по вертикали */
+        justify-content: center;
+        font-size: clamp(24px, 2.0vw, 48px);
+    }
 }
 
 /*LOADING*/

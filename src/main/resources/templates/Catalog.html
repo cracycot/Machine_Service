@@ -49,12 +49,15 @@
                         <option value="">Выберите бренд</option>
                         <option value="caterpillar">CATERPILLAR</option>
                         <option value="cummins">Cummins</option>
-                        <option value="detroitdiesel">DetroitDiesel</option>
+                        <option value="detroitdiesel">Detroit Diesel</option>
                         <option value="fgwilson">FGWilson</option>
                         <option value="perkins">Perkins</option>
                         <option value="maxiforce">Maxiforce</option>
                         <option value="redat">Redat</option>
-                        <option value="volvopenta">VolvoPenta</option>
+                        <option value="volvopenta">Volvo Penta</option>
+                        <option value="solidtechnologies">Solid Technologies</option>
+                        <option value="johndeere">John Deere</option>
+                        <option value="interstatemcbee">Interstate McBee</option>
                     </select>
                 </div>
                 <div class="price">Цена</div>
@@ -108,29 +111,3 @@
 </body>
 </html>
 <!DOCTYPE html>
-
-
-<!--    <div class="search-container">-->
-<!--        <form id="searchForm">-->
-<!--            <input type="text" placeholder="Поиск по артикулу..." name="article" id="searchInput">-->
-<!--            <button type="submit" id="searchButton">Поиск</button>-->
-<!--        </form>-->
-<!--        <div id="results">Результаты поиска здесь...</div>-->
-<!--    </div>-->
-
-<!--    <div class="catalog">-->
-<!--        <ul id="itemsList">-->
-<!--            &lt;!&ndash; Теперь элементы добавляются динамически через JavaScript &ndash;&gt;-->
-<!--        </ul>-->
-<!--        <div class="pagination">-->
-<!--            &lt;!&ndash; Интерполяция Thymeleaf для создания ссылок на страницы &ndash;&gt;-->
-<!--            &lt;!&ndash; Если это не первая страница, покажем кнопку "Предыдущая" &ndash;&gt;-->
-<!--            <a th:if="${page.number > 1}"-->
-<!--               th:href="@{/product/searchproduct(page=${page.number - 1}, search=${searchQuery})}" id="prevPage">Предыдущая</a>-->
-<!--            &lt;!&ndash; Текущая страница &ndash;&gt;-->
-<!--            <span id="currentPage" th:text="${page.number + 1}">1</span>-->
-<!--            &lt;!&ndash; Если это не последняя страница, покажем кнопку "Следующая" &ndash;&gt;-->
-<!--            <a th:if="${page.number < page.totalPages - 1}"-->
-<!--               th:href="@{/product/searchproduct(page=${page.number + 1}, search=${searchQuery})}" id="nextPage">Следующая</a>-->
-<!--        </div>-->
-<!--    </div>-->

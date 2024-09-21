@@ -1,9 +1,6 @@
 package org.example.machine_service.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Product {
@@ -14,6 +11,7 @@ public class Product {
     private String category;
     private String article;
     private int price;
+    @Column(name = "in_stock")
     private int inStock;
 
     public Product(String name, String category, String article, int price, int inStock) {

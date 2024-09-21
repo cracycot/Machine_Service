@@ -57,9 +57,21 @@
             <button type="submit">Отправить заявку</button>
         </form>
     </div>
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="formModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <!-- Убираем кнопку закрытия, если не хотите позволять пользователю закрыть окно самостоятельно -->
+            <!-- <span class="close" onclick="closeModal()">&times;</span> -->
+            <p></p>
+        </div>
+    </div>
 </div>
 <div class="FooterBid">
 </div>
+<script src="/js/sendForm.js"></script>
 </body>
 </html>
 <!DOCTYPE html>

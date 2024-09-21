@@ -63,7 +63,7 @@ public class EmailService {
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             // Обработка исключения MessagingException
-            e.printStackTrace();
+            throw new RuntimeException(e);
             // Возможно, вы захотите здесь добавить дополнительную логику обработки ошибок
         }
     }

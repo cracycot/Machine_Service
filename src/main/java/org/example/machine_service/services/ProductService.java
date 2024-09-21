@@ -73,4 +73,3 @@ public class ProductService {
         productRepo.delete(product);
     }
 }
-//http://localhost:8080/product/create?name=Коллектор Shimano21&article=26&category=ABS&price=63200&inStock=1

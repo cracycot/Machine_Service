@@ -87,12 +87,17 @@ function decreaseQuantity(button) {
 }
 
 function updateBasketCatalog(items) {
-    const itemsContainer = document.querySelector('#itemsContainer');
+    // const itemsContainer = document.querySelector('#itemsContainer');
+    const productsBasket = document.querySelector('.productsBasket');
+    const orderNav = document.querySelector('.order-nav')
+    const contactForm = document.querySelector('.contact-form')
     itemsContainer.innerHTML = '';
 
     if (items.length === 0) {
         // Если элементов нет, показать сообщение
-        itemsContainer.innerHTML = '<p>Корзина пуста</p>';
+        orderNav.style.display = "none"
+        contactForm.style.display = "none"
+        productsBasket.innerHTML = '<p class="basket-empty">Корзина пуста</p>';
         return;
     }
 
@@ -140,25 +145,13 @@ function clearBasket() {
     })
         .then(response => {
             if (response.ok) {
-                alert('Корзина очищена');
+                // alert('Корзина очищена');
                 loadBasketProducts(1); // Load the first page with an empty basket
             } else {
                 console.error('Ошибка при очистке корзины');
             }
         })
         .catch(error => console.error('Ошибка:', error));
-}
-
-// Function to show order confirmation modal and redirect
-function showOrderModal() {
-    const orderModal = document.getElementById("orderModal");
-    orderModal.style.display = "block";
-
-    // Close the modal after 5 seconds and redirect to the main page
-    setTimeout(() => {
-        orderModal.style.display = "none";
-        window.location.href = '/';
-    }, 5000);
 }
 
 function serializeAndSendData() {
@@ -179,7 +172,7 @@ function serializeAndSendData() {
         basket: basket,
         contact: contactInfo
     };
-
+    showLoadingSpinner();
     fetch('/SendOrder', {
         method: 'POST',
         headers: {
@@ -188,28 +181,37 @@ function serializeAndSendData() {
         body: JSON.stringify(orderData)
     })
         .then(response => {
-            if (response.ok) {
-                // Show the order modal
-                clearBasket();
-                showOrderModal();
+            hideLoadingSpinner();
 
+            if (response.ok) {
+                showOrderModal("success");
+                clearBasket();
             } else {
                 console.error('Ошибка при отправке заказа');
-                alert('Произошла ошибка при отправке заказа. Попробуйте еще раз.');
+                showOrderModal('error');
             }
         })
-        .catch(error => console.error('Ошибка:', error));
+        .catch(error => {
+            hideLoadingSpinner();
+            console.error('Ошибка:', error);
+            showOrderModal('error');
+        });
 
     return false;
 }
 
+
 function loadBasketProducts(page = 1) {
     const url = `/basket/products?page=${page}&size=5`;
-
     fetch(url)
         .then(response => response.json())
         .then(data => {
+
+            console.log(data)
             updateBasketCatalog(data.items);
+            if (data.totalPages === 0) {
+                return
+            }
             document.getElementById('currentPageBasket').innerText = data.currentPage;
             checkPaginationButtonsBasket(data.currentPage, data.totalPages);
         })
@@ -249,6 +251,55 @@ document.addEventListener("DOMContentLoaded", function () {
     loadBasketProducts()
 });
 
+function showLoadingSpinner() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    loadingSpinner.style.display = 'block';
+}
+
+function hideLoadingSpinner() {
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    loadingSpinner.style.display = 'none';
+}
+
+function showOrderModal(status) {
+    const orderModal = document.getElementById('orderModal');
+
+    if (!orderModal) {
+        console.error('Модальное окно не найдено');
+        return;
+    }
+    const modalContent = orderModal.querySelector('.modal-content p')
+    if (!modalContent) {
+        console.error('Элемент для отображения сообщения не найден');
+        return;
+    }
+
+    if (status === 'success') {
+        console.log("успех")
+        modalContent.textContent = 'Ваш заказ успешно отправлен!';
+    } else {
+        modalContent.textContent = 'Произошла ошибка при отправке заказа. Пожалуйста, попробуйте еще раз.';
+    }
+
+    orderModal.style.display = 'block';
+    // Закрываем модальное окно через 5 секунд
+    setTimeout(() => {
+        orderModal.style.display = 'none';
+
+        // Если заказ успешно отправлен, перенаправляем пользователя на главную страницу
+        if (status === 'success') {
+            window.location.href = '/';
+        }
+    }, 2500);
+}
+
+
+// Функция для закрытия модального окна вручную (если у вас есть кнопка закрытия)
 function closeModal() {
-    document.getElementById("orderModal").style.display = "none";
+    const orderModal = document.getElementById('orderModal');
+    orderModal.style.display = 'none';
+    // Если заказ успешно отправлен, перенаправляем пользователя на главную страницу
+    if (orderModal.querySelector('.modal-content p').textContent.includes('успешно')) {
+        window.location.href = '/';
+    }
 }

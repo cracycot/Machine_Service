@@ -50,20 +50,6 @@ public class MainController {
         return "Bid";
     }
 
-    @GetMapping("/Success")
-    public String SuccessPage(Model model) {
-        model.addAttribute("title", "Спасибо за заявку");
-        model.addAttribute("message", "Спасибо за заявку, Вам перезвонят");
-        return "SuccessError";
-    }
-
-    @GetMapping("/Error")
-    public String ErrorPage(Model model) {
-        model.addAttribute("title", "Что-то пошло не так");
-        model.addAttribute("message", "Что-то пошло не так, попробуйте позже");
-        return "SuccessError";
-    }
-
     @GetMapping("/Sendform")
     public String showForm(Model model) {
         SendForm sendForm = new SendForm();

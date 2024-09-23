@@ -34,14 +34,6 @@ a {
 img {
     max-width: 100%  ;
 }
-/*.container {*/
-/*    !*width: 1400px;*!*/
-/*    margin: 0 auto;*/
-/*    !*background: linear-gradient(white, #f5f5f5 50%, #808080);*!*/
-/*    !*height: 10000px;*!*/
-/*        !* Градиент от более темно-серого к светло-серому, затем к белому *!*/
-/*    background: linear-gradient(#808080, #f5f5f5 50%, white);*/
-/*}*/
 header nav {
     float: revert ;
     /*width: 50%;*/
@@ -120,65 +112,7 @@ header nav ul li.active {
     z-index: 999;
 }
 
-/*@media (max-aspect-ratio: 4/3) {*/
-/*    .navbar .nav{*/
-/*        height: 4vh;*/
-/*    }*/
-/*}*/
 
-/* Основной стиль для навигации */
-/*.navbar {*/
-/*    width: 100%;*/
-/*    position: sticky;*/
-/*    top: 0;*/
-/*    height: 5vh;*/
-/*    background-color: white;*/
-/*    color: black;*/
-/*    z-index: 1000;*/
-/*}*/
-
-/*.navbar nav {*/
-/*    display: flex;*/
-/*    justify-content: space-between; !* Выровнять элементы по горизонтали *!*/
-/*    align-items: center; !* Выровнять по вертикали *!*/
-/*    padding: 10px 10%;*/
-/*}*/
-
-/*.navbar nav ul {*/
-/*    list-style: none;*/
-/*    display: flex;*/
-/*    gap: 20px; !* Расстояние между кнопками *!*/
-/*    padding: 0;*/
-/*    margin: 0;*/
-/*}*/
-
-/*.navbar nav ul li {*/
-/*    display: inline-block;*/
-/*}*/
-
-/*.navbar .bi {*/
-/*    font-size: 2.0rem;*/
-/*}*/
-
-/*.Number .bi {*/
-/*    color: black;*/
-/*    top: 55%;*/
-/*    transform: translateY(-50%);*/
-/*    width: 24px;*/
-/*    height: 12px;*/
-/*}*/
-
-/*!* Линия под навигацией *!*/
-/*.line {*/
-/*    position: sticky;*/
-/*    top: 5vh; !* Высота навигационного меню *!*/
-/*    width: 100%;*/
-/*    height: 1px;*/
-/*    background-color: #283277;*/
-/*    z-index: 999;*/
-/*}*/
-
-/* Медиа-запрос для телефонов (высокие экраны с малым соотношением сторон) */
 @media (max-aspect-ratio: 4/3) {
     .navbar nav ul {
         display: flex; /* Используем flexbox для выравнивания */
@@ -222,33 +156,16 @@ header nav ul li.active {
 }
 
 
-/*.container {*/
-/*    margin-top: 0px;*/
-/*    position: relative*/
-/*}*/
-
-/* image 8 */
-
-/*position: absolute;*/
-/*width: 148px;*/
-/*height: 91px;*/
-/*left: 129px;*/
-/*top: 14px;*/
-
-/*background: url(image.png);*/
-/*filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));*/
-/*border-radius: 20px;*/
-
 .topBar {
     box-sizing: border-box;
     position: relative;
     /*width: 1512px;*/
     height: 7.8vh;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
     background: #283277;
     border: 1px solid #000000;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 .topBar .logo {
     position: absolute; /* Позиционирование элемента абсолютно */
@@ -348,36 +265,13 @@ header nav ul li.active {
     font-size: 25px;/* Убирает внешний отступ слева, если он есть */
 }
 
-/*.sub-title {*/
-/*    font-family: "Roboto", sans-serif;*/
-/*    font-weight: 400;*/
-/*    font-style: italic;*/
-/*    font-size: 60px; !* Размер шрифта *!*/
-/*    color: white;*/
-/*    text-shadow: 0 0 3px black, !* Горизонтальное и вертикальное смещение тени, радиус размытия и цвет *!*/
-/*    0 0 4px #1d1d1d, !* Добавляем несколько слоёв тени для большего свечения *!*/
-/*    0 0 5px #2e2e2e,*/
-/*    0 0 6px grey;*/
-/*}*/
-/*.description {*/
-/*    font-family: "Roboto", sans-serif;*/
-/*    font-size: 20px;*/
-/*    color: white;*/
-/*    text-shadow: 0 0 3px black,*/
-
-/*}*/
-/*image 13 */
-
-
 /*MAIN*/
 .main {
     margin-right: 10%;
     margin-left: 10%;
 }
 /*CONTAINER*/
-/*.container {*/
-/*    transition: transform 0.8s cubic-bezier(0.660, 0.215, 0.295, 1.640);*/
-/*}*/
+
 .content {
     margin-top: 250px;
     display: flex;
@@ -398,7 +292,7 @@ header nav ul li.active {
 }
 .content-text {
     position: relative;
-    padding-left: 150px;
+    padding-left: 100px;
     padding-right: 30px;
     max-width: 782px;
 }
@@ -523,72 +417,6 @@ header nav ul li.active {
     color: black;
 }
 
-
-/*.brands ul{*/
-/*    margin-top: 27px;*/
-/*    list-style-type: none;*/
-/*    padding-left: 0;*/
-/*    margin-left: 0;*/
-/*    display:flex;*/
-/*    justify-content: center; !* Горизонтальное выравнивание: отцентровка *!*/
-/*    align-items: center*/
-/*}*/
-/*.brands img {*/
-/*    height: 150px;*/
-/*    width: 250px;*/
-/*}*/
-/*.hero-container {*/
-/*    width: 80%;*/
-/*    margin: auto;*/
-/*    position: relative;*/
-/*    !*overflow: hidden;*!*/
-
-/*    !*flex: auto;*!*/
-/*    !*flex-direction: column;*!*/
-/*}*/
-/*.hero--info1, .hero--info2, .hero--info3, .hero--info4 {*/
-/*    position: relative;*/
-/*    height: 50vh;*/
-/*    box-sizing: border-box;*/
-/*    width: 100%;*/
-/*    margin-top: 20px;*/
-/*    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);*/
-/*    background-size: cover;*/
-/*    background-repeat: no-repeat;*/
-/*    background-position: center;*/
-/*    padding: 20px;*/
-/*    color: white;*/
-/*    border-radius: 20px;*/
-/*}*/
-/*#Block1, #Block2, #Block3, #Block4{*/
-/*    position: absolute;*/
-/*    margin-top: -25vh;*/
-/*}*/
-/*.hero--info1 a, .hero--info2 a, .hero--info3 a, .hero--info4 a, .Successfulnesses a {*/
-/*    position: absolute;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    transition: transform 0.3s ease, box-shadow 0.3s ease*/
-/*}*/
-/*.hero--info1:hover, .hero--info2:hover, .hero--info3:hover, .hero--info4:hover  {*/
-/*    transform: scale(1.15);*/
-/*    box-shadow: 0 10px 20px rgba(0,0,0,0.2); !* Добавление тени *!*/
-/*}*/
-
-
-/*.hero--info1 {*/
-/*    background-image: url(../img/Service.jpeg);*/
-/*}*/
-/*.hero--info2 {*/
-/*    background-image: url(../img/Diagnostic.png);*/
-
-/*}*/
-/*.hero--info3 {*/
-/*    background-image: url(../img/Consultation.jpg);*/
-/*}*/
-/*.hero--info4 {*/
-/*    background-image: url(../img/Parts.png);*/
-/*}*/
 .map {
     position: relative;
     margin-top: 20px;
@@ -716,12 +544,12 @@ header nav ul li.active {
     textarea, button {
         font-size: clamp(20px, 1.5vw, 48px);
     }
-
 }
 
 /*CATALOG*/
 
 .main-catalog {
+    height: 70vh;
     margin-top: 5vh;
     margin-right: 10%;
     margin-left: 10%;
@@ -987,35 +815,6 @@ header nav ul li.active {
 
 
 /*MODAL*/
-/* Стили для модального окна */
-/* Стили для модального окна */
-/*#orderModal {*/
-/*    !* Скрыть модальное окно по умолчанию *!*/
-/*    position: fixed; !* Остаётся на месте *!*/
-/*    z-index: 9999; !* Высокий z-index, чтобы быть над другими элементами *!*/
-/*    left: 0;*/
-/*    top: 0;*/
-/*    width: 100%; !* Полная ширина экрана *!*/
-/*    height: 100%; !* Полная высота экрана *!*/
-/*    overflow: hidden; !* Без прокрутки *!*/
-/*    background-color: rgba(0, 0, 0, 0.5); !* Затемнённый фон *!*/
-/*    display: flex; !* Используем flexbox для центрирования содержимого *!*/
-/*    align-items: center; !* Вертикальное центрирование *!*/
-/*    justify-content: center; !* Горизонтальное центрирование *!*/
-/*}*/
-
-/*!* Содержимое/текст модального окна *!*/
-/*.modal-content {*/
-/*    position: absolute;*/
-/*    background-color: #fefefe;*/
-/*    padding: 20px;*/
-/*    border: 1px solid #888;*/
-/*    width: 80%; !* Ширина модального окна *!*/
-/*    max-width: 600px; !* Ограничим максимальную ширину *!*/
-/*    box-shadow: 0 5px 15px rgba(0,0,0,0.3);*/
-/*    border-radius: 5px;*/
-/*    text-align: center; !* Текст по центру *!*/
-/*}*/
 #orderModal {
     /* Скрыть модальное окно по умолчанию */
     position: absolute; /* Остаётся на месте */
@@ -1092,14 +891,9 @@ header nav ul li.active {
     font-size: 60px;
 }
 
-/*#itemsContainer {*/
-/*    position: relative; !* Устанавливаем родителю относительное позиционирование *!*/
-/*    height: 10vh; !* Высота родительского контейнера (можно настроить под ваши нужды) *!*/
-/*    width: 100%;*/
-/*}*/
 
 
-.basket-empty {
+.basket-empty, .catalog-empty {
     padding: 15px;
     border-radius: 15px;
     height: 2vh;
@@ -1359,7 +1153,7 @@ header nav ul li.active {
         width: 3vw;
         text-align: center;
     }
-    .basket-empty {
+    .basket-empty, .catalog-empty {
         text-align: center;
         display: flex; /* Включаем Flexbox */
         align-items: center; /* Центрируем текст по вертикали */

@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 updateCatalog(data);
                 checkPaginationButtons(page, parseInt(document.getElementById("totalPages").innerText, 10));
                 currentPageElement.innerText = page; // Обновляем номер текущей страницы
+                handleEmptyCatalog(data.length === 0);
             })
             .catch(error => console.error('Ошибка:', error));
     }
@@ -81,6 +82,27 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             prevPage.style.display = currentPage <= 1 ? "none" : "inline-block";
             nextPage.style.display = currentPage >= totalPages ? "none" : "inline-block";
+        }
+    }
+    function handleEmptyCatalog(isEmpty) {
+        const filterContainer = document.querySelector('.filter-container');
+        const mainCatalog = document.querySelector('.main-catalog')
+        const searchContainer = document.querySelector('.search-container');
+        const catalogNav = document.querySelector('.catalog-nav');
+        const  pagination = document.querySelector('.pagination')
+
+
+
+        if (isEmpty) {
+            filterContainer.style.display = "none";
+            searchContainer.style.display = "none";
+            catalogNav.style.display = "none";
+            pagination.style.display = "none"
+            mainCatalog.innerHTML = '<p class="catalog-empty">Каталог пуст</p>';
+        } else {
+            filterContainer.style.display = "block";
+            searchContainer.style.display = "block";
+            catalogNav.style.display = "block";
         }
     }
     const resetButton = document.getElementById('resetFilters');

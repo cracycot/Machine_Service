@@ -33,9 +33,8 @@
     </header>
     <div class="line"></div>
     <div class = "mainBlogBid">
-        <form class="SendForm" action="#" th:action="@{/Sendform}" th:object="${sendForm}" method="post">
+        <form class="SendForm" action="#" th:object="${sendForm}" method="post">
             <div>Оформление заявки</div>
-
             <input type="text" placeholder="Введите ваше имя" th:field="*{name}" id="Name"/>
             <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             <br/>

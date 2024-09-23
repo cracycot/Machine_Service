@@ -20,12 +20,6 @@ public class ProductService {
     private ProductFilter productFilter;
 
     public void create_product(Product product) {
-
-        if (productRepo.findById(product.getId()).isPresent()) {
-            String s = product.getName();
-            System.out.println(s);
-            return;
-        }
         productRepo.save(product);
     }
 

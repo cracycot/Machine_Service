@@ -72,15 +72,31 @@ public class ProductController {
         }
     }
 
+//    @PostMapping("/create")
+//    public ResponseEntity<?> CreateProduct(@RequestBody Product product) {
+//        try {
+//            productService.create_product(product);
+//            return ResponseEntity.ok().body("продукт сохранен");
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body("неверная запись");
+//        }
+//    }
     @PostMapping("/create")
     public ResponseEntity<?> CreateProduct(@RequestBody Product product) {
         try {
+            System.out.println("Получен продукт: " + product.getName());
+            System.out.println("Категория: " + product.getCategory());
+            System.out.println("Цена: " + product.getPrice());
+            System.out.println("Наличие: " + product.getInStock());
+
             productService.create_product(product);
-            return ResponseEntity.ok().body("продукт сохранен");
+            return ResponseEntity.ok().body("Продукт сохранен");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("неверная запись");
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Ошибка при создании продукта");
         }
     }
+
 
     @PatchMapping("/updateproduct")
     public ResponseEntity<?> UpdateProduct(@RequestParam Long id, @RequestBody Product product) {

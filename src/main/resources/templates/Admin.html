@@ -27,7 +27,7 @@
     <td th:text="${product.article}"></td>
     <td th:text="${product.price}"></td>
     <td>
-      <span class="stock-quantity" th:text="${product.inStock}"></span>
+      <span class="stock-quantity"  th:text="${product.inStock}"></span>
     </td>
     <td>
       <div class="data-id" style="display: none;" th:text="${product.id}"></div>
@@ -41,7 +41,7 @@
 
 <!-- Форма для добавления нового продукта -->
 <h2>Добавить новый продукт</h2>
-<form action="/product/create" method="post">
+<form class="admin-form" action="/product/create" method="post" style="width: 70vw; display: flex">
   <input type="text" name="name" placeholder="Название" required />
   <div class="input-group">
     <select id="brand" name="category" required>

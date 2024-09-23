@@ -8,7 +8,8 @@ COPY backup.sh /usr/local/bin/backup.sh
 RUN chmod +x /usr/local/bin/backup.sh
 
 # Добавить задачу cron с перенаправлением вывода в лог-файл
-RUN echo "*/1 * * * * root /usr/local/bin/backup.sh >> /var/log/cron.log 2>&1" >> /etc/cron.d/backup-cron
+#RUN echo "*/1 * * * * root /usr/local/bin/backup.sh >> /var/log/cron.log 2>&1" >> /etc/cron.d/backup-cron
+RUN echo "0 0 * * 0 root /usr/local/bin/backup.sh >> /var/log/cron.log 2>&1" >> /etc/cron.d/backup-cron
 RUN chmod 0644 /etc/cron.d/backup-cron
 
 # Запуск cron в фоновом режиме

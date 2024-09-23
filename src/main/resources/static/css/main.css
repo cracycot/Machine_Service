@@ -646,6 +646,7 @@ header nav ul li.active {
     border-radius: 5px;
 }
 #searchInput {
+    width: 90%;
     border: none; /* Убираем границу поля ввода */
     outline: none;
     padding: 2px;/* Убираем контур при фокусе */

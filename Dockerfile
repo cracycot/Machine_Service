@@ -6,7 +6,7 @@ FROM openjdk:21-jdk
 WORKDIR /app
 
 # Копируем файл JAR в контейнер
-COPY target/Machine_Service-0.0.1-SNAPSHOT.jar app.jar
+COPY target_deploy/Machine_Service-0.0.1-SNAPSHOT.jar app.jar
 
 # Указываем порт, который будет использоваться приложением
 EXPOSE 8080

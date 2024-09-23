@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  app:
+    image: kirilllesniak/machine_service
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/machine_service?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: kirilllesniak
+      SPRING_DATASOURCE_PASSWORD: admin12345
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATASOURCE_MAIL_ADDRESS: m0t0rservicesp@gmail.com
+      SPRING_DATASOURCE_MAIL_PASSWORD: hpqk rmwv lxkj vzyb
+      ADMIN_PASSWORD: motorservice12345
+    networks:
+      - app-network
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: machine_service
+      POSTGRES_USER: kirilllesniak
+      POSTGRES_PASSWORD: admin12345
+    volumes:
+      - db-data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    networks:
+        - app-network
+  backup:
+    build:
+      context: ./backup
+      dockerfile: Dockerfile
+    volumes:
+      - ./backup:/backup # Локальная директория для бэкапов
+    depends_on:
+      - db
+    networks:
+      - app-network
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"  # Порт HTTP
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Файл конфигурации Nginx
+    networks:
+      - app-network
+
+
+volumes:
+  db-data:
+
+networks:
+  app-network:

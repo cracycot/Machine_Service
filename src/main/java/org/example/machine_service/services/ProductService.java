@@ -21,7 +21,7 @@ public class ProductService {
 
     public void create_product(Product product) {
 
-        if (productRepo.findByName(product.getName()) != null) {
+        if (productRepo.findById(product.getId()).isPresent()) {
             String s = product.getName();
             System.out.println(s);
             return;

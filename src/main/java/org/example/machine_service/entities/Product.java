@@ -7,6 +7,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = false)
     private String name;
     private String category;
     private String article;

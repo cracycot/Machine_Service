@@ -15,7 +15,8 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_DATASOURCE_MAIL_ADDRESS: m0t0rservicesp@gmail.com
       SPRING_DATASOURCE_MAIL_PASSWORD: hpqk rmwv lxkj vzyb
-      ADMIN_PASSWORD: motorservice12345
+      ADMIN_PASSWORD: admin12345
+      MAIL_ADDRESS: cracycot@mail.ru
     networks:
       - app-network
   db:

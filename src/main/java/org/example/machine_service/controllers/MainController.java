@@ -50,14 +50,6 @@ public class MainController {
         return "Bid";
     }
 
-    @GetMapping("/Sendform")
-    public String showForm(Model model) {
-        SendForm sendForm = new SendForm();
-        model.addAttribute("sendForm", sendForm);
-        return "Bid";
-    }
-
-
     @PostMapping("/Sendform")
     public String submitForm(@ModelAttribute("sendForm") @Valid SendForm sendForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -70,7 +62,7 @@ public class MainController {
                     sendForm.getPhone_number(),
                     sendForm.getEmail(),
                     sendForm.getDescription());
-            return "redirect:/Success";
+            return "redirect:/";
         } catch (MessagingException e) {
             return "redirect:/Error";
         }

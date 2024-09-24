@@ -16,7 +16,7 @@ import static java.awt.SystemColor.text;
 
 @Service
 public class EmailService {
-    @Value("${MAIL_ADDRESS}")
+    @Value("${mail.address}")
     private String mailAddress;
 
     @Autowired

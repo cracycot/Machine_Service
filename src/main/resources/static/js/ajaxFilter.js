@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         loadProducts(1);  // Сброс на первую страницу при поиске
     });
 
-    function loadProducts(page = 1) {
+    function loadProducts(page = 1, flag = false) {
         const searchValue = document.getElementById("searchInput").value;
         const priceFrom = document.getElementById('priceFrom').value || 0;
         const priceTo = document.getElementById('priceTo').value || 100000000;
@@ -53,9 +53,11 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(data => {
                 updateCatalog(data);
+                if (flag) {
+                    handleEmptyCatalog(data.length === 0);
+                }
                 checkPaginationButtons(page, parseInt(document.getElementById("totalPages").innerText, 10));
                 currentPageElement.innerText = page; // Обновляем номер текущей страницы
-                handleEmptyCatalog(data.length === 0);
             })
             .catch(error => console.error('Ошибка:', error));
     }
@@ -116,5 +118,5 @@ document.addEventListener("DOMContentLoaded", function() {
         loadProducts(1);  // Загрузка товаров без фильтров, начиная с первой страницы
     });
     // Инициализируем загрузку с первой страницы
-    loadProducts();
+    loadProducts(1, true);
 });

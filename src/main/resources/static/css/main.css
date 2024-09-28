@@ -160,7 +160,7 @@ header nav ul li.active {
     box-sizing: border-box;
     position: relative;
     /*width: 1512px;*/
-    height: 7.8vh;
+    height: 11vh;
     left: 0;
     top: 0;
     background: #283277;
@@ -179,7 +179,11 @@ header nav ul li.active {
     background-repeat: no-repeat; /* Не повторять изображение */
     display: block; /* Блочный элемент */
 }
-
+@media (max-aspect-ratio: 4/3) {
+    .topBar {
+        height: 7.8vh;
+    }
+}
 .topBar .Number {
     position: absolute;
     top: 50%;
@@ -426,14 +430,64 @@ header nav ul li.active {
     transform:translateX(-50%);
     border-radius: 20px;
 }
+
 .Footer {
     margin-top: 200px;
     position: relative;
-    height: 10vh;
-    bottom:0;
-    width:100%;
+    height: auto;
+    bottom: 0;
+    width: 100%;
     background: #283277;
+    padding: 20px 0;
+    color: white;
+    text-align: center;
 }
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contact-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.contact-list i {
+    margin-right: 10px;
+    color: #f0db4f;
+}
+.contact-list li {
+    font-size: clamp(15px, 1.5vw, 40px);
+    margin: 10px 0;
+}
+.footer-container h2 {
+    font-size: clamp(18px, 3vw, 56px);
+    margin-bottom: 20px;
+    color: white;
+}
+@media  (max-aspect-ratio: 4/3) {
+    .footer-container h2 {
+        font-size: clamp(28px, 4vw, 56px);
+    }
+    .contact-list li {
+        font-size: clamp(28px, 2vw, 40px);
+    }
+
+}
+
+/*.Footer {*/
+/*    margin-top: 200px;*/
+/*    position: relative;*/
+/*    height: 10vh;*/
+/*    bottom:0;*/
+/*    width:100%;*/
+/*    background: #283277;*/
+/*}*/
 .mainBlogBid {
     position: relative;
     background-size: cover;

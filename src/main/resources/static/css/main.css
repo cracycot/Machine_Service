@@ -202,6 +202,7 @@ header nav ul li.active {
     background-image: url("../img/Logo.png");
     z-index: 20000;
 }
+
 .swiper {
     margin-bottom: -150px;
     position: relative;
@@ -211,64 +212,113 @@ header nav ul li.active {
 }
 
 .swiper-slide {
-    text-align: right;
+    position: relative;
     font-size: 18px;
-    background: #fff;
     background-size: cover;
     background-position: center;
-    background-imageopacity: 0.5;
+    text-align: left; /* Заголовок слева */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Заголовок будет ближе к верхней части */
+    color: white;
+    /*padding: 50px 20px; !* Добавляем отступы для заголовка *!*/
 }
-.swiper-slide img{
+
+.swiper-slide img {
     position: absolute;
     left: 0;
     width: 100%;
     height: 100%;
-}
-.carousel-text {
-    margin: 20px;
-}
-.carousel-item-content {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 25%;
-    height: 90%;
-    max-height: 600px;
-    min-width: 400px;
-    right: 40px;
-    color: black;
-    background-color: rgb(251,215,132, 0.9);
-    border-radius: 20px;
-    text-align: left;
-    /*background-color: #283277;*/
-    /*background: linear-gradient(to bottom,#ffffff , #4f558b);*/
-}
-.sub-title {
-    margin-bottom: 27px;
-    /*font-family: "Playfair Display", serif;*/
-    font-style: normal;
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 1.0;
-    color: black;
-}
-.description {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 1.0;
-    color: black;
-}
-.description ul {
-    list-style-type: none; /* Убирает маркеры списка */
-    padding-left: 0; /* Убирает отступ слева, чтобы элементы списка прижались к левому краю */
-    margin-left: 0;
-    font-size: 25px;/* Убирает внешний отступ слева, если он есть */
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.7;
 }
 
+.swiper-slide::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25); /* Затемненное наложение */
+    z-index: 2;
+}
+
+
+
+.carousel-text {
+    position: absolute;
+    z-index: 3;
+    width: 70%;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    top: 50%; /* Центрирование по вертикали */
+    left: 50%; /* Центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* Смещение для точного центрирования */
+    text-align: center; /* Текст по центру */
+}
+
+.lineBetween {
+    display: block;
+    width: 200px;
+    height: 3px;
+    background-color: #FBD784;
+    margin: 20px auto; /* Центрируем по горизонтали и добавляем отступы */
+}
+
+
+.sub-title {
+    font-family: 'Playfair Display', serif; /* Новый элегантный шрифт */
+    /*font-size: 60px; 60*/
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #fff;
+    display: flex;  /* Включаем flexbox для выравнивания */
+    justify-content: center;  /* Горизонтальное выравнивание */
+    align-items: center;  /* Вертикальное выравнивание */
+    height: 100%;  /* Высота блока, чтобы текст был по центру */
+    text-align: center;  /* Текст по центру */
+}
+
+
+/* Изменяем стиль основного текста */
+.description {
+    font-family: 'Roboto', sans-serif; /* Новый шрифт для текста */
+    font-size: 25px;
+    margin: 30px auto;
+    text-align: justify;
+    color: #f0f0f0;
+    line-height: 1.6;
+    word-spacing: -2px;
+    max-width: 600px; /* Ограничиваем ширину текста */
+}
+
+/* Оформляем список */
+.description ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.description ul li {
+    word-spacing: -2px;
+}
+
+@media (max-aspect-ratio: 4/3) {
+    .description {
+        font-size: clamp(30px, 3vw, 80px);
+    }
+
+    .description ul {
+        font-size: clamp(30px, 3vw, 80px);
+    }
+
+}
 /*MAIN*/
 .main {
     margin-right: 10%;

@@ -287,7 +287,7 @@ header nav ul li.active {
 /* Изменяем стиль основного текста */
 .description {
     font-family: 'Roboto', sans-serif; /* Новый шрифт для текста */
-    font-size: 25px;
+    font-size: 30px;
     margin: 30px auto;
     text-align: justify;
     color: #f0f0f0;
@@ -301,7 +301,7 @@ header nav ul li.active {
     list-style-type: none;
     padding-left: 0;
     margin-left: 0;
-    font-size: 25px;
+    font-size: 20px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -311,11 +311,17 @@ header nav ul li.active {
 
 @media (max-aspect-ratio: 4/3) {
     .description {
-        font-size: clamp(30px, 3vw, 80px);
+        word-break: break-word; /* Автоматический перенос длинных слов */
+        hyphens: auto;
+        word-break: break-word;
+        font-size: clamp(40px, 4vw, 90px);
     }
 
     .description ul {
-        font-size: clamp(30px, 3vw, 80px);
+        word-break: break-word; /* Автоматический перенос длинных слов */
+        hyphens: auto;
+        word-break: break-word;
+        font-size: clamp(40px, 3vw, 90px);
     }
 
 }

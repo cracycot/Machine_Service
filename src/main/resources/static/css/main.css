@@ -45,6 +45,7 @@ header nav ul {
     justify-content: space-between;
 }
 header nav ul li {
+    font-size: 20px;
     display: inline-block;
 }
 header nav ul li a:hover {
@@ -259,14 +260,19 @@ header nav ul li.active {
     text-align: center; /* Текст по центру */
 }
 
-.lineBetween {
+.lineBetween  {
     display: block;
     width: 200px;
     height: 3px;
     background-color: #FBD784;
     margin: 20px auto; /* Центрируем по горизонтали и добавляем отступы */
 }
-
+#line1 {
+    width: 550px;
+}
+#line2 {
+    width: 500px;
+}
 
 .sub-title {
     font-family: 'Playfair Display', serif; /* Новый элегантный шрифт */
@@ -286,43 +292,65 @@ header nav ul li.active {
 
 /* Изменяем стиль основного текста */
 .description {
+    hyphens: auto;
     font-family: 'Roboto', sans-serif; /* Новый шрифт для текста */
     font-size: 30px;
     margin: 30px auto;
     text-align: justify;
     color: #f0f0f0;
     line-height: 1.6;
+    word-break: break-word;
     word-spacing: -2px;
     max-width: 600px; /* Ограничиваем ширину текста */
 }
 
 /* Оформляем список */
 .description ul {
+    /* Автоматический перенос длинных слов */
+    hyphens: auto;
     list-style-type: none;
     padding-left: 0;
     margin-left: 0;
+    word-break: break-word;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
 }
 
 .description ul li {
-    word-spacing: -2px;
+    position: relative;
+    margin-bottom: 15px; /* Отступ между элементами списка */
+    padding-left: 40px; /* Отступ для маркера */
+    line-height: 1.5;
 }
+.description ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px; /* Позиция кружка по вертикали относительно текста */
+    width: 20px;
+    height: 20px;
+    background-color: #FBD784; /* Желтый цвет декоративного элемента */
+    border-radius: 50%; /* Делает элемент кругом */
+}
+
 
 @media (max-aspect-ratio: 4/3) {
     .description {
         word-break: break-word; /* Автоматический перенос длинных слов */
         hyphens: auto;
-        word-break: break-word;
         font-size: clamp(40px, 4vw, 90px);
     }
 
     .description ul {
         word-break: break-word; /* Автоматический перенос длинных слов */
         hyphens: auto;
-        word-break: break-word;
         font-size: clamp(40px, 3vw, 90px);
     }
+
+    .description ul li::before {
+        top: 20px;
+    }
+
 
 }
 /*MAIN*/
@@ -506,24 +534,27 @@ header nav ul li.active {
 }
 
 .contact-list {
+    margin: 0 auto; /* Устанавливаем автоматические отступы для центрирования */
+    display: inline-block;
     list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
 
 
 .contact-list i {
     margin-right: 10px;
-    color: #f0db4f;
+    color: #FBD784;
 }
 .contact-list li {
+    display: flex; /* Выравнивание элементов в строку */
+    align-items: center;
     font-size: clamp(15px, 1.5vw, 40px);
     margin: 10px 0;
 }
 .footer-container h2 {
     font-size: clamp(18px, 3vw, 56px);
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     color: white;
 }
 @media  (max-aspect-ratio: 4/3) {

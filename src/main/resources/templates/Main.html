@@ -35,7 +35,7 @@
                     <li><a href="#Block1">Обслуживание</a></li>
                     <li><a href="#Block2">Диагностика и ремонт</a></li>
                     <li><a href="#Block3">Консультации</a></li>
-                    <li><a href="#Block4">Запчасти</a></li>
+                    <li><a th:href="@{/Catalog}">Запчасти</a></li>
                     <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id= "Busket" ></a></li>
                 </ul>
             </nav>
@@ -48,7 +48,7 @@
                     <div class="carousel-item-content">
                         <div class="carousel-text">
                             <h1 class = "sub-title">О нас</h1>
-                            <div class="lineBetween"></div>
+                            <div class="lineBetween"  id = "line0"></div>
                             <div class = "description">ООО «Моторсервис» предоставляет полный спектр услуг по ремонту промышленных дизельных и газовых двигателей.</div>
                         </div>
                     </div>
@@ -57,7 +57,9 @@
                     <img class="carousel-img" src = '../img/connection.jpg'>
                     <div class="carousel-item-content">
                         <div class="carousel-text">
-                            <h1 class = "sub-title">Преимущества сотрудничества с нами</h1>
+<!--                            <h1 class = "sub-title">Преимущества сотрудничества с нами</h1>-->
+                            <h1 class = "sub-title">Наши преимущества</h1>
+                            <div class="lineBetween"  id = "line1"></div>
                             <div class = "description">
                                 <ul>
                                     <li>Профессиональные специалисты с опытом работы</li>
@@ -74,7 +76,8 @@
                     <div class="carousel-item-content">
                         <div class="carousel-text">
                             <h1 class = "sub-title">Наши ремзоны</h1>
-                            <div class = "description">ООО «Моторсервис» предоставляет полный спектр услуг в Санкт-Петербурге и Котласе</div>
+                            <div class="lineBetween" id = "line2"></div>
+                            <div class = "description">ООО «Моторсервис» предоставляет полный спектр услуг в Санкт-Петербурге</div>
                         </div>
                     </div>
                 </div>
@@ -138,7 +141,7 @@
                             Мы ценим ваше время и стараемся сделать процесс заказа максимально удобным.
                         </p>
 <!--                        <div class="content-application" th:href="@{/Catalog}">Перейти в каталог</div>-->
-                        <a class="content-application" th:href="@{/Catalog}">Перейти в каталог</a>
+<!--                        <a class="content-application" th:href="@{/Catalog}">Перейти в каталог</a>-->
                     </div>
                     <div class="content-img">
                         <img src="../img/Diesel.JPG" alt="обслуживание">

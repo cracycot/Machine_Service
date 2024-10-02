@@ -44,25 +44,25 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"
+      - "80:80"   # HTTP
+      - "443:443" # HTTPS
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf # Файл конфигурации Nginx
-      - ./nginx/certs:/etc/letsencrypt
-      - ./nginx/www:/var/www/certbot
+      - ./nginx/certs:/etc/ssl/certs
     depends_on:
       - app
     networks:
       - app-network
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./nginx/certs:/etc/letsencrypt
-      - ./nginx/www:/var/www/certbot
-    command: certonly --webroot --webroot-path=/var/www/certbot --email cracycot@mail.ru --agree-tos --no-eff-email -d motorservice.su -d www.motorservice.su
-    depends_on:
-      - nginx
-    networks:
-      - app-network
+#  certbot:
+#    image: certbot/certbot
+#    volumes:
+#      - ./nginx/certs:/etc/letsencrypt
+#      - ./nginx/www:/var/www/certbot
+#    command: certonly --webroot --webroot-path=/var/www/certbot --email cracycot@mail.ru --agree-tos --no-eff-email -d motorservice.su -d www.motorservice.su
+#    depends_on:
+#      - nginx
+#    networks:
+#      - app-network
 volumes:
   db-data:
 

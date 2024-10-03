@@ -16,7 +16,7 @@ services:
       SPRING_DATASOURCE_MAIL_ADDRESS: m0t0rservicesp@gmail.com
       SPRING_DATASOURCE_MAIL_PASSWORD: hpqk rmwv lxkj vzyb
       ADMIN_PASSWORD: admin12345
-      MAIL_ADDRESS: cracycot@mail.ru
+      MAIL_ADDRESS: spb.motorservice@yandex.ru # заменить на другую для тестового окружения
     networks:
       - app-network
   db:

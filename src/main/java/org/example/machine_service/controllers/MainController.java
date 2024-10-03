@@ -128,12 +128,4 @@ public class MainController {
         model.addAttribute("pageSize", elements.getSize());
         return "Catalog";
     }
-
-
-
-    @GetMapping("/MainPage")
-    public String MainPage(Model model) {
-        return "MainPage";
-    }
-
 }

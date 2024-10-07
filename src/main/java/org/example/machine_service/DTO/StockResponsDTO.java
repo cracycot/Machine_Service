@@ -1,16 +1,16 @@
 package org.example.machine_service.DTO;
 
 
-public class StockResponse {
+public class StockResponsDTO {
     private Integer newStock;
     private String error;
 
     // Constructors
-    public StockResponse(Integer newStock) {
+    public StockResponsDTO(Integer newStock) {
         this.newStock = newStock;
     }
 
-    public StockResponse(String error) {
+    public StockResponsDTO(String error) {
         this.error = error;
     }
 

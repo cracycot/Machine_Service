@@ -58,8 +58,8 @@ public class MainController {
         try {
             emailService.sendHtmlMessage(
                     sendForm.getName(),
-                    sendForm.getMotor_number(),
-                    sendForm.getPhone_number(),
+                    sendForm.getMotorNumber(),
+                    sendForm.getPhoneNumber(),
                     sendForm.getEmail(),
                     sendForm.getDescription());
             return "redirect:/";

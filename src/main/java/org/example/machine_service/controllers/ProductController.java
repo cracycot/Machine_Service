@@ -1,6 +1,6 @@
 package org.example.machine_service.controllers;
 
-import org.example.machine_service.DTO.StockResponse;
+import org.example.machine_service.DTO.StockResponsDTO;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.services.ProductService;
@@ -13,9 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("product")
@@ -35,7 +33,7 @@ public class ProductController {
     @GetMapping("/getproduct")
     public ResponseEntity<?> GetProduct(@RequestParam Long id) {
         try {
-            Product product = productService.get_product(id);
+            Product product = productService.getProduct(id);
             return ResponseEntity.ok().body(product);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("произошла ошибка");
@@ -44,31 +42,31 @@ public class ProductController {
 
     // Increase stock by 1
     @PostMapping("/increaseStock")
-    public ResponseEntity<StockResponse> increaseStock(@RequestParam("id") Long id) {
+    public ResponseEntity<StockResponsDTO> increaseStock(@RequestParam("id") Long id) {
         try {
-            Product product = productService.get_product(id);
+            Product product = productService.getProduct(id);
             product.setInStock(product.getInStock() + 1);
-            productService.update_product(product);
-            return ResponseEntity.ok(new StockResponse(product.getInStock()));
+            productService.updateProduct(product);
+            return ResponseEntity.ok(new StockResponsDTO(product.getInStock()));
         } catch (ProductNotFindException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StockResponse("Product not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StockResponsDTO("Product not found"));
         }
     }
 
     // Decrease stock by 1
     @PostMapping("/decreaseStock")
-    public ResponseEntity<StockResponse> decreaseStock(@RequestParam("id") Long id) {
+    public ResponseEntity<StockResponsDTO> decreaseStock(@RequestParam("id") Long id) {
         try {
-            Product product = productService.get_product(id);
+            Product product = productService.getProduct(id);
             if (product.getInStock() > 1) { // Ensure stock does not go below 0
                 product.setInStock(product.getInStock() - 1);
-                productService.update_product(product);
-                return ResponseEntity.ok(new StockResponse(product.getInStock()));
+                productService.updateProduct(product);
+                return ResponseEntity.ok(new StockResponsDTO(product.getInStock()));
             } else {
-                return ResponseEntity.badRequest().body(new StockResponse("Stock cannot be less than 0"));
+                return ResponseEntity.badRequest().body(new StockResponsDTO("Stock cannot be less than 0"));
             }
         } catch (ProductNotFindException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StockResponse("Product not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StockResponsDTO("Product not found"));
         }
     }
 
@@ -89,7 +87,7 @@ public class ProductController {
             System.out.println("Цена: " + product.getPrice());
             System.out.println("Наличие: " + product.getInStock());
 
-            productService.create_product(product);
+            productService.createProduct(product);
             return ResponseEntity.ok().body("Продукт сохранен");
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,7 +99,7 @@ public class ProductController {
     @PatchMapping("/updateproduct")
     public ResponseEntity<?> UpdateProduct(@RequestParam Long id, @RequestBody Product product) {
         try {
-            Product past_product = productService.get_product(id);
+            Product past_product = productService.getProduct(id);
             if (product.getPrice() != 0) {
                 past_product.setPrice(product.getPrice());
             }
@@ -111,7 +109,7 @@ public class ProductController {
             if (!product.getName().isEmpty()) {
                 past_product.setName(product.getName());
             }
-            productService.update_product(past_product);
+            productService.updateProduct(past_product);
             return ResponseEntity.ok().body("продукт обновлен");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("произошла ошибка");
@@ -121,7 +119,7 @@ public class ProductController {
     @DeleteMapping("/deleteproduct")
     public ResponseEntity<?> DeleteProduct(@RequestParam Long id) {
         try {
-            Product delete_product = productService.get_product(id);
+            Product delete_product = productService.getProduct(id);
             productService.delete_product(delete_product);
             return ResponseEntity.ok().body("продукт удален");
         } catch (Exception e) {

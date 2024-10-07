@@ -10,8 +10,8 @@ public class SendForm {
     private String name;
 
     @NotEmpty(message = "Введите номер телефона")
-    private String phone_number;
-    private String motor_number;
+    private String phoneNumber;
+    private String motorNumber;
     private String description;
 
     @NotEmpty(message = "Введите Вашу почту")
@@ -26,20 +26,20 @@ public class SendForm {
         this.name = name;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public @NotEmpty(message = "Введите номер телефона") String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(@NotEmpty(message = "Введите номер телефона") String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getMotor_number() {
-        return motor_number;
+    public String getMotorNumber() {
+        return motorNumber;
     }
 
-    public void setMotor_number(String motor_number) {
-        this.motor_number = motor_number;
+    public void setMotorNumber(String motorNumber) {
+        this.motorNumber = motorNumber;
     }
 
     public String getDescription() {

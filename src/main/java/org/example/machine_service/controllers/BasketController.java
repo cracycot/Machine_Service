@@ -1,7 +1,7 @@
 package org.example.machine_service.controllers;
 
 import jakarta.servlet.http.HttpSession;
-import org.example.machine_service.DTO.BasketUpdateRequest;
+import org.example.machine_service.DTO.BasketUpdateRequestDTO;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.services.ProductService;
@@ -34,7 +34,7 @@ public class BasketController {
         }
 
         // Извлечь продукт, используя предоставленный ID.
-        Product product = productService.get_product(productId); // Реализовать этот метод.
+        Product product = productService.getProduct(productId); // Реализовать этот метод.
         if (product != null) {
             String productName = product.getName();
             // Проверить, есть ли продукт уже в корзине
@@ -60,13 +60,13 @@ public class BasketController {
     }
 
     @PostMapping("/basket/increase")
-    public ResponseEntity<?> increaseQuantity(@RequestBody BasketUpdateRequest request, HttpSession session) {
+    public ResponseEntity<?> increaseQuantity(@RequestBody BasketUpdateRequestDTO request, HttpSession session) {
         System.out.println(request.productName());
         return updateQuantity(session, request.productName(), 1, request.page());
     }
 
     @PostMapping("/basket/decrease")
-    public ResponseEntity<?> decreaseQuantity(@RequestBody BasketUpdateRequest request, HttpSession session) {
+    public ResponseEntity<?> decreaseQuantity(@RequestBody BasketUpdateRequestDTO request, HttpSession session) {
         return updateQuantity(session, request.productName(), -1, request.page());
     }
 
@@ -78,7 +78,7 @@ public class BasketController {
             session.setAttribute("basket", basket);
         }
         System.out.println(basket);
-        if (basket != null && basket.containsKey(productName)) {
+        if (basket.containsKey(productName)) {
             int currentQuantity = (Integer) basket.get(productName).get(0);
             int inStock = (Integer) basket.get(productName).get(4);
 

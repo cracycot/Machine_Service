@@ -19,11 +19,11 @@ public class ProductService {
     @Autowired
     private ProductFilter productFilter;
 
-    public void create_product(Product product) {
+    public void createProduct(Product product) {
         productRepo.save(product);
     }
 
-    public Product get_product(Long id) throws ProductNotFindException {
+    public Product getProduct(Long id) throws ProductNotFindException {
         Optional<Product> productOptional = productRepo.findById(id);
         if (productOptional.isEmpty()) {
             throw new ProductNotFindException("Пользователь не найден");
@@ -31,7 +31,7 @@ public class ProductService {
         return productOptional.get();
     }
 
-    public void update_product(Product product) {
+    public void updateProduct(Product product) {
         Product savedProduct = productRepo.save(product);
     }
 

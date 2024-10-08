@@ -1,7 +1,9 @@
 package org.example.machine_service.services;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.S3Object;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Optional;
 
 @Service
 public class UploadPhotosService {
@@ -50,7 +54,14 @@ public class UploadPhotosService {
         return s3Client.getUrl(bucketName, fileName).toString();
     }
 
-//    public MultipartFile getPhoto(String url) {
-//        ObjectMetadata ObjectMetadata  = s3Client.getObject(new GetObjectRequest(bucketName, url));
-//    };
+    public byte[] getPhotoByte(String fileName) {
+        S3Object s3Object = s3Client.getObject(new GetObjectRequest(bucketName, fileName));
+        InputStream inputStream = s3Object.getObjectContent();
+        try (inputStream) {
+            return inputStream.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException("Ошибка при чтении содержимого файла из S3", e);
+        }
+    }
+
 }

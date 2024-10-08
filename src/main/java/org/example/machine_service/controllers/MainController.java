@@ -6,22 +6,26 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.entities.SendForm;
-import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.repositories.ProductRepo;
 import org.example.machine_service.services.ProductService;
+import org.example.machine_service.services.UploadPhotosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.example.machine_service.services.EmailService;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -32,6 +36,8 @@ public class MainController {
     private ProductService productService;
     @Autowired
     private ProductRepo productRepo;
+    @Autowired
+    private UploadPhotosService uploadPhotosService;
 
     @GetMapping("/")
     public String MainPage(HttpSession session, Model model) {
@@ -128,4 +134,40 @@ public class MainController {
         model.addAttribute("pageSize", elements.getSize());
         return "Catalog";
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity<Map<String, String>> uploadPhoto(@RequestParam("file") MultipartFile file,
+                                                           @RequestParam("fileName") String fileName) {
+        try {
+            String imageUrl = uploadPhotosService.uploadImage(file, fileName);
+
+            Map<String, String> response = new HashMap<>();
+            response.put("url", imageUrl);
+
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Failed to upload image"));
+        }
+    }
+
+    @GetMapping("/products/{productId}/image")
+    public ResponseEntity<byte[]> getProductImage(@PathVariable String productId) {
+        String fileName = productId; // Убедитесь, что fileName - это только имя файла, а не полный URL.
+
+        // Загружаем файл по имени
+        byte[] content = uploadPhotosService.getPhotoByte(fileName);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentLength(content.length);
+        headers.set("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(content);
+    }
+
+
 }

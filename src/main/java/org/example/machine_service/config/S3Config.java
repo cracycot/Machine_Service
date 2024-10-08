@@ -17,7 +17,7 @@ public class S3Config {
     private String accessKey;
     @Value("${s3.secretkey}")
     private String secretKey;
-    private String endpointUrl = "https://s3.selcdn.ru"; // Selectel S3 endpoint
+    private final String endpointUrl = "https://s3.selcdn.ru"; // Selectel S3 endpoint
 
     @Bean
     public AmazonS3 s3Client() {

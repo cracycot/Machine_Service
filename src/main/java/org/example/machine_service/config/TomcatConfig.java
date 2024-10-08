@@ -10,7 +10,6 @@ public class TomcatConfig {
     @Bean
     public TomcatContextCustomizer tomcatContextCustomizer() {
         return (Context context) -> {
-            // Отключаем персистентность сессий
             context.setManager(null);
         };
     }

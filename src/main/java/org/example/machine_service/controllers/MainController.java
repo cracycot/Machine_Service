@@ -9,6 +9,8 @@ import org.example.machine_service.entities.SendForm;
 import org.example.machine_service.repositories.ProductRepo;
 import org.example.machine_service.services.ProductService;
 import org.example.machine_service.services.UploadPhotosService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +32,7 @@ import java.util.*;
 
 @Controller
 public class MainController {
+    private static final Logger log = LoggerFactory.getLogger(MainController.class);
     @Autowired
     private EmailService emailService;
     @Autowired
@@ -139,11 +142,10 @@ public class MainController {
     public ResponseEntity<Map<String, String>> uploadPhoto(@RequestParam("file") MultipartFile file,
                                                            @RequestParam("fileName") String fileName) {
         try {
+            log.info("Фото отправлено {}", fileName);
             String imageUrl = uploadPhotosService.uploadImage(file, fileName);
-
             Map<String, String> response = new HashMap<>();
             response.put("url", imageUrl);
-
             return ResponseEntity.ok(response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -168,6 +170,4 @@ public class MainController {
                 .headers(headers)
                 .body(content);
     }
-
-
 }

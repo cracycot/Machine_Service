@@ -4,6 +4,9 @@ import org.example.machine_service.DTO.StockResponsDTO;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.services.ProductService;
+import org.example.machine_service.services.UploadPhotosService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,14 +15,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("product")
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UploadPhotosService uploadPhotosService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+
 
     @GetMapping("/home")
     public ResponseEntity<?> CheckCorrect() {
@@ -73,27 +85,62 @@ public class ProductController {
 //    @PostMapping("/create")
 //    public ResponseEntity<?> CreateProduct(@RequestBody Product product) {
 //        try {
-//            productService.create_product(product);
-//            return ResponseEntity.ok().body("продукт сохранен");
+//            System.out.println("Получен продукт: " + product.getName());
+//            System.out.println("Категория: " + product.getCategory());
+//            System.out.println("Цена: " + product.getPrice());
+//            System.out.println("Наличие: " + product.getInStock());
+//
+//            productService.createProduct(product);
+//            return ResponseEntity.ok().body("Продукт сохранен");
 //        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body("неверная запись");
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().body("Ошибка при создании продукта");
 //        }
 //    }
-    @PostMapping("/create")
-    public ResponseEntity<?> CreateProduct(@RequestBody Product product) {
-        try {
-            System.out.println("Получен продукт: " + product.getName());
-            System.out.println("Категория: " + product.getCategory());
-            System.out.println("Цена: " + product.getPrice());
-            System.out.println("Наличие: " + product.getInStock());
 
+    @PostMapping("/create")
+    public ResponseEntity<?> createProduct(
+            @RequestParam("name") String name,
+            @RequestParam("category") String category,
+            @RequestParam("article") String article,
+            @RequestParam("price") int price,
+            @RequestParam("inStock") int inStock,
+            @RequestParam("imageUrls") Optional<String> imageUrlsJson, // Если вы все же передаете imageUrls
+            @RequestPart("files") MultipartFile[] files) {
+
+        try {
+            // Обработка данных продукта
+            Product product = new Product();
+            product.setName(name);
+            product.setCategory(category);
+            product.setArticle(article);
+            product.setPrice(price);
+            product.setInStock(inStock);
+
+            // Список для хранения URL загруженных изображений
+            List<String> imageUrls = new ArrayList<>();
+
+            // Загрузка файлов на S3 и получение их URL
+            for (MultipartFile file : files) {
+                String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+                String imageUrl = uploadPhotosService.uploadImage(file, fileName);
+                logger.info("загружено фото {}", fileName);
+                imageUrls.add(imageUrl);
+            }
+
+            // Установка URL изображений в продукт
+            product.setImageUrls(imageUrls);
+
+            // Сохранение продукта в базе данных
             productService.createProduct(product);
+
             return ResponseEntity.ok().body("Продукт сохранен");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Ошибка при создании продукта");
         }
     }
+
 
 
     @PatchMapping("/updateproduct")

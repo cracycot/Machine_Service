@@ -5,6 +5,8 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import net.coobird.thumbnailator.Thumbnails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,8 +19,9 @@ import java.util.Optional;
 
 @Service
 public class UploadPhotosService {
-    @Autowired
     AmazonS3 s3Client;
+
+    private final Logger logger = LoggerFactory.getLogger(UploadPhotosService.class);
 
     private final String bucketName = "motorservicephotos";
 
@@ -38,12 +41,10 @@ public class UploadPhotosService {
         byte[] compressedImage = os.toByteArray();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(compressedImage);
 
-        // Метаданные файла
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(compressedImage.length);
         metadata.setContentType(file.getContentType());
 
-        // Загрузка в S3
         s3Client.putObject(bucketName, fileName, inputStream, metadata);
 
         // Возвращаем URL загруженного изображения
@@ -58,9 +59,12 @@ public class UploadPhotosService {
         S3Object s3Object = s3Client.getObject(new GetObjectRequest(bucketName, fileName));
         InputStream inputStream = s3Object.getObjectContent();
         try (inputStream) {
-            return inputStream.readAllBytes();
+            byte[] result = inputStream.readAllBytes();
+            logger.info("Обьект с именем {} сохранен", fileName);
+            return result;
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при чтении содержимого файла из S3", e);
+            logger.error("Ошибка при чтении содержимого файла из S3");
+            throw new RuntimeException(e);
         }
     }
 

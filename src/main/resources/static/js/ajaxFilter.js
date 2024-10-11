@@ -375,7 +375,8 @@ document.addEventListener("DOMContentLoaded", function() {
             itemsList.appendChild(listItem);
 
             // Если у продукта есть изображения, загружаем их
-            if (product.imageUrls && product.imageUrls.length > 0) {
+            if (product.fileNames && product.fileNames.length > 0) {
+                console.log("попытка получения фото")
                 fetch(`product/get/photos?productId=${product.id}`)
                     .then(response => response.json())
                     .then(base64Images => {

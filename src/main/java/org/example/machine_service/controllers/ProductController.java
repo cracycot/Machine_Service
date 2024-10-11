@@ -12,15 +12,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("product")
@@ -105,7 +103,6 @@ public class ProductController {
             @RequestParam("article") String article,
             @RequestParam("price") int price,
             @RequestParam("inStock") int inStock,
-            @RequestParam("imageUrls") Optional<String> imageUrlsJson, // Если вы все же передаете imageUrls
             @RequestPart("files") MultipartFile[] files) {
 
         try {
@@ -118,18 +115,18 @@ public class ProductController {
             product.setInStock(inStock);
 
             // Список для хранения URL загруженных изображений
-            List<String> imageUrls = new ArrayList<>();
+            List<String> fileNames = new ArrayList<>();
 
             // Загрузка файлов на S3 и получение их URL
             for (MultipartFile file : files) {
                 String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-                String imageUrl = uploadPhotosService.uploadImage(file, fileName);
+                uploadPhotosService.uploadImage(file, fileName);
                 logger.info("загружено фото {}", fileName);
-                imageUrls.add(imageUrl);
+                fileNames.add(fileName);
             }
 
             // Установка URL изображений в продукт
-            product.setImageUrls(imageUrls);
+            product.setFileNames(fileNames);
 
             // Сохранение продукта в базе данных
             productService.createProduct(product);
@@ -167,7 +164,7 @@ public class ProductController {
     public ResponseEntity<?> DeleteProduct(@RequestParam Long id) {
         try {
             Product delete_product = productService.getProduct(id);
-            productService.delete_product(delete_product);
+            productService.deleteProduct(delete_product);
             return ResponseEntity.ok().body("продукт удален");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("произошла ошибка");
@@ -202,6 +199,28 @@ public class ProductController {
         headers.add("Total-Pages", String.valueOf(products.getTotalPages()));
 
         return new ResponseEntity<>(products.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/photos")
+    public ResponseEntity<?> getProductImages(@RequestParam("productId") Long productId) {
+        try {
+            List<String> fileNames = productService.getProduct(productId).getFileNames();
+            List<String> base64Images = new ArrayList<>();
+
+            for (String fileName : fileNames) {
+                logger.info("получен запрос на загрузку фото {}", fileName);
+                byte[] photo = uploadPhotosService.getPhotoByte(fileName);
+                // Преобразуем байты изображения в Base64-строку
+                String base64Image = Base64.getEncoder().encodeToString(photo);
+                base64Images.add(base64Image);
+            }
+
+            // Возвращаем список Base64-строк изображений в формате JSON
+            return ResponseEntity.ok(base64Images);
+        } catch (ProductNotFindException e) {
+            logger.error("продукт не найден");
+            return ResponseEntity.badRequest().body("Ошибка при получении изображений");
+        }
     }
 
 }

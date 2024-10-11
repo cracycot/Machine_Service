@@ -1,6 +1,7 @@
 package org.example.machine_service.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +19,21 @@ public class Product {
     @Column(name = "in_stock")
     private int inStock;
     @ElementCollection
-    private List<String> imageUrls;
+    @CollectionTable(
+            name = "product_file_names",
+            joinColumns = @JoinColumn(name = "product_id")
+    )
+    @Column(name = "file_name")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<String> fileNames;
 
-    public Product(String name, String category, String article, int price, int inStock, ArrayList<String> imageUrls) {
+    public Product(String name, String category, String article, int price, int inStock, ArrayList<String> fileNames) {
         this.name = name;
         this.category = category.toLowerCase();
         this.article = article;
         this.price = price;
         this.inStock = inStock;
-        this.imageUrls = imageUrls;
+        this.fileNames = fileNames;
     }
 
     public Product() {
@@ -35,7 +42,7 @@ public class Product {
         this.price = 10000000;
         this.inStock = 0;
         this.article = "";
-        this.imageUrls = new ArrayList<>();
+        this.fileNames = new ArrayList<>();
     }
 
     public void setId(Long id) {
@@ -86,11 +93,11 @@ public class Product {
         return id;
     }
 
-    public List<String> getImageUrls() {
-        return imageUrls;
+    public List<String> getFileNames() {
+        return fileNames;
     }
 
-    public void setImageUrls(List<String> imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setFileNames(List<String> fileNames) {
+        this.fileNames = fileNames;
     }
 }

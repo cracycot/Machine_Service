@@ -72,9 +72,11 @@
             </form>
         </div>
         <div class="catalog">
+            <!-- Существующий код -->
             <span id="totalPages" style="display: none;" th:text= "${totalPages}"></span>
             <div class="catalog-nav">
                 <ul class="catalog-nav-ul">
+                    <li class="item">Изображение</li>
                     <li class="item">Название</li>
                     <li class="item">Бренд</li>
                     <li class="item">Артикул</li>
@@ -82,8 +84,7 @@
                     <li class="item">В наличии</li>
                 </ul>
             </div>
-            <ul id="itemsList">
-            </ul>
+            <ul id="itemsList" class="product-list"></ul>
             <div class="pagination">
                 <button id="prevPage">Предыдущая</button>
                 <span id="currentPage">1</span>

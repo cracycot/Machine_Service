@@ -32,7 +32,7 @@ import java.util.*;
 
 @Controller
 public class MainController {
-    private static final Logger log = LoggerFactory.getLogger(MainController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
     @Autowired
     private EmailService emailService;
     @Autowired
@@ -134,6 +134,7 @@ public class MainController {
         model.addAttribute("page", elements);
         model.addAttribute("currentPage", elements.getNumber() + 1); // +1 потому что Page индексируется с 0
         model.addAttribute("totalPages", elements.getTotalPages());
+        logger.info("элементов в каталоге {}", elements.getTotalElements());
         model.addAttribute("pageSize", elements.getSize());
         return "Catalog";
     }
@@ -142,7 +143,7 @@ public class MainController {
     public ResponseEntity<Map<String, String>> uploadPhoto(@RequestParam("file") MultipartFile file,
                                                            @RequestParam("fileName") String fileName) {
         try {
-            log.info("Фото отправлено {}", fileName);
+            logger.info("Фото отправлено {}", fileName);
             String imageUrl = uploadPhotosService.uploadImage(file, fileName);
             Map<String, String> response = new HashMap<>();
             response.put("url", imageUrl);
@@ -152,22 +153,5 @@ public class MainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to upload image"));
         }
-    }
-
-    @GetMapping("/products/{productId}/image")
-    public ResponseEntity<byte[]> getProductImage(@PathVariable String productId) {
-        String fileName = productId; // Убедитесь, что fileName - это только имя файла, а не полный URL.
-
-        // Загружаем файл по имени
-        byte[] content = uploadPhotosService.getPhotoByte(fileName);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        headers.setContentLength(content.length);
-        headers.set("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(content);
     }
 }

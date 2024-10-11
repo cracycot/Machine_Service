@@ -1,5 +1,7 @@
 package org.example.machine_service.services;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.repositories.ProductFilter;
@@ -18,6 +20,10 @@ public class ProductService {
     private ProductRepo productRepo;
     @Autowired
     private ProductFilter productFilter;
+    @Autowired
+    private UploadPhotosService photosService;
+    @Autowired
+    private EntityManager entityManager;
 
     public void createProduct(Product product) {
         productRepo.save(product);
@@ -63,7 +69,16 @@ public class ProductService {
         return (ArrayList<Product>) productRepo.findAll();
     }
 
-    public void delete_product(Product product) {
+    @Transactional
+    public void deleteProduct(Product product) {
+
+        for (String fileName : product.getFileNames()) {
+            photosService.deletePhoto(fileName);
+        }
+        product.getFileNames().clear();
+        productRepo.save(product);
+        entityManager.flush();
+
         productRepo.delete(product);
     }
 }

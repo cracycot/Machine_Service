@@ -1,6 +1,7 @@
 package org.example.machine_service.services;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
@@ -48,24 +49,29 @@ public class UploadPhotosService {
         s3Client.putObject(bucketName, fileName, inputStream, metadata);
 
         // Возвращаем URL загруженного изображения
-        return s3Client.getUrl(bucketName, fileName).toString();
+        return fileName;
     }
 
-    public String getPhotoUrl(String fileName) {
-        return s3Client.getUrl(bucketName, fileName).toString();
+    public void deletePhoto(String fileName) {
+        s3Client.deleteObject(bucketName, fileName);
     }
 
     public byte[] getPhotoByte(String fileName) {
-        S3Object s3Object = s3Client.getObject(new GetObjectRequest(bucketName, fileName));
-        InputStream inputStream = s3Object.getObjectContent();
-        try (inputStream) {
-            byte[] result = inputStream.readAllBytes();
-            logger.info("Обьект с именем {} сохранен", fileName);
-            return result;
+        try {
+            S3Object s3Object = s3Client.getObject(new GetObjectRequest(bucketName, fileName));
+            try (InputStream inputStream = s3Object.getObjectContent()) {
+                byte[] result = inputStream.readAllBytes();
+                logger.info("Объект с именем {} получен", fileName);
+                return result;
+            }
+        } catch (AmazonS3Exception e) {
+            logger.error("Ошибка при получении объекта из S3: {}", e.getMessage());
+            throw new RuntimeException("Файл не найден в S3: " + fileName, e);
         } catch (IOException e) {
             logger.error("Ошибка при чтении содержимого файла из S3");
-            throw new RuntimeException(e);
+            throw new RuntimeException("Ошибка при чтении файла: " + fileName, e);
         }
     }
+
 
 }

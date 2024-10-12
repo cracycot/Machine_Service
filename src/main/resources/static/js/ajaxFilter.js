@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const priceTo = document.getElementById('priceTo').value || 100000000;
         const brand = document.getElementById('brand').value;
 
-        const size = 5; // Размер страницы — количество товаров на странице
+        const size = 8; // Размер страницы — количество товаров на странице
 
         // Исправляем URL, используя обратные кавычки
         const url = `/product/filterproduct?search=${encodeURIComponent(searchValue)}&brand=${encodeURIComponent(brand === 'Выберите бренд' ? '' : brand)}&min=${priceFrom}&max=${priceTo}&page=${page}&size=${size}`;
@@ -250,149 +250,6 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch(error => console.error('Ошибка:', error));
     }
-
-    // function updateCatalog(products) {
-    //     const itemsList = document.getElementById("itemsList");
-    //     itemsList.innerHTML = ""; // Очищаем текущий список товаров
-    //     products.forEach(product => {
-    //         const listItem = document.createElement("li");
-    //         listItem.classList.add("product-item");
-    //
-    //         // Создаем элемент изображения
-    //         const imageElement = document.createElement("img");
-    //         imageElement.classList.add("product-image");
-    //
-    //         console.log(product.imageUrls)
-    //         // Проверяем, есть ли у товара изображения
-    //         if (product.imageUrls && product.imageUrls.length > 0) {
-    //             // Формируем корректный путь к изображению
-    //             imageElement.src = `/products/${product.id}/image?fileName=${encodeURIComponent(product.imageUrls[0])}`;
-    //         } else {
-    //             imageElement.src = "/img/connection.jpg"; // Путь к изображению по умолчанию
-    //         }
-    //
-    //         // Создаем остальные элементы
-    //         const nameElement = document.createElement("span");
-    //         nameElement.classList.add("item");
-    //         nameElement.id = "product-name";
-    //         nameElement.textContent = product.name;
-    //
-    //         const categoryElement = document.createElement("span");
-    //         categoryElement.classList.add("item");
-    //         categoryElement.id = "product-category";
-    //         categoryElement.textContent = product.category;
-    //
-    //         const articleElement = document.createElement("span");
-    //         articleElement.classList.add("item");
-    //         articleElement.id = "product-article";
-    //         articleElement.textContent = product.article;
-    //
-    //         const priceElement = document.createElement("span");
-    //         priceElement.classList.add("item");
-    //         priceElement.id = "product-price";
-    //         priceElement.textContent = product.price + "р";
-    //
-    //         const inStockElement = document.createElement("span");
-    //         inStockElement.classList.add("item");
-    //         inStockElement.id = "product-in-stock";
-    //         inStockElement.textContent = product.inStock + " шт";
-    //
-    //         const addToCartButton = document.createElement("button");
-    //         addToCartButton.type = "button";
-    //         addToCartButton.classList.add("add-to-cart-btn");
-    //         addToCartButton.dataset.productId = product.id;
-    //         addToCartButton.textContent = "Добавить в корзину";
-    //
-    //         // Собираем элемент списка
-    //         listItem.appendChild(imageElement);
-    //         listItem.appendChild(nameElement);
-    //         listItem.appendChild(categoryElement);
-    //         listItem.appendChild(articleElement);
-    //         listItem.appendChild(priceElement);
-    //         listItem.appendChild(inStockElement);
-    //         listItem.appendChild(addToCartButton);
-    //
-    //         itemsList.appendChild(listItem);
-    //     });
-    // }
-    function updateCatalog(products) {
-        const itemsList = document.getElementById("itemsList");
-        itemsList.innerHTML = ""; // Очищаем текущий список товаров
-
-        products.forEach(product => {
-            const listItem = document.createElement("li");
-            listItem.classList.add("product-item");
-
-            // Создаем элемент изображения
-            const imageElement = document.createElement("img");
-            imageElement.classList.add("product-image");
-
-            // Устанавливаем изображение по умолчанию
-            imageElement.src = "/img/connection.jpg";
-
-
-            // Создаем остальные элементы
-            const nameElement = document.createElement("span");
-            nameElement.classList.add("item");
-            nameElement.id = "product-name";
-            nameElement.textContent = product.name;
-
-            const categoryElement = document.createElement("span");
-            categoryElement.classList.add("item");
-            categoryElement.id = "product-category";
-            categoryElement.textContent = product.category;
-
-            const articleElement = document.createElement("span");
-            articleElement.classList.add("item");
-            articleElement.id = "product-article";
-            articleElement.textContent = product.article;
-
-            const priceElement = document.createElement("span");
-            priceElement.classList.add("item");
-            priceElement.id = "product-price";
-            priceElement.textContent = product.price + "р";
-
-            const inStockElement = document.createElement("span");
-            inStockElement.classList.add("item");
-            inStockElement.id = "product-in-stock";
-            inStockElement.textContent = product.inStock + " шт";
-
-            const addToCartButton = document.createElement("button");
-            addToCartButton.type = "button";
-            addToCartButton.classList.add("add-to-cart-btn");
-            addToCartButton.dataset.productId = product.id;
-            addToCartButton.textContent = "Добавить в корзину";
-
-            // Собираем элемент списка
-            listItem.appendChild(imageElement);
-            listItem.appendChild(nameElement);
-            listItem.appendChild(categoryElement);
-            listItem.appendChild(articleElement);
-            listItem.appendChild(priceElement);
-            listItem.appendChild(inStockElement);
-            listItem.appendChild(addToCartButton);
-
-            itemsList.appendChild(listItem);
-
-            // Если у продукта есть изображения, загружаем их
-            if (product.fileNames && product.fileNames.length > 0) {
-                console.log("попытка получения фото")
-                fetch(`product/get/photos?productId=${product.id}`)
-                    .then(response => response.json())
-                    .then(base64Images => {
-                        if (base64Images.length > 0) {
-                            // Устанавливаем src изображения на первую полученную Base64-строку
-                            imageElement.src = `data:image/jpeg;base64,${base64Images[0]}`;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Ошибка при получении изображений:', error);
-                    });
-            }
-        });
-    }
-
-
     function checkPaginationButtons(currentPage, totalPages) {
         if (totalPages <= 1) {
             prevPage.style.display = "none";
@@ -401,6 +258,72 @@ document.addEventListener("DOMContentLoaded", function() {
             prevPage.style.display = currentPage <= 1 ? "none" : "inline-block";
             nextPage.style.display = currentPage >= totalPages ? "none" : "inline-block";
         }
+    }
+    function updateCatalog(products) {
+        const productGrid = document.getElementById("productGrid");
+        productGrid.innerHTML = ""; // Очищаем текущий список товаров
+
+        products.forEach(product => {
+            // Создаем карточку товара
+            const card = document.createElement("div");
+            card.classList.add("product-card");
+
+            // Создаем элемент изображения
+            const imageElement = document.createElement("img");
+            imageElement.classList.add("product-image");
+            imageElement.src = "/img/connection.jpg"; // Изображение по умолчанию
+
+            // Если у продукта есть изображения, загружаем их
+            if (product.fileNames && product.fileNames.length > 0) {
+                fetch(`product/get/photos?productId=${product.id}`)
+                    .then(response => response.json())
+                    .then(base64Images => {
+                        if (base64Images.length > 0) {
+                            imageElement.src = `data:image/jpeg;base64,${base64Images[0]}`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при получении изображений:', error);
+                    });
+            }
+
+            // Создаем контейнер для контента карточки
+            const content = document.createElement("div");
+            content.classList.add("product-card-content");
+
+            // Название продукта
+            const nameElement = document.createElement("h3");
+            nameElement.textContent = product.name;
+
+            // Категория или бренд (если нужно)
+            const categoryElement = document.createElement("p");
+            categoryElement.textContent = product.category;
+
+            // Цена
+            const priceElement = document.createElement("div");
+            priceElement.classList.add("price");
+            priceElement.textContent = product.price + " р";
+
+            // Кнопка "Добавить в корзину"
+            const addToCartButton = document.createElement("button");
+            addToCartButton.type = "button";
+            addToCartButton.classList.add("add-to-cart-btn");
+            addToCartButton.dataset.productId = product.id;
+            addToCartButton.textContent = "Добавить в корзину";
+
+            // Собираем контент карточки
+            content.appendChild(nameElement);
+            content.appendChild(categoryElement);
+            content.appendChild(priceElement);
+            content.appendChild(addToCartButton);
+
+            // Собираем карточку товара
+            card.appendChild(imageElement);
+            card.appendChild(content);
+
+            // Добавляем карточку в сетку продуктов
+            productGrid.appendChild(card);
+        });
     }
 
     function handleEmptyCatalog(isEmpty) {

@@ -736,271 +736,561 @@ header nav ul li.active {
 
 /*CATALOG*/
 
-.main-catalog {
-    height: 70vh;
-    margin-top: 5vh;
-    margin-right: 10%;
-    margin-left: 10%;
-}
-.Catalog_name {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-size: 60px;
-}
-.catalog {
-    min-width: 550px;
-    min-height: 55vh;
-    margin-top: -200px;
-    left: 40%;
-    position: relative;
-    height: 100%;
-    width: 60%;
-}
-.catalog-nav {
-    width: 87%;
-    height: 40px;
-    min-height: 2vh;
-    background-color: #FBD784;
-    border-radius: 5px;
-}
-.catalog-nav ul {
-    height: 100%;
-    width: 100%;
-    padding: 5px;
-    padding-right: 15px;
-    list-style-type: none;
-    display: flex; /* Активируем Flexbox */
-    flex-direction: row; /* Элементы в ряд */
-    justify-content: flex-start;
-}
-.catalog-nav-ul .item:first-child {
-    width: 35%;
-    margin-right: 5%;
-}
-.catalog-nav-ul .item {
-    width: 12%;
-    margin-right: 5%; /* Добавляем небольшой отступ справа от каждого элемента */
-}
 
-.catalog-nav-ul .item:last-child {
-    width: 15%;
-}
-#itemsList {
-    min-height: 30vh;
-    height: auto;
-    margin-top: 1vh;
-    left:0;
-    list-style-type: none;
-    padding: 0;
-}
-#itemsList li {
-    /*font-size: 1em;*/
-    background: white;
-    margin-top: 10px;
-    padding: 5px;
-    height: 5vh;
-    display: flex; /* Активируем Flexbox */
-    flex-direction: row; /* Элементы в ряд */
-    justify-content: flex-start;
-}
-#itemsList .item:first-child {
-    width: 45%;
-    margin-right: 5%;
-}
-#itemsList .item:last-child {
-    width: 5%;
-    margin-right: 5%;
-}
-#itemsList .item {
-    font-size: 16px;
-    width: 15%;
-    margin-right: 5%; /* Добавляем небольшой отступ справа от каждого элемента */
-}
-#itemsList .item:last-child {
-    margin-right: 0; /* Удаляем отступ справа у последнего элемента */
-}
-.search-container {
-    margin-top: 15px;
-    margin-left: 3px;
-    width: 150px;
-    height: 30px;
-    min-height: 2vh;
-    font-size: 24px;
-    /*min-width: 10vw;*/
-    background-color: #FBD784;
+/* Стили для контейнера карточек товаров */
+.product-grid {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-}
-#searchInput {
-    width: 90%;
-    border: none; /* Убираем границу поля ввода */
-    outline: none;
-    padding: 2px;/* Убираем контур при фокусе */
-    background-color: #FBD784;
-}
-.filter-container {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px; /* Расстояние между карточками */
     margin-top: 20px;
-    min-width: 200px;
-    min-height: 10vh;
-    width: 12%;
-    background-color: #FBD784;
+}
+
+/* Стили для карточки товара */
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 5px;
-}
-.filter-container h2 {
-    padding-left: 5px;
-}
-#filterForm {
-    width: 90%;
-    height: 100%;
-    padding: 5px;
-}
-.filter-container .price {
-    margin: 10px auto 0;
-}
-.filter-container  input{
-    width: 50px;
-    min-height: 2vh;
-    min-width: 40%;
-    border: none; /* Убираем границу поля ввода */
-    outline: none;
-    padding: 2px;/* Убираем контур при фокусе */
-    background-color: white;
-    border-radius: 2px;
-}
-.filter-container button {
-    margin: 10px auto 0;
-    width: 48%; /* Чтобы кнопки занимали по половине ширины */
-    height: 40px; /* Сделаем кнопки повыше */
-    font-size: 16px; /* Увеличим размер шрифта для удобства */
-    border: none;
-    border-radius: 5px;
-}
-#brand {
-    min-height: 2vh;
-}
-.filter-container .buttons-group {
+    width: calc(25% - 20px); /* Четыре карточки в ряд */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     display: flex;
-    justify-content: space-between; /* Кнопки будут на одной линии */
-    margin-top: 10px;
+    flex-direction: column;
 }
 
-.add-to-cart-btn {
-    width: 20%;
-    border: none;
-    font-family: 'Lato';
-    color: inherit;
-    background: none;
-    cursor: pointer;
-    /*padding: 25px 80px;*/
-    display: inline-block;
-    /*margin: 15px 30px;*/
-    /*text-transform: uppercase;*/
-    letter-spacing: 1px;
-    font-weight: 600;
-    outline: none;
-    position: relative;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-
-.add-to-cart-btn:after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-}
-
-/* Pseudo elements for icons */
-.add-to-cart-btn:before {
-    font-family: 'FontAwesome';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
+.product-card img {
+    width: 100%;
+    height: 200px; /* Фиксированная высота для изображений */
+    object-fit: cover; /* Сохраняем пропорции и обрезаем лишнее */
+    transition: transform 0.3s;
 }
 
 
-/* Icon separator */
-.add-to-cart-btn:before {
-    background: rgba(0,0,0,0.15);
+.product-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
-.add-to-cart-btn {
-    background: #FBD784;
+
+.product-card h3 {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.product-card p {
+    margin: 0 0 10px;
+    color: #666;
+    flex-grow: 1;
+}
+
+.product-card .price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
     color: #000;
 }
 
-.add-to-cart-btn:hover {
-    background: #FBD784;
-}
-
-.add-to-cart-btn:active {
-    background: #FBD784;
-    top: 2px;
-}
-
-.add-to-cart-btn:before {
-    position: absolute;
-    height: 100%;
-    left: 0;
-    top: 0;
-    line-height: 3;
-    font-size: 140%;
-    width: 30px;
-}
-
-/*PAGINATION*/
-.pagination {
-    margin-top: 1vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;/* Выравнивание элементов по вертикали */ /* Горизонтальное центрирование содержимого */
-    /*padding: 10px; !* Внутренний отступ для блока пагинации *!*/
-}
-
-.pagination #currentPage {
-    margin: 0 20px; /* Добавляет горизонтальный отступ между номером страницы и кнопками */
-    background-color: #FBD784; /* Цвет фона для элемента с текущей страницей */
-    padding: 0 10px; /* Внутренний отступ */
-    border-radius: 5px; /* Скругление углов */
+.product-card .add-to-cart-btn {
+    background-color: #FBD784;
+    color: #000;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
     font-weight: bold;
-    font-size: clamp(16px, 2.0vw, 48px);
+    text-transform: uppercase;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-@media (max-aspect-ratio: 4/3)  {
-    .pagination #currentPage {
-        height: 2vh;
+.product-card .add-to-cart-btn:hover {
+    background-color: #e0b765;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 1200px) {
+    .product-card {
+        width: calc(33.333% - 20px); /* Три карточки в ряд */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: calc(50% - 20px); /* Две карточки в ряд */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        width: 100%; /* Одна карточка в ряд */
+    }
+}
+
+.filter-container {
+    width: 20%;
+    background-color: #FBD784;
+    height: 40%;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.filter-container h2 {
+    margin-top: 0;
+}
+
+.filter-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-container select,
+.filter-container input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.buttons-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons-group button {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0b765;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.buttons-group button:hover {
+    background-color: #d1a653;
+}
+.catalog-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+.filter-container {
+    width: 20%;
+    margin-right: 20px;
+}
+
+.catalog {
+    width: 80%;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-to-cart-btn:hover {
+    background-color: #d1a653;
+}
+
+.product-card img {
+    transition: transform 0.3s;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+.search-container {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 300px; /* Ограничиваем максимальную ширину */
+}
+
+#searchForm {
+    display: flex;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #FBD784;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #e0b765;
+}
+
+.pagination span#currentPage {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+/* Общие стили для мобильных устройств */
+@media (max-width: 768px) {
+    /* Контейнер для поиска и фильтров */
+    .search-and-filters {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    /* Стили для контейнера фильтров */
+    .filter-container {
+        width: 100%;
+        max-width: 800px;
+        background-color: #FBD784;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 15px;
+    }
+
+    /* Стили для контейнера поиска */
+    .search-container {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .product-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: calc(25% - 20px); /* Четыре карточки в ряд на больших экранах */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Увеличиваем размер шрифта для удобства чтения */
+    body {
+        font-size: 16px;
+    }
+
+    /* Центрируем название каталога */
+    .Catalog_name {
+        text-align: center;
+    }
+
+    /* Убираем отступы для лучшего использования пространства */
+    .container {
+        padding: 10px;
+    }
+
+    /* Фильтры и поиск */
+    .search-and-filters {
+        align-items: stretch;
+    }
+
+    .search-container,
+    .filter-container {
+        width: 100%;
+    }
+
+    .filter-container {
+        margin-top: 10px;
     }
 }
 
 
-/*height: 2vh;*/
 
 
-.pagination button {
-    border: none; /* Убираем границу кнопки */
-    background-color: #FBD784; /* Цвет фона кнопок */
-    color: #000; /* Цвет текста кнопок */
-    min-height: 2vh;
-    min-width: 5vh;
-    padding: 10px 15px; /* Внутренний отступ кнопок */
-    margin: 0 5px; /* Маргин между элементами внутри .pagination */
-    cursor: pointer; /* Курсор в виде указателя */
-    border-radius: 5px; /* Скругление углов */
-    transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
-}
 
-.pagination button:hover {
-    background-color: #ecc967; /* Цвет фона кнопок при наведении */
-}
+/*Old catalog*/
+
+/*.main-catalog {*/
+/*    height: 70vh;*/
+/*    margin-top: 5vh;*/
+/*    margin-right: 10%;*/
+/*    margin-left: 10%;*/
+/*}*/
+/*.Catalog_name {*/
+/*    font-family: "Roboto", sans-serif;*/
+/*    font-weight: 400;*/
+/*    font-size: 60px;*/
+/*}*/
+/*.catalog {*/
+/*    min-width: 550px;*/
+/*    min-height: 55vh;*/
+/*    margin-top: -200px;*/
+/*    left: 40%;*/
+/*    position: relative;*/
+/*    height: 100%;*/
+/*    width: 60%;*/
+/*}*/
+/*.catalog-nav {*/
+/*    width: 87%;*/
+/*    height: 40px;*/
+/*    min-height: 2vh;*/
+/*    background-color: #FBD784;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*.catalog-nav ul {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    padding: 5px;*/
+/*    padding-right: 15px;*/
+/*    list-style-type: none;*/
+/*    display: flex; !* Активируем Flexbox *!*/
+/*    flex-direction: row; !* Элементы в ряд *!*/
+/*    justify-content: flex-start;*/
+/*}*/
+/*.catalog-nav-ul .item:first-child {*/
+/*    width: 35%;*/
+/*    margin-right: 5%;*/
+/*}*/
+/*.catalog-nav-ul .item {*/
+/*    width: 12%;*/
+/*    margin-right: 5%; !* Добавляем небольшой отступ справа от каждого элемента *!*/
+/*}*/
+
+/*.catalog-nav-ul .item:last-child {*/
+/*    width: 15%;*/
+/*}*/
+/*#itemsList {*/
+/*    min-height: 30vh;*/
+/*    height: auto;*/
+/*    margin-top: 1vh;*/
+/*    left:0;*/
+/*    list-style-type: none;*/
+/*    padding: 0;*/
+/*}*/
+/*#itemsList li {*/
+/*    !*font-size: 1em;*!*/
+/*    background: white;*/
+/*    margin-top: 10px;*/
+/*    padding: 5px;*/
+/*    height: 5vh;*/
+/*    display: flex; !* Активируем Flexbox *!*/
+/*    flex-direction: row; !* Элементы в ряд *!*/
+/*    justify-content: flex-start;*/
+/*}*/
+/*#itemsList .item:first-child {*/
+/*    width: 45%;*/
+/*    margin-right: 5%;*/
+/*}*/
+/*#itemsList .item:last-child {*/
+/*    width: 5%;*/
+/*    margin-right: 5%;*/
+/*}*/
+/*#itemsList .item {*/
+/*    font-size: 16px;*/
+/*    width: 15%;*/
+/*    margin-right: 5%; !* Добавляем небольшой отступ справа от каждого элемента *!*/
+/*}*/
+/*#itemsList .item:last-child {*/
+/*    margin-right: 0; !* Удаляем отступ справа у последнего элемента *!*/
+/*}*/
+/*.search-container {*/
+/*    margin-top: 15px;*/
+/*    margin-left: 3px;*/
+/*    width: 150px;*/
+/*    height: 30px;*/
+/*    min-height: 2vh;*/
+/*    font-size: 24px;*/
+/*    !*min-width: 10vw;*!*/
+/*    background-color: #FBD784;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*#searchInput {*/
+/*    width: 90%;*/
+/*    border: none; !* Убираем границу поля ввода *!*/
+/*    outline: none;*/
+/*    padding: 2px;!* Убираем контур при фокусе *!*/
+/*    background-color: #FBD784;*/
+/*}*/
+/*.filter-container {*/
+/*    margin-top: 20px;*/
+/*    min-width: 200px;*/
+/*    min-height: 10vh;*/
+/*    width: 12%;*/
+/*    background-color: #FBD784;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*.filter-container h2 {*/
+/*    padding-left: 5px;*/
+/*}*/
+/*#filterForm {*/
+/*    width: 90%;*/
+/*    height: 100%;*/
+/*    padding: 5px;*/
+/*}*/
+/*.filter-container .price {*/
+/*    margin: 10px auto 0;*/
+/*}*/
+/*.filter-container  input{*/
+/*    width: 50px;*/
+/*    min-height: 2vh;*/
+/*    min-width: 40%;*/
+/*    border: none; !* Убираем границу поля ввода *!*/
+/*    outline: none;*/
+/*    padding: 2px;!* Убираем контур при фокусе *!*/
+/*    background-color: white;*/
+/*    border-radius: 2px;*/
+/*}*/
+/*.filter-container button {*/
+/*    margin: 10px auto 0;*/
+/*    width: 48%; !* Чтобы кнопки занимали по половине ширины *!*/
+/*    height: 40px; !* Сделаем кнопки повыше *!*/
+/*    font-size: 16px; !* Увеличим размер шрифта для удобства *!*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*#brand {*/
+/*    min-height: 2vh;*/
+/*}*/
+/*.filter-container .buttons-group {*/
+/*    display: flex;*/
+/*    justify-content: space-between; !* Кнопки будут на одной линии *!*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.add-to-cart-btn {*/
+/*    width: 20%;*/
+/*    border: none;*/
+/*    font-family: 'Lato';*/
+/*    color: inherit;*/
+/*    background: none;*/
+/*    cursor: pointer;*/
+/*    !*padding: 25px 80px;*!*/
+/*    display: inline-block;*/
+/*    !*margin: 15px 30px;*!*/
+/*    !*text-transform: uppercase;*!*/
+/*    letter-spacing: 1px;*/
+/*    font-weight: 600;*/
+/*    outline: none;*/
+/*    position: relative;*/
+/*    -webkit-transition: all 0.3s;*/
+/*    -moz-transition: all 0.3s;*/
+/*    transition: all 0.3s;*/
+/*}*/
+
+/*.add-to-cart-btn:after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    z-index: -1;*/
+/*    -webkit-transition: all 0.3s;*/
+/*    -moz-transition: all 0.3s;*/
+/*    transition: all 0.3s;*/
+/*}*/
+
+/*!* Pseudo elements for icons *!*/
+/*.add-to-cart-btn:before {*/
+/*    font-family: 'FontAwesome';*/
+/*    speak: none;*/
+/*    font-style: normal;*/
+/*    font-weight: normal;*/
+/*    font-variant: normal;*/
+/*    text-transform: none;*/
+/*    line-height: 1;*/
+/*    position: relative;*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*}*/
+
+
+/*!* Icon separator *!*/
+/*.add-to-cart-btn:before {*/
+/*    background: rgba(0,0,0,0.15);*/
+/*}*/
+/*.add-to-cart-btn {*/
+/*    background: #FBD784;*/
+/*    color: #000;*/
+/*}*/
+
+/*.add-to-cart-btn:hover {*/
+/*    background: #FBD784;*/
+/*}*/
+
+/*.add-to-cart-btn:active {*/
+/*    background: #FBD784;*/
+/*    top: 2px;*/
+/*}*/
+
+/*.add-to-cart-btn:before {*/
+/*    position: absolute;*/
+/*    height: 100%;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    line-height: 3;*/
+/*    font-size: 140%;*/
+/*    width: 30px;*/
+/*}*/
+
+/*!*PAGINATION*!*/
+/*.pagination {*/
+/*    margin-top: 1vh;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;!* Выравнивание элементов по вертикали *! !* Горизонтальное центрирование содержимого *!*/
+/*    !*padding: 10px; !* Внутренний отступ для блока пагинации *!*!*/
+/*}*/
+
+/*.pagination #currentPage {*/
+/*    margin: 0 20px; !* Добавляет горизонтальный отступ между номером страницы и кнопками *!*/
+/*    background-color: #FBD784; !* Цвет фона для элемента с текущей страницей *!*/
+/*    padding: 0 10px; !* Внутренний отступ *!*/
+/*    border-radius: 5px; !* Скругление углов *!*/
+/*    font-weight: bold;*/
+/*    font-size: clamp(16px, 2.0vw, 48px);*/
+/*}*/
+
+/*@media (max-aspect-ratio: 4/3)  {*/
+/*    .pagination #currentPage {*/
+/*        height: 2vh;*/
+/*    }*/
+/*}*/
+
+
+/*!*height: 2vh;*!*/
+
+
+/*.pagination button {*/
+/*    border: none; !* Убираем границу кнопки *!*/
+/*    background-color: #FBD784; !* Цвет фона кнопок *!*/
+/*    color: #000; !* Цвет текста кнопок *!*/
+/*    min-height: 2vh;*/
+/*    min-width: 5vh;*/
+/*    padding: 10px 15px; !* Внутренний отступ кнопок *!*/
+/*    margin: 0 5px; !* Маргин между элементами внутри .pagination *!*/
+/*    cursor: pointer; !* Курсор в виде указателя *!*/
+/*    border-radius: 5px; !* Скругление углов *!*/
+/*    transition: background-color 0.3s ease; !* Плавное изменение цвета при наведении *!*/
+/*}*/
+
+/*.pagination button:hover {*/
+/*    background-color: #ecc967; !* Цвет фона кнопок при наведении *!*/
+/*}*/
 
 
 /*MODAL*/

@@ -884,8 +884,11 @@ header nav ul li.active {
 
 .catalog {
     width: 80%;
+    min-height: 80vh;
 }
 
+.product-grid {
+}
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);

@@ -26,14 +26,18 @@ public class Product {
     @Column(name = "file_name")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<String> fileNames;
+    public String description;
+    private boolean isNew;
 
-    public Product(String name, String category, String article, int price, int inStock, ArrayList<String> fileNames) {
+    public Product(String name, String category, String article, int price, int inStock, ArrayList<String> fileNames, String description, boolean isNew) {
         this.name = name;
         this.category = category.toLowerCase();
         this.article = article;
         this.price = price;
         this.inStock = inStock;
         this.fileNames = fileNames;
+        this.description = description;
+        this.isNew = isNew;
     }
 
     public Product() {
@@ -43,6 +47,7 @@ public class Product {
         this.inStock = 0;
         this.article = "";
         this.fileNames = new ArrayList<>();
+        this.description = "";
     }
 
     public void setId(Long id) {
@@ -99,5 +104,21 @@ public class Product {
 
     public void setFileNames(List<String> fileNames) {
         this.fileNames = fileNames;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
     }
 }

@@ -807,22 +807,15 @@ header nav ul li.active {
     background-color: #e0b765;
 }
 
-/* Адаптивность для мобильных устройств */
 @media (max-width: 1200px) {
     .product-card {
-        width: calc(33.333% - 20px); /* Три карточки в ряд */
+        width: calc(49% - 20px); /* Two cards in a row for standard phones like iPhone */
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 400px) {
     .product-card {
-        width: calc(50% - 20px); /* Две карточки в ряд */
-    }
-}
-
-@media (max-width: 480px) {
-    .product-card {
-        width: 100%; /* Одна карточка в ряд */
+        width: 100%; /* One card in a row for very small screens */
     }
 }
 
@@ -950,78 +943,18 @@ header nav ul li.active {
     margin: 0 10px;
 }
 /* Общие стили для мобильных устройств */
-@media (max-width: 768px) {
-    /* Контейнер для поиска и фильтров */
-    .search-and-filters {
+@media (max-aspect-ratio: 4/3) {
+    .buttons-group {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
+        flex-direction: column; /* Располагает кнопки в столбик */
+        gap: 10px; /* Расстояние между кнопками */
     }
 
-    /* Стили для контейнера фильтров */
-    .filter-container {
-        width: 100%;
-        max-width: 800px;
-        background-color: #FBD784;
-        border-radius: 5px;
-        padding: 15px;
-        margin-top: 15px;
-    }
-
-    /* Стили для контейнера поиска */
-    .search-container {
-        width: 100%;
-        max-width: 800px;
-    }
-
-    .product-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .product-card {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: calc(25% - 20px); /* Четыре карточки в ряд на больших экранах */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Увеличиваем размер шрифта для удобства чтения */
-    body {
-        font-size: 16px;
-    }
-
-    /* Центрируем название каталога */
-    .Catalog_name {
-        text-align: center;
-    }
-
-    /* Убираем отступы для лучшего использования пространства */
-    .container {
-        padding: 10px;
-    }
-
-    /* Фильтры и поиск */
-    .search-and-filters {
-        align-items: stretch;
-    }
-
-    .search-container,
-    .filter-container {
-        width: 100%;
-    }
-
-    .filter-container {
-        margin-top: 10px;
+    .buttons-group button {
+        width: 100%; /* Кнопки занимают всю ширину контейнера */
     }
 }
+
 
 
 

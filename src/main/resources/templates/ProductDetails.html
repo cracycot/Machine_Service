@@ -1,0 +1,187 @@
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="ru" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title th:text="${title}"/>-->
+<!--  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+<!--  <meta charset="UTF-8">-->
+<!--  <link rel="icon" href="../img/Logo.png" type="image/x-icon">-->
+<!--  <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--  <link rel="stylesheet" type="text/css" href="/css/detailProduct.css">-->
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">-->
+<!--  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">-->
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>-->
+
+<!--  <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=1.0">-->
+
+<!--  &lt;!&ndash; Подключите CSS Swiper &ndash;&gt;-->
+<!--  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />-->
+
+
+<!--</head>-->
+<!--<body>-->
+<!--<header class = "topBar">-->
+<!--  <picture class ="logo" src="../img/Logo.png"> </picture>-->
+<!--  <h1 class="Number">-->
+<!--    <a href="https://wa.me/+79110272500" class="whatsapp">-->
+<!--      <i class="bi bi-telephone-fill"></i>-->
+<!--      +79110272500-->
+<!--    </a>-->
+<!--  </h1>-->
+<!--</header>-->
+<!--<div class="container">-->
+<!--    <header class="navbar">-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li><a th:href="@{/#Block1}">Обслуживание</a></li>-->
+<!--                <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>-->
+<!--                <li><a th:href="@{/#Block3}">Консультации</a></li>-->
+<!--                <li><a th:href="@{/Catalog}">Запчасти</a></li>&lt;!&ndash;                    <i class="bi bi-cart-fill"></i>&ndash;&gt;-->
+<!--                <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id= "Busket" ></a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </header>-->
+<!--    <div class="line"></div>-->
+<!--    <div id="productGrid" class="product-grid"></div>-->
+<!--    <div id="productId" style="display: none;" th:text= "${product.id}"></div> &lt;!&ndash; Replace 123 with dynamic value from backend &ndash;&gt;-->
+<!--</div>-->
+<!--<div class="Footer">-->
+<!--  <div class="footer-container">-->
+<!--    <h2>Контакты</h2>-->
+<!--    <div class="container-contact-list">-->
+<!--      <ul class="contact-list">-->
+<!--        <li>-->
+<!--          <i class="bi bi-envelope-fill" id = "mail"></i> spb.motorservice@yandex.ru-->
+<!--        </li>-->
+<!--        <li class="phone-item">-->
+<!--          <i class="bi bi-telephone-fill"></i>-->
+<!--          <div class="phone-numbers">-->
+<!--            <div class="main-phone">-->
+<!--              +7 911 027-25-00-->
+<!--            </div>-->
+<!--            <div class="yellow-line"></div>-->
+<!--            <div class="second-phone-number">-->
+<!--              +7 911 720-25-00-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--&lt;!&ndash; Подключаем JS для Swiper &ndash;&gt;-->
+<!--&lt;!&ndash; Подключаем CSS Swiper &ndash;&gt;-->
+
+<!--&lt;!&ndash; Подключаем JS Swiper &ndash;&gt;-->
+
+<!--<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>-->
+<!--&lt;!&ndash; Include external JS file &ndash;&gt;-->
+<!--<script src="/js/photosDetails.js"></script>-->
+
+<!--</body>-->
+<!--</html>-->
+<!--<!DOCTYPE html>-->
+
+<!DOCTYPE HTML>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <link rel="icon" href="../img/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/catalog.css">
+    <link rel="stylesheet" type="text/css" href="/css/detailProduct.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключение CSS Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+<header class="topBar">
+    <picture class="logo" src="../img/Logo.png"></picture>
+    <h1 class="Number">
+        <a href="https://wa.me/+79110272500" class="whatsapp">
+            <i class="bi bi-telephone-fill"></i>
+            +79110272500
+        </a>
+    </h1>
+</header>
+
+<div class="container">
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a th:href="@{/#Block1}">Обслуживание</a></li>
+                <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>
+                <li><a th:href="@{/#Block3}">Консультации</a></li>
+                <li><a th:href="@{/Catalog}">Запчасти</a></li>
+                <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id="Busket"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="line"></div>
+
+    <div id="productDetail" class="product-detail">
+        <!-- Слайдер изображений -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- Слайды будут добавляться динамически через JS -->
+            </div>
+            <!-- Кнопки навигации -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <!-- Пагинация -->
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- Информация о товаре -->
+        <div class="product-info">
+            <h2 class="product-name">Название товара</h2>
+            <p class="product-category">Категория: Электроника</p>
+            <p class="product-article">Артикул: 123456</p>
+            <p class="product-description">Описание товара...</p>
+            <div class="product-price">Цена: 9999 р</div>
+            <div class="product-availability">В наличии: Да</div>
+            <button class="add-to-cart-btn">Добавить в корзину</button>
+        </div>
+    </div>
+
+    <div id="productId" style="display: none;" th:text="${product.id}"></div>
+</div>
+
+<div class="Footer">
+    <div class="footer-container">
+        <h2>Контакты</h2>
+        <div class="container-contact-list">
+            <ul class="contact-list">
+                <li>
+                    <i class="bi bi-envelope-fill" id="mail"></i> spb.motorservice@yandex.ru
+                </li>
+                <li class="phone-item">
+                    <i class="bi bi-telephone-fill"></i>
+                    <div class="phone-numbers">
+                        <div class="main-phone">
+                            +7 911 027-25-00
+                        </div>
+                        <div class="yellow-line"></div>
+                        <div class="second-phone-number">
+                            +7 911 720-25-00
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Подключаем JS Swiper -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Подключаем внешний JS файл -->
+<script src="/js/photosDetails.js"></script>
+</body>
+</html>

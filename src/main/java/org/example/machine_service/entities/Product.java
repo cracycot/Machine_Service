@@ -26,6 +26,7 @@ public class Product {
     @Column(name = "file_name")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<String> fileNames;
+    @Column(columnDefinition = "TEXT")
     public String description;
     private boolean isNew;
 

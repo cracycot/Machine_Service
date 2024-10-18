@@ -22,15 +22,15 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendHtmlMessage(String name, String motor_number, String phone_number, String email, String text) throws MessagingException {
+    public void sendHtmlMessage(String name, String motorNumber, String phoneNumber, String email, String text) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 
         // Customize the HTML content
         String htmlContent = "<h3>Заявка</h3>"
                 + "<p><strong>Имя:</strong> " + name + "</p>"
-                + "<p><strong>Номер мотора:</strong> " + motor_number + "</p>"
-                + "<p><strong>Телефон:</strong> " + phone_number + "</p>"
+                + "<p><strong>Номер мотора:</strong> " + motorNumber + "</p>"
+                + "<p><strong>Телефон:</strong> " + phoneNumber + "</p>"
                 + "<p><strong>Email:</strong> " + email + "</p>"
                 + "<p><strong>Сообщение:</strong> " + text + "</p>";
 

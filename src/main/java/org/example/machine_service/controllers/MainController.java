@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.machine_service.entities.Product;
 import org.example.machine_service.entities.SendForm;
+import org.example.machine_service.exeptions.ProductNotFindException;
 import org.example.machine_service.repositories.ProductRepo;
 import org.example.machine_service.services.ProductService;
 import org.example.machine_service.services.UploadPhotosService;
@@ -153,5 +154,14 @@ public class MainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Failed to upload image"));
         }
+    }
+
+
+    @GetMapping("/product/{id}")
+    public String getProductDetail(@PathVariable Long id, Model model) throws ProductNotFindException {
+        Product product = productService.getProduct(id);
+        model.addAttribute("product", product);
+        System.out.println(id);
+        return "ProductDetails"; // Название шаблона Thymeleaf для детальной страницы товара
     }
 }

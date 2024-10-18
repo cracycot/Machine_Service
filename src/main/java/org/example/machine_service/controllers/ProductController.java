@@ -103,7 +103,9 @@ public class ProductController {
             @RequestParam("article") String article,
             @RequestParam("price") int price,
             @RequestParam("inStock") int inStock,
-            @RequestPart("files") MultipartFile[] files) {
+            @RequestParam("description") String description,
+            @RequestParam("condition") boolean condition,
+            @RequestParam("files") MultipartFile[] files) {
 
         try {
             // Обработка данных продукта
@@ -113,6 +115,8 @@ public class ProductController {
             product.setArticle(article);
             product.setPrice(price);
             product.setInStock(inStock);
+            product.setNew(condition);
+            product.setDescription(description);
 
             // Список для хранения URL загруженных изображений
             List<String> fileNames = new ArrayList<>();

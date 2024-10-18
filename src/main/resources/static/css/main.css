@@ -157,32 +157,71 @@ header nav ul li.active {
 }
 
 
+/*.topBar {*/
+/*    box-sizing: border-box;*/
+/*    position: relative;*/
+/*    !*width: 1512px;*!*/
+/*    height: 11vh;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    background: #283277;*/
+/*    border: 1px solid #000000;*/
+/*    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);*/
+/*}*/
+/*.topBar .logo {*/
+/*    position: absolute; !* Позиционирование элемента абсолютно *!*/
+/*    top: 50%; !* Сдвигаем логотип на 50% от верхнего края родительского элемента *!*/
+/*    left: 12%; !* Отступ слева *!*/
+/*    transform: translateY(-50%); !* Корректируем положение логотипа по вертикали *!*/
+/*    width: 20%; !* Ширина логотипа *!*/
+/*    height:80%; !* Высота логотипа *!*/
+/*    background-image: url("../img/logoPc.png"); !* Путь к изображению логотипа *!*/
+/*    background-size: contain; !* Размер изображения *!*/
+/*    background-repeat: no-repeat; !* Не повторять изображение *!*/
+/*    display: block; !* Блочный элемент *!*/
+/*}*/
+/*@media (max-aspect-ratio: 4/3) {*/
+/*    .topBar {*/
+/*        height: 7.8vh;*/
+/*    }*/
+/*    .topBar .logo {*/
+/*        background-image: url("../img/logoPhone.png");*/
+/*    }*/
+/*}*/
+
 .topBar {
     box-sizing: border-box;
     position: relative;
-    /*width: 1512px;*/
     height: 11vh;
     left: 0;
     top: 0;
     background: #283277;
     border: 1px solid #000000;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;            /* Use Flexbox */
+    align-items: center;      /* Center items vertically */
+    justify-content: space-between; /* Space out items horizontally */
+    padding: 0 8%;            /* Horizontal padding */
 }
+
 .topBar .logo {
-    position: absolute; /* Позиционирование элемента абсолютно */
-    top: 50%; /* Сдвигаем логотип на 50% от верхнего края родительского элемента */
-    left: 12%; /* Отступ слева */
-    transform: translateY(-50%); /* Корректируем положение логотипа по вертикали */
-    width: 20%; /* Ширина логотипа */
-    height:80%; /* Высота логотипа */
-    background-image: url("../img/Logo.png"); /* Путь к изображению логотипа */
-    background-size: contain; /* Размер изображения */
-    background-repeat: no-repeat; /* Не повторять изображение */
-    display: block; /* Блочный элемент */
+    width: 20%;               /* Width of the logo */
+    height: 80%;              /* Height of the logo */
+    background-image: url("../img/logoPc.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    border-radius: 15px;      /* Add rounded corners */
 }
+
 @media (max-aspect-ratio: 4/3) {
     .topBar {
         height: 7.8vh;
+    }
+    .topBar .logo {
+        background-image: url("../img/logoPhone.png");
     }
 }
 .topBar .Number {
@@ -374,6 +413,7 @@ header nav ul li.active {
 .content-img img{
     width: 400px;
     height: 600px;
+    object-fit: cover;
     /*min-height: 10vh;*/
     /*max-height: 500px; !* Ограничиваем высоту изображений *!*/
     /*width: 200px; !* Оставляем ширину адаптивной *!*/
@@ -536,6 +576,18 @@ header nav ul li.active {
     display: flex;
     align-items: center;
 }
+
+.contact-list a {
+    color: inherit; /* Наследовать цвет родителя */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    border-bottom: 2px solid transparent; /* Изначально прозрачная линия */
+    transition: border-bottom 0.3s ease; /* Плавный переход */
+}
+
+.contact-list a:hover {
+    border-bottom: 2px solid #FBD784; /* Желтая линия при наведении */
+}
+
 .contact-list {
     margin: 0 auto;
     list-style-type: none;
@@ -747,6 +799,11 @@ header nav ul li.active {
     gap: 20px; /* Расстояние между карточками */
     margin-top: 20px;
 }
+.add-to-cart-btn {
+    position: relative;
+    z-index: 2;
+}
+
 
 /* Стили для карточки товара */
 .product-card {

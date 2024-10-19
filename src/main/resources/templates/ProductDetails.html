@@ -82,55 +82,159 @@
 <!--</html>-->
 <!--<!DOCTYPE html>-->
 
+
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="ru" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title th:text="${title}"></title>-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="icon" href="../img/Logo.png" type="image/x-icon">-->
+<!--    &lt;!&ndash; Подключение стилей &ndash;&gt;-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/detailProduct.css">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=1.0">-->
+
+<!--    &lt;!&ndash; Подключение CSS Swiper &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />-->
+<!--    &lt;!&ndash; Подключение скриптов &ndash;&gt;-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header class="topBar">-->
+<!--    <div class="logo"></div>-->
+<!--    <h1 class="Number">-->
+<!--        <a href="https://wa.me/+79110272500" class="whatsapp">-->
+<!--            <i class="bi bi-telephone-fill"></i>-->
+<!--            +79110272500-->
+<!--        </a>-->
+<!--    </h1>-->
+<!--</header>-->
+<!--<header class="navbar">-->
+<!--    <nav>-->
+<!--        <ul>-->
+<!--            <li><a th:href="@{/#Block1}">Обслуживание</a></li>-->
+<!--            <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>-->
+<!--            <li><a th:href="@{/#Block3}">Консультации</a></li>-->
+<!--            <li><a th:href="@{/Catalog}">Запчасти</a></li>-->
+<!--            <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id="Busket"></a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</header>-->
+<!--<div class="container">-->
+<!--    &lt;!&ndash; Блок деталей продукта &ndash;&gt;-->
+<!--    <div id="productDetail" class="product-detail">-->
+<!--        &lt;!&ndash; Слайдер изображений &ndash;&gt;-->
+<!--        <div class="swiper-container">-->
+<!--            <div class="swiper-wrapper">-->
+<!--                &lt;!&ndash; Слайды будут добавлены динамически через JS &ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Кнопки навигации &ndash;&gt;-->
+<!--            <div class="swiper-button-prev"></div>-->
+<!--            <div class="swiper-button-next"></div>-->
+<!--            &lt;!&ndash; Пагинация &ndash;&gt;-->
+<!--            <div class="swiper-pagination"></div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Информация о товаре &ndash;&gt;-->
+<!--        <div class="product-info">-->
+<!--            <h2 class="product-name">Название товара</h2>-->
+<!--            <div class="product-price">Цена: 9999 р</div>-->
+<!--            <div class="product-availability">В наличии: 10 шт.</div>-->
+<!--            <p class="product-category">Категория: Электроника</p>-->
+<!--            <p class="product-article">Артикул: 123456</p>-->
+<!--            <p class="product-description">Описание товара...</p>-->
+<!--            <button class="add-to-cart-btn1">Добавить в корзину</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div id="productId" style="display: none;" th:text="${product.id}"></div>-->
+<!--</div>-->
+<!--<div class="Footer">-->
+<!--    <div class="footer-container">-->
+<!--        <h2>Контакты</h2>-->
+<!--        <div class="container-contact-list">-->
+<!--            <ul class="contact-list">-->
+<!--                <li>-->
+<!--                    <i class="bi bi-envelope-fill" id="mail"></i>-->
+<!--                    <a href="mailto:spb.motorservice@yandex.ru">spb.motorservice@yandex.ru</a>-->
+<!--                </li>-->
+<!--                <li class="phone-item">-->
+<!--                    <i class="bi bi-telephone-fill"></i>-->
+<!--                    <div class="phone-numbers">-->
+<!--                        <div class="main-phone">-->
+<!--                            <a href="tel:+79110272500">+7 911 027-25-00</a>-->
+<!--                        </div>-->
+<!--                        <div class="yellow-line"></div>-->
+<!--                        <div class="second-phone-number">-->
+<!--                            <a href="tel:+79117202500">+7 911 720-25-00</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--&lt;!&ndash; Подключение JS Swiper &ndash;&gt;-->
+<!--<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>-->
+<!--&lt;!&ndash; Подключение внешнего JS файла &ndash;&gt;-->
+<!--<script src="/js/photosDetails.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE HTML>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${title}"></title>
+    <title th:text="${title}">Название страницы</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="UTF-8">
     <link rel="icon" href="../img/Logo.png" type="image/x-icon">
+    <!-- Подключение стилей -->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/catalog.css">
     <link rel="stylesheet" type="text/css" href="/css/detailProduct.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Подключение CSS Swiper -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- Подключение скриптов -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 <body>
 <header class="topBar">
-    <picture class="logo" src="../img/Logo.png"></picture>
+    <div class="logo"></div>
     <h1 class="Number">
         <a href="https://wa.me/+79110272500" class="whatsapp">
             <i class="bi bi-telephone-fill"></i>
-            +79110272500
+            +7 911 027-25-00
         </a>
     </h1>
 </header>
-
+<header class="navbar">
+    <nav>
+        <ul>
+            <li><a th:href="@{/#Block1}">Обслуживание</a></li>
+            <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>
+            <li><a th:href="@{/#Block3}">Консультации</a></li>
+            <li><a th:href="@{/Catalog}">Запчасти</a></li>
+            <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id="Busket"></a></li>
+        </ul>
+    </nav>
+</header>
 <div class="container">
-    <header class="navbar">
-        <nav>
-            <ul>
-                <li><a th:href="@{/#Block1}">Обслуживание</a></li>
-                <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>
-                <li><a th:href="@{/#Block3}">Консультации</a></li>
-                <li><a th:href="@{/Catalog}">Запчасти</a></li>
-                <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id="Busket"></a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="line"></div>
-
+    <!-- Блок деталей продукта -->
     <div id="productDetail" class="product-detail">
         <!-- Слайдер изображений -->
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <!-- Слайды будут добавляться динамически через JS -->
+                <!-- Слайды будут добавлены динамически через JS -->
+                <!-- Пример слайда:
+                <div class="swiper-slide">
+                    <img src="/path/to/image.jpg" alt="Описание изображения">
+                </div>
+                -->
             </div>
             <!-- Кнопки навигации -->
             <div class="swiper-button-prev"></div>
@@ -138,39 +242,50 @@
             <!-- Пагинация -->
             <div class="swiper-pagination"></div>
         </div>
+        <!-- Название товара по центру -->
 
-        <!-- Информация о товаре -->
-        <div class="product-info">
+        <!-- Информация о товаре и описание -->
+        <div class="product-info-outside">
             <h2 class="product-name">Название товара</h2>
-            <p class="product-category">Категория: Электроника</p>
-            <p class="product-article">Артикул: 123456</p>
-            <p class="product-description">Описание товара...</p>
-            <div class="product-price">Цена: 9999 р</div>
-            <div class="product-availability">В наличии: Да</div>
-            <button class="add-to-cart-btn">Добавить в корзину</button>
+            <div class="help-line-before"></div>
+            <div class="product-info">
+                <div class="info-left">
+                    <div class="product-price">Цена: 9999 р</div>
+                    <div class="product-availability">В наличии: 10 шт.</div>
+                    <p class="product-category">Категория: Электроника</p>
+                    <p class="product-article">Артикул: 123456</p>
+                </div>
+                <div class="info-right">
+                    <p class="product-description">
+                        Описание товара... Это краткое описание продукта, содержащее до 60 слов, которое даёт покупателю представление о его основных характеристиках и преимуществах.
+                    </p>
+                </div>
+            </div>
+            <div class="help-line-after"></div>
+            <button class="add-to-cart-btn1">Добавить в корзину</button>
         </div>
-    </div>
 
+    </div>
     <div id="productId" style="display: none;" th:text="${product.id}"></div>
 </div>
-
 <div class="Footer">
     <div class="footer-container">
         <h2>Контакты</h2>
         <div class="container-contact-list">
             <ul class="contact-list">
                 <li>
-                    <i class="bi bi-envelope-fill" id="mail"></i> spb.motorservice@yandex.ru
+                    <i class="bi bi-envelope-fill" id="mail"></i>
+                    <a href="mailto:spb.motorservice@yandex.ru">spb.motorservice@yandex.ru</a>
                 </li>
                 <li class="phone-item">
                     <i class="bi bi-telephone-fill"></i>
                     <div class="phone-numbers">
                         <div class="main-phone">
-                            +7 911 027-25-00
+                            <a href="tel:+79110272500">+7 911 027-25-00</a>
                         </div>
                         <div class="yellow-line"></div>
                         <div class="second-phone-number">
-                            +7 911 720-25-00
+                            <a href="tel:+79117202500">+7 911 720-25-00</a>
                         </div>
                     </div>
                 </li>
@@ -178,10 +293,10 @@
         </div>
     </div>
 </div>
-
-<!-- Подключаем JS Swiper -->
+<!-- Подключение JS Swiper -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<!-- Подключаем внешний JS файл -->
+<!-- Подключение внешнего JS файла -->
 <script src="/js/photosDetails.js"></script>
 </body>
 </html>
+

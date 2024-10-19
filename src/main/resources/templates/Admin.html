@@ -1,79 +1,8 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--  <title>Админ панель</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Админ панель</h1>-->
-
-<!--<table>-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th>ID</th>-->
-<!--    <th>Название</th>-->
-<!--    <th>Категория</th>-->
-<!--    <th>Артикул</th>-->
-<!--    <th>Цена</th>-->
-<!--    <th>В наличии</th>-->
-<!--    <th>Действия</th>-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--  <tr th:each="product : ${products}">-->
-<!--    <td th:text="${product.id}"></td>-->
-<!--    <td th:text="${product.name}"></td>-->
-<!--    <td th:text="${product.category}"></td>-->
-<!--    <td th:text="${product.article}"></td>-->
-<!--    <td th:text="${product.price}"></td>-->
-<!--    <td>-->
-<!--      <span class="stock-quantity" th:text="${product.inStock}"></span>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--      <div class="data-id" style="display: none;" th:text="${product.id}"></div>-->
-<!--      <button onclick="deleteProduct(this)">Удалить</button>-->
-<!--      <button onclick="decreaseStock(this)">-1</button>-->
-<!--      <button onclick="increaseStock(this)">+1</button>-->
-<!--    </td>-->
-<!--  </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
-
-<!--&lt;!&ndash; Форма для добавления нового продукта &ndash;&gt;-->
-<!--<h2>Добавить новый продукт</h2>-->
-<!--<form id="productForm" class="admin-form" style="width: 70vw; display: flex">-->
-<!--  <input type="text" name="name" placeholder="Название" required />-->
-<!--  <div class="input-group">-->
-<!--    <select id="brand" name="category" required>-->
-<!--      <option value="">Выберите бренд</option>-->
-<!--      <option value="caterpillar">CATERPILLAR</option>-->
-<!--      <option value="cummins">Cummins</option>-->
-<!--      <option value="detroitdiesel">Detroit Diesel</option>-->
-<!--      <option value="fgwilson">FGWilson</option>-->
-<!--      <option value="perkins">Perkins</option>-->
-<!--      <option value="maxiforce">Maxiforce</option>-->
-<!--      <option value="redat">Redat</option>-->
-<!--      <option value="volvopenta">Volvo Penta</option>-->
-<!--      <option value="solidtechnologies">Solid Technologies</option>-->
-<!--      <option value="johndeere">John Deere</option>-->
-<!--      <option value="interstatemcbee">Interstate McBee</option>-->
-<!--    </select>-->
-<!--  </div>-->
-<!--  <input type="text" name="article" placeholder="Артикул" required />-->
-<!--  <input type="number" name="price" placeholder="Цена" required />-->
-<!--  <input type="number" name="inStock" placeholder="Количество на складе" required />-->
-<!--  <input type="file" name="images" id="images" multiple accept="image/*" />-->
-<!--  <input type="submit" value="Добавить в каталог" />-->
-<!--</form>-->
-
-<!--<script src="/js/admin-editor.js"></script>-->
-<!--<script src="/js/uploadPhotos.js"></script>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Админ панель</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css">
+    <title>Админ панель</title>
 </head>
 <body>
 <h1>Админ панель</h1>
@@ -113,36 +42,46 @@
 <!-- Форма для добавления нового продукта -->
 <h2>Добавить новый продукт</h2>
 <form id="productForm" class="admin-form" style="width: 70vw; display: flex; flex-direction: column;">
-  <input type="text" name="name" placeholder="Название" required />
-  <div class="input-group">
-    <select id="brand" name="category" required>
-        <option value="">Выберите бренд</option>
-        <option value="caterpillar">CATERPILLAR</option>
-        <option value="cummins">Cummins</option>
-        <option value="detroitdiesel">Detroit Diesel</option>
-        <option value="fgwilson">FGWilson</option>
-        <option value="perkins">Perkins</option>
-        <option value="maxiforce">Maxiforce</option>
-        <option value="redat">Redat</option>
-        <option value="volvopenta">Volvo Penta</option>
-        <option value="solidtechnologies">Solid Technologies</option>
-        <option value="johndeere">John Deere</option>
-        <option value="interstatemcbee">Interstate McBee</option>
-      </select>
-    </select>
-  </div>
-  <input type="text" name="article" placeholder="Артикул" required />
-  <input type="number" name="price" placeholder="Цена" required />
-  <input type="number" name="inStock" placeholder="Количество на складе" required />
+    <input type="text" name="name" placeholder="Название" required />
+    <div class="input-group">
+        <select id="brand" name="category" required>
+            <option value="">Выберите бренд</option>
+            <option value="caterpillar">CATERPILLAR</option>
+            <option value="cummins">Cummins</option>
+            <option value="detroitdiesel">Detroit Diesel</option>
+            <option value="fgwilson">FGWilson</option>
+            <option value="perkins">Perkins</option>
+            <option value="maxiforce">Maxiforce</option>
+            <option value="redat">Redat</option>
+            <option value="volvopenta">Volvo Penta</option>
+            <option value="solidtechnologies">Solid Technologies</option>
+            <option value="johndeere">John Deere</option>
+            <option value="interstatemcbee">Interstate McBee</option>
+          </select>
+      </div>
+    <div class="input-group">
+        <select id="condition" name="condition" required>
+            <option value="">Выберите состояние</option>
+            <option value="usedCondition">БУ</option>
+            <option value="usedCondition">новое</option>
+        </select>
+    </div>
+    <input type="text" name="article" placeholder="Артикул" required />
+    <input type="text" name="description" placeholder="Описание"/>
+
+    <input type="number" name="price" placeholder="Цена" required />
+    <input type="number" name="inStock" placeholder="Количество на складе" required />
 
   <!-- Контейнер для полей выбора файлов -->
-  <div id="fileInputsContainer">
-    <input type="file" name="images" class="image-input" accept="image/*" />
-  </div>
-  <button type="button" id="addImageButton">Добавить еще фото</button>
-
-  <input type="submit" value="Добавить в каталог" />
+    <div id="fileInputsContainer">
+        <input type="file" name="images" class="image-input" accept="image/*" />
+    </div>
+    <button type="button" id="addImageButton">Добавить еще фото</button>
+    <input type="submit" class="sendProduct"  value="Добавить в каталог" />
 </form>
+<div id="loadingSpinner" class="loading-spinner" style="display: none;">
+    <div class="spinner"></div>
+</div>
 
 <script src="/js/admin-editor.js"></script>
 <script src="/js/uploadPhotos.js"></script>

@@ -1,12 +1,46 @@
-function increaseQuantity(button) {
-    const liElement = button.closest('li');
-    const productName = liElement.querySelector('.name').innerText;
+// function increaseQuantity(button, productId) {
+//     const liElement = button.closest('li'); // Находим li элемент
+//     // const productId = liElement.getAttribute('data-product-id'); // Получаем id продукта
+//     const currentPageElementBasket = document.getElementById("currentPageBasket");
+//     const numberInBasket = liElement.querySelector('.number-in-basket'); // Количество товара
+//     const basketIncrease = {
+//         productId: parseInt(productId), // Используем id товара вместо имени
+//         page: parseInt(currentPageElementBasket.innerText) // Обязательно преобразуем в число
+//     };
+//
+//
+//     fetch('/basket/increase', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json', // Указываем правильный тип
+//         },
+//         body: JSON.stringify(basketIncrease) // Отправляем JSON-строку
+//     })
+//         .then(response => {
+//             if (response.ok) {
+//                 let currentValue = parseInt(numberInBasket.innerText) || 0;
+//                 numberInBasket.innerText = currentValue + 1;
+//                 return response.json(); // Нужно вернуть response.json() для дальнейшего использования
+//             } else {
+//                 console.error('Ошибка при увеличении количества товара');
+//             }
+//         })
+//         .then(data => {
+//             updateBasketCatalog(data.items); // Обновляем данные корзины
+//         })
+//         .catch(error => console.error('Ошибка: ', error));
+// }
+
+function increaseQuantity(button, productId) {
+    const liElement = button.closest('li'); // Находим li элемент
     const currentPageElementBasket = document.getElementById("currentPageBasket");
-    const numberInBasket = liElement.querySelector('.number-in-basket');
+    const numberInBasket = liElement.querySelector('.number-in-basket'); // Количество товара
+
     const basketIncrease = {
-        productName: productName,
-        page: parseInt(currentPageElementBasket.innerText) // Обязательно преобразуйте в число
+        productId: parseInt(productId), // Используем id товара вместо имени
+        page: parseInt(currentPageElementBasket.innerText) // Обязательно преобразуем в число
     };
+
     fetch('/basket/increase', {
         method: 'POST',
         headers: {
@@ -15,31 +49,66 @@ function increaseQuantity(button) {
         body: JSON.stringify(basketIncrease) // Отправляем JSON-строку
     })
         .then(response => {
-            console.log(response)
-            if (response.ok) {
-                console.log('Количество товара увеличено');
-                let currentValue = parseInt(numberInBasket.innerText) || 0;
-                numberInBasket.innerText = currentValue + 1;
-                return response.json(); // Нужно вернуть response.json() для дальнейшего использования
-            } else {
-                console.error('Ошибка при увеличении количества товара');
+            if (!response.ok) {
+                return response.json().then(data => {
+                    // Обработка ошибки
+                    showWarningMessage(data); // Выводим сообщение об ошибке
+                    throw new Error(data);
+                });
             }
+            let currentValue = parseInt(numberInBasket.innerText) || 0;
+            numberInBasket.innerText = currentValue + 1;
+            return response.json(); // Нужно вернуть response.json() для дальнейшего использования
         })
         .then(data => {
-            updateBasketCatalog(data.items);
+            updateBasketCatalog(data.items); // Обновляем данные корзины
         })
-        .catch(error => console.error('Ошибка: ', error));
+        .catch(error => console.log('Ошибка: ', error));
+}
+function showWarningMessage(message) {
+    // Создаем или находим элемент для предупреждений
+    let warningElement = document.getElementById('warningMessage');
+    if (!warningElement) {
+        warningElement = document.createElement('div');
+        warningElement.id = 'warningMessage';
+        warningElement.style.position = 'fixed';
+        warningElement.style.top = '10px';
+        warningElement.style.right = '10px';
+        warningElement.style.backgroundColor = '#f8d7da';
+        warningElement.style.color = '#721c24';
+        warningElement.style.padding = '10px';
+        warningElement.style.border = '1px solid #f5c6cb';
+        warningElement.style.borderRadius = '5px';
+        warningElement.style.zIndex = '1000';
+        document.body.appendChild(warningElement);
+    }
+
+    // Устанавливаем текст предупреждения
+    warningElement.innerText = message;
+
+    // Показываем предупреждение на 5 секунд, затем скрываем
+    warningElement.style.display = 'block';
+    setTimeout(() => {
+        warningElement.style.display = 'none';
+    }, 5000);
 }
 
 
-function decreaseQuantity(button) {
-    const liElement = button.closest('li');
-    const productName = liElement.querySelector('.name').innerText;
-    const numberInBasket = liElement.querySelector('.number-in-basket');
+function decreaseQuantity(button, productId) {
+    const liElement = button.closest('li'); // Находим li элемент
+    // const productId = liElement.getAttribute('data-product-id'); // Получаем id продукта
+    const numberInBasket = liElement.querySelector('.number-in-basket'); // Количество товара
     const currentPageElementBasket = document.getElementById("currentPageBasket");
     let currentPage = parseInt(currentPageElementBasket.innerText, 10);
+
+    // Проверка на наличие элемента numberInBasket
+    if (!numberInBasket) {
+        console.error('Элемент с классом number-in-basket не найден в DOM');
+        return;
+    }
+
     const basketDecrease = {
-        productName: productName,
+        productId: parseInt(productId), // Используем id товара вместо имени
         page: currentPage
     };
 
@@ -57,74 +126,69 @@ function decreaseQuantity(button) {
             return response.json();
         })
         .then(data => {
-            // Обновляем отображение корзины
-            updateBasketCatalog(data.items);
+            updateBasketCatalog(data.items); // Обновляем данные корзины
 
-            // Если есть элементы, уменьшаем их количество на экране
-            if (data.items.length > 0) {
-                console.log('Количество товара уменьшено');
-                let currentValue = parseInt(numberInBasket.innerText) || 0;
-                let newValue = Math.max(0, currentValue - 1);
-                numberInBasket.innerText = newValue;
+            let currentValue = parseInt(numberInBasket.innerText) || 0;
+            let newValue = Math.max(0, currentValue - 1);
+            numberInBasket.innerText = newValue;
 
-                if (newValue <= 0) {
-                    liElement.remove();
-                }
-
-                const totalPages = data.totalPages;
-                checkPaginationButtonsBasket(currentPage, totalPages);
-            } else {
-                // Если на текущей странице нет элементов, переходим на предыдущую страницу
-                if (currentPage > 1) {
-                    loadBasketProducts(currentPage - 1);
-                } else {
-                    // Если нет предыдущей страницы и корзина пуста
-                    alert('Корзина пуста');
-                }
+            if (newValue <= 0) {
+                liElement.remove(); // Удаляем товар из DOM, если количество стало 0
             }
+
+            const totalPages = data.totalPages;
+            checkPaginationButtonsBasket(currentPage, totalPages);
         })
         .catch(error => console.error('Ошибка: ', error));
 }
-
 function updateBasketCatalog(items) {
-    // const itemsContainer = document.querySelector('#itemsContainer');
+    const itemsContainer = document.querySelector('#itemsContainer');
     const productsBasket = document.querySelector('.productsBasket');
-    const orderNav = document.querySelector('.order-nav')
-    const contactForm = document.querySelector('.contact-form')
+    const orderNav = document.querySelector('.order-nav');
+    const contactForm = document.querySelector('.contact-form');
     itemsContainer.innerHTML = '';
 
     if (items.length === 0) {
-        // Если элементов нет, показать сообщение
-        orderNav.style.display = "none"
-        contactForm.style.display = "none"
-        productsBasket.innerHTML = '<p class="basket-empty">Корзина пуста</p>';
+        orderNav.style.display = "none";
+        contactForm.style.display = "none";
+        productsBasket.innerHTML = `
+        <div class="empty-basket-wrapper">
+            <p class="basket-empty">Корзина пуста</p>
+        </div>`;
         return;
     }
+
+    orderNav.style.display = "flex"; // Показываем навигационную панель на десктопах
+    contactForm.style.display = "block"; // Показываем форму контакта
 
     items.forEach(item => {
         const listItem = document.createElement('li');
         listItem.classList.add('order-products');
 
+        // Ensure the fields match what your backend sends
         listItem.innerHTML = `
             <div class="item-sel">
-                <span class="name">${item.name}</span>
+                <strong>Название:</strong> ${item.name || 'N/A'}
             </div>
             <div class="item-sel">
-                <span class="article">${item.article}</span>
+                <strong>Артикул:</strong> ${item.article || 'N/A'}
             </div>
             <div class="item-sel">
-                <span class="number-in-stock">${item.price}</span>
+                <strong>Цена:</strong> ${item.price ? item.price + ' руб.' : 'N/A'}
             </div>
             <div class="item-sel">
-                <button class="decrease-key" onclick="decreaseQuantity(this)">-</button>
-                <span class="number-in-basket">${item.inBasket}</span>
-                <button class="increase-key" onclick="increaseQuantity(this)">+</button>
+                <strong>В корзине:</strong>
+                <button class="decrease-key" onclick="decreaseQuantity(this, ${item.id})">-</button>
+                <span class="number-in-basket">${item.quantity || 1}</span>
+                <button class="increase-key" onclick="increaseQuantity(this,${item.id})">+</button>
             </div>
         `;
 
         itemsContainer.appendChild(listItem);
     });
 }
+
+
 
 function checkPaginationButtonsBasket(currentPage, totalPages) {
     const prevPageBasket = document.getElementById("prevPageBasket");
@@ -159,20 +223,29 @@ function serializeAndSendData() {
 
     let basket = {};
     document.querySelectorAll('.order-products').forEach(item => {
-        const name = item.querySelector('.name').innerText;
+        const productId = parseInt(item.getAttribute('data-product-id')); // Получаем ID товара из атрибута
+        const name = item.querySelector('.item-sel strong').innerText; // Извлекаем имя товара
         const quantity = parseInt(item.querySelector('.number-in-basket').innerText) || 0;
-        const article = item.querySelector('.article').innerText;
-        const price = parseFloat(item.querySelector('.number-in-stock').innerText) || 0;
-        const inStock = parseInt(item.querySelector('.number-in-stock').innerText) || 0;
+        const article = item.querySelector('.item-sel:nth-child(2)').innerText;
+        const price = parseFloat(item.querySelector('.item-sel:nth-child(3)').innerText) || 0;
+        const inStock = parseInt(item.querySelector('.item-sel:nth-child(4)').innerText) || 0;
 
-        basket[name] = [quantity, "Unknown Category", article, price, inStock];
+        basket[productId] = {
+            "quantity": quantity,
+            "name": name,
+            "article": article,
+            "price": price,
+            "inStock": inStock
+        };
     });
 
     const orderData = {
         basket: basket,
         contact: contactInfo
     };
+
     showLoadingSpinner();
+
     fetch('/SendOrder', {
         method: 'POST',
         headers: {
@@ -202,7 +275,7 @@ function serializeAndSendData() {
 
 
 function loadBasketProducts(page = 1) {
-    const url = `/basket/products?page=${page}&size=5`;
+    const url = `/basket/products?page=${page}&size=8`;
     fetch(url)
         .then(response => response.json())
         .then(data => {

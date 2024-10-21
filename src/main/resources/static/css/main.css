@@ -800,7 +800,10 @@ header nav ul li.active {
     margin-top: 20px;
 }
 .add-to-cart-btn {
+    margin: 10px auto ;
+    width: 90%;
     position: relative;
+    border-radius: 15px;
     z-index: 2;
 }
 

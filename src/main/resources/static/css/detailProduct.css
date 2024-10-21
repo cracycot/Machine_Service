@@ -636,3 +636,48 @@ header nav ul li.active {
         font-size:  clamp(15px, 1.25vw, 40px);
     }
 }
+
+
+/*MODAL*/
+
+/* Модальное окно (скрыто по умолчанию) */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Зафиксировано на экране */
+    z-index: 1000; /* Поверх всех элементов */
+    padding-top: 100px; /* Отступ сверху */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    background-color: rgba(0, 0, 0, 0.8); /* Черный фон с прозрачностью */
+}
+
+/* Содержимое модального окна (увеличенное изображение) */
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+/* Закрывающая кнопка (X) */
+.close-modal {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Текст описания */
+#caption {
+    margin: auto;
+    display: block;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}

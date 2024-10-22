@@ -1,0 +1,878 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&family=Wix+Madefor+Display:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+html {
+    scroll-behavior: smooth;
+    font-family: 'Plex', sans-serif;
+}
+body {
+    background: linear-gradient(to bottom, #283277, #ffffff);
+
+}
+input {
+    -webkit-user-select: text;  /* Для браузеров на базе WebKit (Chrome, Safari) */
+    -moz-user-select: text;     /* Для Firefox */
+    -ms-user-select: text;      /* Для Internet Explorer и Edge */
+    user-select: text;          /* Современный стандарт подумать над этим*/
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400  ;
+}
+h2 {
+    font-weight: 200;
+}
+a {
+    text-decoration: none;
+
+}
+img {
+    max-width: 100%  ;
+}
+header nav {
+    float: revert ;
+    /*width: 50%;*/
+}
+header nav ul {
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+}
+header nav ul li {
+    font-size: 20px;
+    display: inline-block;
+}
+header nav ul li a:hover {
+    border-bottom: 5px   solid #FBD784;
+}
+header nav ul li.active {
+    content: '';
+    display:   block;
+    width: 40px;
+    height: 5px;
+    background: #FBD784;
+    border-radius: 10px;
+
+}
+.button {
+    background:  #FBD784;
+    color: #fff;
+    border-radius:  50px;
+    padding: 15px 30px  ;
+    border:  0;
+    transition:  all 500ms ease;
+}
+.button:hover {
+    cursor: pointer;
+    transform:  scale(1.1);
+}
+
+.navbar { /* Ширина вашего sidebar */
+    width: 100%;
+    position: sticky;
+    top: 0;
+    height: 5vh;
+    background-color:white;/* Цвет фона вашей навигационной панели */
+    color: black; /* Цвет текста */
+    /*padding: 10px 0;*/
+    z-index: 1000;
+    /*text-align: center; !* Центрирование текста *!*/
+    /* Цвет фона вашего sidebar */
+}
+
+.navbar nav {
+    padding: 10px 10%;
+}
+.navbar #Busket {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.0rem;
+    /* или любой другой размер, который вам нужен */
+}
+.Number .bi {
+    color: black;
+    top: 55%;
+    right: 70.5%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 12px;
+}
+.line {
+    position: sticky;
+    top: 5vh; /* Высота вашего навигационного меню */
+    width: 100%;
+    height: 1px;
+    background-color: #283277;
+    z-index: 999;
+}
+
+@media (max-aspect-ratio: 4/3) {
+    .topBar {
+        height: 7.8vh;
+    }
+    .topBar .logo {
+        background-image: url("../img/logoPhone.png");
+    }
+}
+.topBar {
+    box-sizing: border-box;
+    position: relative;
+    height: 11vh;
+    left: 0;
+    top: 0;
+    background: #283277;
+    border: 1px solid #000000;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;            /* Use Flexbox */
+    align-items: center;      /* Center items vertically */
+    justify-content: space-between; /* Space out items horizontally */
+    padding: 0 8%;            /* Horizontal padding */
+}
+
+.topBar .logo {
+    width: 20%;               /* Width of the logo */
+    height: 80%;              /* Height of the logo */
+    background-image: url("../img/logoPc.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    border-radius: 15px;      /* Add rounded corners */
+}
+
+
+header nav {
+    float: revert ;
+    /*width: 50%;*/
+}
+header nav ul {
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+}
+header nav ul li {
+    font-size: 20px;
+    display: inline-block;
+}
+header nav ul li a:hover {
+    border-bottom: 5px   solid #FBD784;
+}
+header nav ul li.active {
+    content: '';
+    display:   block;
+    width: 40px;
+    height: 5px;
+    background: #FBD784;
+    border-radius: 10px;
+
+}
+.button {
+    background:  #FBD784;
+    color: #fff;
+    border-radius:  50px;
+    padding: 15px 30px  ;
+    border:  0;
+    transition:  all 500ms ease;
+}
+.button:hover {
+    cursor: pointer;
+    transform:  scale(1.1);
+}
+
+.navbar { /* Ширина вашего sidebar */
+    width: 100%;
+    position: sticky;
+    top: 0;
+    height: 5vh;
+    background-color:white;/* Цвет фона вашей навигационной панели */
+    color: black; /* Цвет текста */
+    /*padding: 10px 0;*/
+    z-index: 1000;
+    /*text-align: center; !* Центрирование текста *!*/
+    /* Цвет фона вашего sidebar */
+}
+
+.navbar nav {
+    padding: 10px 10%;
+}
+.navbar #Busket {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.0rem;
+    /* или любой другой размер, который вам нужен */
+}
+.Number .bi {
+    color: black;
+    top: 55%;
+    right: 70.5%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 12px;
+}
+.line {
+    position: sticky;
+    top: 5vh; /* Высота вашего навигационного меню */
+    width: 100%;
+    height: 1px;
+    background-color: #283277;
+    z-index: 999;
+}
+
+.topBar .whatsapp {
+    color: white; /* Задает белый цвет для нормального и посещенного состояния */
+    text-decoration: none
+}
+/* Медиа-запросы для мобильных устройств */
+@media (max-aspect-ratio: 4/3) {
+
+    .topBar .logo {
+        background-image: url(../img/logoPhone.png);
+    }
+
+    .topBar .Number {
+        font-size:1.1rem;
+    }
+    .navbar nav ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        height: 100%;
+        width: 100%; /* Элемент занимает полную ширину экрана */
+    }
+
+    .navbar #Busket {
+        font-size: 1.5rem;
+    }
+
+
+    .navbar nav {
+        padding: 5px;
+        justify-content: center;
+    }
+
+    .navbar {
+        height: 6vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar .bi {
+        color: black;
+        width: 4px;
+        height: 2px;
+    }
+
+    .navbar nav ul li {
+        font-size: 9px;
+        /*padding: 4px 7px;*/
+        white-space: nowrap; /* Предотвращает перенос текста */
+    }
+
+    .navbar #Busket {
+        position: relative;
+        top: 0;
+        transform: none;
+        /*font-size: 2.0rem;*/
+    }
+
+    .navbar {
+        height: 6vh;
+    }
+}
+
+.main-catalog {
+    margin-top: 5vh;
+    min-height: 25vh;
+}
+/* Общие стили для контейнера корзины */
+.container .productsBasket {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    /*background-color: #f9f9f9;*/
+    border-radius: 10px;
+    /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/
+    margin-top: 20px;
+    gap: 20px; /* Расстояние между блоками */
+}
+
+/* Контейнеры для контактов и корзины */
+.productsBasket .contact-form,
+.productsBasket .order-list-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+/* Специфические стили для формы контакта */
+.productsBasket .contact-form {
+    max-width: 300px; /* Ограничиваем максимальную ширину формы */
+    order: 1; /* Размещаем форму контакта слева */
+}
+
+.productsBasket .contact-form p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.productsBasket .contact-form input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* Кнопки оформления и очистки корзины */
+.productsBasket .contact-form .buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.productsBasket .contact-form .buttons-group button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FBD784;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.productsBasket .contact-form .buttons-group button:hover {
+    background-color: #e0b765;
+}
+
+/* Контейнер для списка заказов */
+.productsBasket .order-list-container {
+    flex: 3;
+    order: 2; /* Размещаем корзину справа */
+}
+
+/* Список заказов */
+.order-list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Навигационная панель (видна только на десктопах) */
+.order-list.desktop-nav {
+    display: block;
+}
+
+.order-list.desktop-nav .order-nav-ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.order-list.desktop-nav .order-nav-ul .item {
+    list-style-type: none; /* Убираем маркеры у всех параграфов характеристик */
+    font-weight: bold;
+    color: #000;
+    flex: 1;
+    text-align: center;
+    font-size: 16px; /* Увеличенный размер шрифта для лучшей читаемости */
+}
+
+/* Список товаров */
+.order-list-container .order-list .order-products {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.order-list-container .order-list .order-products:hover {
+    background-color: #f1f1f1;
+}
+
+.order-list-container .order-list .order-products .item-sel {
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.order-list-container .order-list .order-products .item-sel strong {
+    display: none; /* Скрываем заголовки на десктопах */
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.order-list-container .order-list .order-products .name,
+.order-list-container .order-list .order-products .article,
+.order-list-container .order-list .order-products .number-in-stock,
+.order-list-container .order-list .order-products .number-in-basket {
+    font-size: 16px;
+    color: #333;
+    word-wrap: break-word; /* Перенос длинных слов */
+}
+
+/* Кнопки увеличения и уменьшения количества */
+.order-list-container .order-list .order-products button.decrease-key,
+.order-list-container .order-list .order-products button.increase-key {
+    background-color: #FBD784;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.order-list-container .order-list .order-products button.decrease-key:hover,
+.order-list-container .order-list .order-products button.increase-key:hover {
+    background-color: #e0b765;
+}
+
+.order-list-container .order-list .order-products .number-in-basket {
+    margin: 0 10px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Пагинация */
+.productsBasket .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.productsBasket .pagination button {
+    background-color: #FBD784;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.productsBasket .pagination button:hover {
+    background-color: #e0b765;
+}
+
+.productsBasket .pagination span#currentPageBasket {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+    color: #333;
+}
+
+/* Сообщение о пустой корзине */
+/*.basket-empty {*/
+/*    !*background-color: white;*!*/
+/*    font-size: 18px;*/
+/*    color: #666;*/
+/*    text-align: center;*/
+/*    margin-top: 50px;*/
+/*}*/
+
+.empty-basket-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.basket-empty {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: bold;
+    margin: 0;
+}
+
+.empty-basket-wrapper::before {
+    content: '🛒'; /* Иконка корзины */
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #e0c65c;
+}
+
+
+/* Модальные окна */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal .modal-content {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.modal .modal-content p {
+    font-size: 18px;
+    color: #333;
+}
+
+.modal .modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal .modal-content .close:hover {
+    color: #000;
+}
+
+/* Анимация загрузки */
+.loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* background-color: rgba(255, 255, 255, 0.7); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    transform: translate(-50%, -50%);
+}
+
+
+.loading-spinner .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #FBD784;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+
+.Footer {
+    margin-top: 200px;
+    position: relative;
+    height: auto;
+    bottom: 0;
+    width: 100%;
+    background: #283277;
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.container-contact-list {
+    display: flex;
+    align-items: center;
+}
+
+.contact-list a {
+    color: inherit; /* Наследовать цвет родителя */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    border-bottom: 2px solid transparent; /* Изначально прозрачная линия */
+    transition: border-bottom 0.3s ease; /* Плавный переход */
+}
+
+.contact-list a:hover {
+    border-bottom: 2px solid #FBD784; /* Желтая линия при наведении */
+}
+
+.contact-list {
+    margin: 0 auto;
+    list-style-type: none; /* Убираем маркеры у всех параграфов характеристик */
+    display: flex;
+    padding: 0;
+    flex-direction: column; /* Располагаем все элементы вертикально */
+    align-items: flex-start;
+}
+
+.contact-list li {
+    display: flex; /* Выравниваем содержимое в строку */
+    align-items: center;
+    font-size: clamp(15px, 1.75vw, 60px);
+    margin: 10px 0;
+}
+
+.contact-list i {
+    margin-right: 10px;
+    color: #FBD784;
+}
+
+.phone-item {
+    display: flex;
+    align-items: center;
+}
+
+.phone-item .phone-numbers {
+    display: flex;
+    flex-direction: column; /* Размещаем номера вертикально */
+}
+
+.phone-item .main-phone {
+    /*font-size: clamp(20px, 2vw, 60px);*/
+}
+
+#mail {
+    user-select: all;
+}
+.phone-item .main-phone {
+    user-select: all;
+
+}
+.phone-item .second-phone-number {
+    user-select: all;
+    display: flex;
+    justify-content: flex-end;
+    font-size: clamp(15px, 1.4vw, 80px);
+    margin-top: 5px;
+}
+
+.yellow-line {
+    width: 100%;
+    height: 1px;
+    background-color: #FBD784;
+    margin: 5px 0;
+}
+
+.footer-container h2 {
+    font-size: clamp(18px, 3vw, 56px);
+    color: white;
+}
+
+@media (max-aspect-ratio: 4/3) {
+    .footer-container h2 {
+        font-size: clamp(18px, 2.75vw, 56px);
+    }
+    .contact-list li {
+        font-size: clamp(18px, 1.75vw, 50px);
+    }
+    .contact-list  {
+        font-size: clamp(18px, 1.75vw, 50px);
+    }
+    .phone-item .second-phone-number {
+        font-size:  clamp(15px, 1.25vw, 40px);
+    }
+
+    .productsBasket .contact-form {
+        max-width: 100%;
+    }
+
+    .productsBasket .basket {
+        font-size: 20px;
+    }
+
+    .order-list-container .order-list .order-nav-ul .item {
+        font-size: 14px;
+    }
+
+    .order-list-container .order-list .order-products .item-sel {
+        padding: 5px;
+    }
+
+    .order-list-container .order-list .order-products .name,
+    .order-list-container .order-list .order-products .article,
+    .order-list-container .order-list .order-products .number-in-stock,
+    .order-list-container .order-list .order-products .number-in-basket {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .contact-form input[type="text"] {
+        font-size: 14px;
+    }
+
+    .contact-form .buttons-group button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Увеличение размеров кнопок и интерактивных элементов */
+    .pagination button {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .pagination span#currentPageBasket {
+        font-size: 16px;
+    }
+
+    /* Улучшение читаемости товаров */
+    .order-list-container .order-list .order-products {
+        padding: 10px;
+    }
+
+    .order-list-container .order-list .order-products .name,
+    .order-list-container .order-list .order-products .article,
+    .order-list-container .order-list .order-products .number-in-stock,
+    .order-list-container .order-list .order-products .number-in-basket {
+        font-size: 16px;
+    }
+}
+
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Мобильная адаптация для корзины */
+@media (max-width: 1200px) {
+    .container .productsBasket {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .productsBasket .contact-form,
+    .productsBasket .order-list-container {
+        max-width: 100%;
+    }
+
+    /* Скрываем навигационную панель на мобильных устройствах */
+    .order-list.desktop-nav {
+        display: none;
+    }
+
+    /* Показываем заголовки характеристик внутри записей на мобильных устройствах */
+    .order-list-container .order-list .order-products .item-sel strong {
+        display: block; /* Показываем заголовки */
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .order-list-container .order-list .order-products {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-list-container .order-list .order-products .item-sel {
+        text-align: left;
+        padding: 5px 0;
+    }
+
+    .order-list-container .order-list .order-products .name,
+    .order-list-container .order-list .order-products .article,
+    .order-list-container .order-list .order-products .number-in-stock,
+    .order-list-container .order-list .order-products .number-in-basket {
+        font-size: 14px; /* Уменьшенный размер шрифта для мобильных */
+        line-height: 1.5; /* Увеличенный межстрочный интервал */
+    }
+
+    .contact-form .buttons-group {
+        flex-direction: column;
+    }
+
+    .contact-form .buttons-group button {
+        width: 100%;
+    }
+
+    /* Улучшение читаемости категорий и характеристик */
+    .order-list-container .order-list .order-products .item-sel {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .productsBasket .contact-form {
+        max-width: 100%;
+    }
+
+    .productsBasket .basket {
+        font-size: 20px;
+    }
+
+    .order-list-container .order-list .order-nav-ul .item {
+        font-size: 14px;
+    }
+
+    .order-list-container .order-list .order-products .item-sel {
+        padding: 5px;
+    }
+
+    .order-list-container .order-list .order-products .name,
+    .order-list-container .order-list .order-products .article,
+    .order-list-container .order-list .order-products .number-in-stock,
+    .order-list-container .order-list .order-products .number-in-basket {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .contact-form input[type="text"] {
+        font-size: 14px;
+    }
+
+    .contact-form .buttons-group button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Увеличение размеров кнопок и интерактивных элементов */
+    .pagination button {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .pagination span#currentPageBasket {
+        font-size: 16px;
+    }
+
+    /* Улучшение читаемости товаров */
+    .order-list-container .order-list .order-products {
+        padding: 10px;
+    }
+
+    .order-list-container .order-list .order-products .name,
+    .order-list-container .order-list .order-products .article,
+    .order-list-container .order-list .order-products .number-in-stock,
+    .order-list-container .order-list .order-products .number-in-basket {
+        font-size: 16px;
+    }
+}

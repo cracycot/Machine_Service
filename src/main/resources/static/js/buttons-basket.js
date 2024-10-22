@@ -1,36 +1,3 @@
-// function increaseQuantity(button, productId) {
-//     const liElement = button.closest('li'); // Находим li элемент
-//     // const productId = liElement.getAttribute('data-product-id'); // Получаем id продукта
-//     const currentPageElementBasket = document.getElementById("currentPageBasket");
-//     const numberInBasket = liElement.querySelector('.number-in-basket'); // Количество товара
-//     const basketIncrease = {
-//         productId: parseInt(productId), // Используем id товара вместо имени
-//         page: parseInt(currentPageElementBasket.innerText) // Обязательно преобразуем в число
-//     };
-//
-//
-//     fetch('/basket/increase', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json', // Указываем правильный тип
-//         },
-//         body: JSON.stringify(basketIncrease) // Отправляем JSON-строку
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 let currentValue = parseInt(numberInBasket.innerText) || 0;
-//                 numberInBasket.innerText = currentValue + 1;
-//                 return response.json(); // Нужно вернуть response.json() для дальнейшего использования
-//             } else {
-//                 console.error('Ошибка при увеличении количества товара');
-//             }
-//         })
-//         .then(data => {
-//             updateBasketCatalog(data.items); // Обновляем данные корзины
-//         })
-//         .catch(error => console.error('Ошибка: ', error));
-// }
-
 function increaseQuantity(button, productId) {
     const liElement = button.closest('li'); // Находим li элемент
     const currentPageElementBasket = document.getElementById("currentPageBasket");
@@ -165,24 +132,29 @@ function updateBasketCatalog(items) {
         const listItem = document.createElement('li');
         listItem.classList.add('order-products');
 
-        // Ensure the fields match what your backend sends
         listItem.innerHTML = `
-            <div class="item-sel">
-                <strong>Название:</strong> ${item.name || 'N/A'}
-            </div>
-            <div class="item-sel">
-                <strong>Артикул:</strong> ${item.article || 'N/A'}
-            </div>
-            <div class="item-sel">
-                <strong>Цена:</strong> ${item.price ? item.price + ' руб.' : 'N/A'}
-            </div>
-            <div class="item-sel">
-                <strong>В корзине:</strong>
-                <button class="decrease-key" onclick="decreaseQuantity(this, ${item.id})">-</button>
-                <span class="number-in-basket">${item.quantity || 1}</span>
-                <button class="increase-key" onclick="increaseQuantity(this,${item.id})">+</button>
-            </div>
+        <div class="item-sel">
+            <strong>Название:</strong> ${item.name || 'N/A'}
+        </div>
+        <div class="item-sel article">
+            <strong>Артикул:</strong> ${item.article || 'N/A'}
+        </div>
+        <div class="item-sel price">
+            <strong>Цена:</strong> ${item.price ? item.price + ' руб.' : 'N/A'}
+        </div>
+        <div class="item-sel">
+            <strong>В корзине:</strong>
+            <button class="decrease-key" onclick="decreaseQuantity(this, ${item.id})">-</button>
+            <span class="number-in-basket">${item.quantity || 1}</span>
+            <button class="increase-key" onclick="increaseQuantity(this, ${item.id})">+</button>
+        </div>
+        <div class="idProduct" style="display: none">${item.id}</div>
+        <div class="in-basket-form" style="display:none">${item.quantity}</div>
+        <div class="article-form" style="display:none">${item.article}</div>
+        <div class="name-form" style="display:none">${item.name}</div>
+        <div class="price-form" style="display:none">${item.price}</div>
         `;
+
 
         itemsContainer.appendChild(listItem);
     });
@@ -219,24 +191,18 @@ function clearBasket() {
 }
 
 function serializeAndSendData() {
-    const contactInfo = document.querySelector('input[name="contactInfo"]').value;
+    const contactInfo = document.querySelector('input[name="contactInfo"]').value.trim();
 
     let basket = {};
     document.querySelectorAll('.order-products').forEach(item => {
-        const productId = parseInt(item.getAttribute('data-product-id')); // Получаем ID товара из атрибута
-        const name = item.querySelector('.item-sel strong').innerText; // Извлекаем имя товара
-        const quantity = parseInt(item.querySelector('.number-in-basket').innerText) || 0;
-        const article = item.querySelector('.item-sel:nth-child(2)').innerText;
-        const price = parseFloat(item.querySelector('.item-sel:nth-child(3)').innerText) || 0;
-        const inStock = parseInt(item.querySelector('.item-sel:nth-child(4)').innerText) || 0;
+        const productId = item.querySelector('.idProduct').innerText; // Получаем ID товара
+        const name = item.querySelector('.name-form').innerText; // Название товара
+        const quantity = parseInt(item.querySelector('.in-basket-form').innerText) || 1; // Количество товара
+        const article = item.querySelector('.article-form').innerText; // Артикул товара
+        const price = parseFloat(item.querySelector('.price-form').innerText) || 0; // Цена товара
 
-        basket[productId] = {
-            "quantity": quantity,
-            "name": name,
-            "article": article,
-            "price": price,
-            "inStock": inStock
-        };
+        // Используем productId в качестве ключа и массив атрибутов в качестве значения
+        basket[productId] = [quantity, name, article, price];
     });
 
     const orderData = {
@@ -245,6 +211,7 @@ function serializeAndSendData() {
     };
 
     showLoadingSpinner();
+
 
     fetch('/SendOrder', {
         method: 'POST',
@@ -255,7 +222,6 @@ function serializeAndSendData() {
     })
         .then(response => {
             hideLoadingSpinner();
-
             if (response.ok) {
                 showOrderModal("success");
                 clearBasket();
@@ -269,7 +235,6 @@ function serializeAndSendData() {
             console.error('Ошибка:', error);
             showOrderModal('error');
         });
-
     return false;
 }
 

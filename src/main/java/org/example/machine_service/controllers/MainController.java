@@ -80,7 +80,7 @@ public class MainController {
 
     @PostMapping("/SendOrder")
     public ResponseEntity<Object> sendOrder(@Valid @RequestBody OrderRequest orderRequest) {
-        HashMap<String, List<Object>> basket = orderRequest.getBasket();
+        HashMap<Long, List<Object>> basket = orderRequest.getBasket();
         String contact = orderRequest.getContact();
 
         if (basket == null || basket.isEmpty() || contact == null || contact.isEmpty()) {
@@ -97,15 +97,15 @@ public class MainController {
 
     // Внутренний класс для десериализации
     private static class OrderRequest {
-        private HashMap<String, List<Object>> basket;
+        private HashMap<Long, List<Object>> basket;
         private String contact;
 
         // Геттеры и сеттеры
-        public HashMap<String, List<Object>> getBasket() {
+        public HashMap<Long, List<Object>> getBasket() {
             return basket;
         }
 
-        public void setBasket(HashMap<String, List<Object>> basket) {
+        public void setBasket(HashMap<Long, List<Object>> basket) {
             this.basket = basket;
         }
 

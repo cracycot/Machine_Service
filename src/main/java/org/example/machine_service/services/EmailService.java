@@ -42,19 +42,20 @@ public class EmailService {
         mailSender.send(mimeMessage);
     }
 
-    public void sendOrder(HashMap<String, List<Object>> basket, String contact) {
+    public void sendOrder(HashMap<Long, List<Object>> basket, String contact) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             StringBuilder htmlContent = new StringBuilder("<h3>Заказ</h3>" + "<ul>");
 
             // Customize the HTML content
-            for (String key : basket.keySet()) {
+            for (Long key : basket.keySet()) {
                 List<Object> value = basket.get(key);
-                htmlContent.append("<li>" + "<p><strong>Название товара:</strong> ").append(key).append("</p>")
+                System.out.println(value);
+                htmlContent.append("<li>" + "<p><strong>Название товара:</strong> ").append(value.get(1)).append("</p>")
                         .append("<p><strong>Кол-во</strong> ").append(value.get(0)).append("</p>")
-                        .append("<p><strong>Бренд</strong> ").append(value.get(1)).append("</p>")
-                        .append("<p><strong>Цена</strong> ").append(value.get(2)).append("</p>").append("</li>");
+                        .append("<p><strong>Артикул</strong> ").append(value.get(2)).append("</p>")
+                        .append("<p><strong>Цена</strong> ").append(value.get(3)).append("</p>").append("</li>");
             }
             htmlContent.append("</ul>" + "<p><strong>Контакты</strong> ").append(contact).append("</p>");
 

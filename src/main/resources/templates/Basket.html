@@ -1,16 +1,192 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <title>Корзина</title>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="icon" href="../img/Logo.png" type="image/x-icon">-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/basket.css">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=1.0">&ndash;&gt;-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header class="topBar">-->
+<!--    <picture class="logo"></picture>-->
+<!--    <h1 class="Number">-->
+<!--        <a href="https://wa.me/+79110272500" class="whatsapp">-->
+<!--            <i class="bi bi-telephone-fill"></i>-->
+<!--            +79110272500-->
+<!--        </a>-->
+<!--    </h1>-->
+<!--</header>-->
+<!--<div class="container">-->
+<!--    <header class="navbar">-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li><a href="/#Block1">Обслуживание</a></li>-->
+<!--                <li><a href="/#Block2">Диагностика и ремонт</a></li>-->
+<!--                <li><a href="/#Block3">Консультации</a></li>-->
+<!--                <li><a th:href="@{/Catalog}">Запчасти</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </header>-->
+<!--    <div class="line"></div>-->
+<!--    <div class="productsBasket">-->
+<!--        <div class="basket">Корзина</div>-->
+<!--        <div class="contact-form">-->
+<!--            <form class="contact-form-submit" onsubmit="return serializeAndSendData()">-->
+<!--                <p>Введите вашу почту/телефон:</p>-->
+<!--                <input type="text" name="contactInfo" placeholder="Email или телефон" required>-->
+<!--                <div class="buttons-group">-->
+<!--                    <button class="send-order" type="button" onclick="serializeAndSendData()">Оформить заказ</button>-->
+<!--                    <button class="clear-basket" type="button" onclick="clearBasket()">Очистить корзину</button>-->
+<!--                </div>&lt;!&ndash; Clear Basket Button &ndash;&gt;-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <ul class="order-list">-->
+<!--            <div class="order-nav">-->
+<!--                <ul class="order-nav-ul">-->
+<!--                    <li class="item">Название</li>-->
+<!--                    <li class="item">Артикул</li>-->
+<!--                    <li class="item">Цена</li>-->
+<!--                    <li class="item">В корзине</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <span id="totalPages" style="display: none;" th:text= "${totalPages}"></span>-->
+<!--            <span id="currentPage" style="display: none;">1</span>-->
+<!--            <div id="itemsContainer">-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Пагинация &ndash;&gt;-->
+<!--            <div class="pagination">-->
+<!--                <button id="prevPageBasket">Предыдущая</button>-->
+<!--                <span id="currentPageBasket">1</span>-->
+<!--                <button id="nextPageBasket">Следующая</button>-->
+<!--            </div>-->
+<!--        </ul>-->
+<!--        <div id="loadingSpinner" class="loading-spinner" style="display: none;">-->
+<!--            <div class="spinner"></div>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--    <div id="orderModal" class="modal" style="display:none;">-->
+<!--        <div class="modal-content">-->
+<!--            <p></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="FooterBid"></div>-->
+<!--<script src="/js/buttons-basket.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <title>Корзина</title>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="icon" href="../img/Logo.png" type="image/x-icon">-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/basket.css">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header class="topBar">-->
+<!--    <picture class="logo"></picture>-->
+<!--    <h1 class="Number">-->
+<!--        <a href="https://wa.me/+79110272500" class="whatsapp">-->
+<!--            <i class="bi bi-telephone-fill"></i>-->
+<!--            +79110272500-->
+<!--        </a>-->
+<!--    </h1>-->
+<!--</header>-->
+<!--<div class="container">-->
+<!--    <header class="navbar">-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li><a href="/#Block1">Обслуживание</a></li>-->
+<!--                <li><a href="/#Block2">Диагностика и ремонт</a></li>-->
+<!--                <li><a href="/#Block3">Консультации</a></li>-->
+<!--                <li><a th:href="@{/Catalog}">Запчасти</a></li>-->
+<!--                <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id="Busket"></a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </header>-->
+<!--    <div class="line"></div>-->
+<!--    <div class="main-catalog" id="catalog">-->
+<!--        <div class="productsBasket">-->
+<!--            &lt;!&ndash; Контейнер формы контакта &ndash;&gt;-->
+<!--            <div class="contact-form">-->
+<!--                <form class="contact-form-submit" onsubmit="return serializeAndSendData()">-->
+<!--                    <p>Введите вашу почту/телефон:</p>-->
+<!--                    <input type="text" name="contactInfo" placeholder="Email или телефон" required>-->
+<!--                    <div class="buttons-group">-->
+<!--                        <button class="send-order" type="button" onclick="serializeAndSendData()">Оформить заказ</button>-->
+<!--                        <button class="clear-basket" type="button" onclick="clearBasket()">Очистить корзину</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Контейнер списка заказов &ndash;&gt;-->
+<!--            <div class="order-list-container">-->
+<!--                <span id="totalPages" style="display: none;" th:text="${totalPages}"></span>-->
+<!--                <span id="currentPage" style="display: none;">1</span>-->
+<!--                <ul class="order-list">-->
+<!--                    <li class="order-nav">-->
+<!--                        <ul class="order-nav-ul">-->
+<!--                            <li class="item">Название</li>-->
+<!--                            <li class="item">Артикул</li>-->
+<!--                            <li class="item">Цена</li>-->
+<!--                            <li class="item">В корзине</li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <div id="itemsContainer">-->
+<!--                        &lt;!&ndash; Здесь будут динамически загружаться элементы корзины &ndash;&gt;-->
+<!--                    </div>-->
+<!--                </ul>-->
+
+<!--                &lt;!&ndash; Пагинация &ndash;&gt;-->
+<!--                <div class="pagination">-->
+<!--                    <button id="prevPageBasket">Предыдущая</button>-->
+<!--                    <span id="currentPageBasket">1</span>-->
+<!--                    <button id="nextPageBasket">Следующая</button>-->
+<!--                </div>-->
+<!--                <div id="loadingSpinner" class="loading-spinner" style="display: none;">-->
+<!--                    <div class="spinner"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Модальные окна &ndash;&gt;-->
+<!--            <div id="orderModal" class="modal" style="display:none;">-->
+<!--                <div class="modal-content">-->
+<!--                    <span class="close" onclick="closeModal()">&times;</span>-->
+<!--                    <p></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="FooterCatalog"></div>-->
+<!--    &lt;!&ndash; Подключение скриптов &ndash;&gt;-->
+<!--    <script src="/js/buttons-basket.js"></script>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <title>Корзина</title>
     <meta charset="UTF-8">
     <link rel="icon" href="../img/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/basket.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <header class="topBar">
-    <picture class="logo" src="../img/Logo.png"></picture>
+    <picture class="logo"></picture>
     <h1 class="Number">
         <a href="https://wa.me/+79110272500" class="whatsapp">
             <i class="bi bi-telephone-fill"></i>
@@ -26,55 +202,92 @@
                 <li><a href="/#Block2">Диагностика и ремонт</a></li>
                 <li><a href="/#Block3">Консультации</a></li>
                 <li><a th:href="@{/Catalog}">Запчасти</a></li>
+                <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id="Busket"></a></li>
             </ul>
         </nav>
     </header>
     <div class="line"></div>
-    <div class="productsBasket">
-        <div class="basket">Корзина</div>
-        <div class="contact-form">
-            <form class="contact-form-submit" onsubmit="return serializeAndSendData()">
-                <p>Введите вашу почту/телефон:</p>
-                <input type="text" name="contactInfo" placeholder="Email или телефон" required>
-                <div class="buttons-group">
-                    <button class="send-order" type="button" onclick="serializeAndSendData()">Оформить заказ</button>
-                    <button class="clear-basket" type="button" onclick="clearBasket()">Очистить корзину</button>
-                </div><!-- Clear Basket Button -->
-            </form>
+    <div class="main-catalog" id="catalog">
+        <div class="productsBasket">
+            <!-- Контейнер формы контакта -->
+            <div class="contact-form">
+                <form class="contact-form-submit" onsubmit="return serializeAndSendData()">
+                    <p>Введите вашу почту/телефон:</p>
+                    <input type="text" name="contactInfo" placeholder="Email или телефон" required>
+                    <div class="buttons-group">
+                        <button class="send-order" type="button" onclick="serializeAndSendData()">Оформить заказ</button>
+                        <button class="clear-basket" type="button" onclick="clearBasket()">Очистить корзину</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Контейнер списка заказов -->
+            <div class="order-list-container">
+                <!-- Навигационная панель (видна только на десктопах) -->
+                <ul class="order-list desktop-nav">
+                    <li class="order-nav">
+                        <ul class="order-nav-ul">
+                            <li class="item">Название</li>
+                            <li class="item">Артикул</li>
+                            <li class="item">Цена</li>
+                            <li class="item">В корзине</li>
+                        </ul>
+                    </li>
+                </ul>
+                <span id="totalPages" style="display: none;" th:text="${totalPages}"></span>
+                <span id="currentPage" style="display: none;">1</span>
+                <ul class="order-list mobile-list">
+                    <div id="itemsContainer">
+                    </div>
+                </ul>
+
+                <!-- Пагинация -->
+                <div class="pagination">
+                    <button id="prevPageBasket">Предыдущая</button>
+                    <span id="currentPageBasket">1</span>
+                    <button id="nextPageBasket">Следующая</button>
+                </div>
+                <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Модальные окна -->
+            <div id="orderModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <p></p>
+                </div>
+            </div>
         </div>
-        <ul class="order-list">
-            <div class="order-nav">
-                <ul class="order-nav-ul">
-                    <li class="item">Название</li>
-                    <li class="item">Артикул</li>
-                    <li class="item">Цена</li>
-                    <li class="item">В корзине</li>
+    </div>
+    <div class="Footer">
+        <div class="footer-container">
+            <h2>Контакты</h2>
+            <div class="container-contact-list">
+                <ul class="contact-list">
+                    <li>
+                        <i class="bi bi-envelope-fill" id="mail"></i>
+                        <a href="mailto:spb.motorservice@yandex.ru">spb.motorservice@yandex.ru</a>
+                    </li>
+                    <li class="phone-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <div class="phone-numbers">
+                            <div class="main-phone">
+                                <a href="tel:+79110272500">+7 911 027-25-00</a>
+                            </div>
+                            <div class="yellow-line"></div>
+                            <div class="second-phone-number">
+                                <a href="tel:+79117202500">+7 911 720-25-00</a>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <span id="totalPages" style="display: none;" th:text= "${totalPages}"></span>
-            <span id="currentPage" style="display: none;">1</span>
-            <div id="itemsContainer">
-            </div>
-
-            <!-- Пагинация -->
-            <div class="pagination">
-                <button id="prevPageBasket">Предыдущая</button>
-                <span id="currentPageBasket">1</span>
-                <button id="nextPageBasket">Следующая</button>
-            </div>
-        </ul>
-        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
-            <div class="spinner"></div>
-        </div>
-
-    </div>
-    <div id="orderModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <p></p>
         </div>
     </div>
+    <!-- Подключение скриптов -->
+    <script src="/js/buttons-basket.js"></script>
 </div>
-<div class="FooterBid"></div>
-<script src="/js/buttons-basket.js"></script>
 </body>
 </html>

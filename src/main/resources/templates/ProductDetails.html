@@ -18,15 +18,41 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
 <body id="bodyCatalog">
+<head>
+    <title>Корзина</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../img/Logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
 <header class="topBar">
-    <picture class="logo"></picture>
-    <h1 class="Number">
-        <a href="https://wa.me/+79110272500" class="whatsapp">
-            <i class="bi bi-telephone-fill"></i>
-            +79110272500
-        </a>
-    </h1>
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="../img/Logo.png" alt="Motor Service Logo" class="logo">
+    </div>
+
+    <!-- Information -->
+    <div class="info-container">
+        <p class="slogan">С заботой о вашем двигателе</p>
+        <p class="contact-details">
+            <a href="tel:+79110272500">+7 (911) 027-25-00</a><br>
+            <a href="tel:+79117202500">+7 (911) 720-25-00</a><br>
+            <a href="mailto:spb.motorservice@yandex.ru">spb.motorservice@yandex.ru</a><br>
+            <span class="nationwide">Работаем по всей России</span>
+        </p>
+    </div>
 </header>
+</body>
+
+<!--<header class="topBar">-->
+<!--    <picture class="logo"></picture>-->
+<!--    <h1 class="Number">-->
+<!--        <a href="https://wa.me/+79110272500" class="whatsapp">-->
+<!--            <i class="bi bi-telephone-fill"></i>-->
+<!--            +79110272500-->
+<!--        </a>-->
+<!--    </h1>-->
+<!--</header>-->
 <div class="container2">
     <header class="navbar">
         <nav>
@@ -73,6 +99,13 @@
             <div class="help-line-after"></div>
             <button class="add-to-cart-btn1">Добавить в корзину</button>
         </div>
+        <!-- Модальное окно для просмотра изображения -->
+        <div id="imageModal" class="modal" style="display: none">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <div id="caption"></div>
+        </div>
+
 
     </div>
     <div id="productId" style="display: none;" th:text="${product.id}"></div>

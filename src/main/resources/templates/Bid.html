@@ -11,7 +11,7 @@
 </head>
 <body>
 <header class = "topBar">
-    <picture class ="logo" src="../img/Logo.png"> </picture>
+    <picture class ="logo"> </picture>
     <h1 class="Number">
         <a href="https://wa.me/+79110272500" class="whatsapp">
             <i class="bi bi-telephone-fill"></i>
@@ -26,36 +26,39 @@
                 <li><a th:href="@{/#Block1}">Обслуживание</a></li>
                 <li><a th:href="@{/#Block2}">Диагностика и ремонт</a></li>
                 <li><a th:href="@{/#Block3}">Консультации</a></li>
-                <li><a th:href="@{/#Block4}" >Запчасти</a></li><!--                    <i class="bi bi-cart-fill"></i>-->
+                <li><a th:href="@{/Catalog}">Запчасти</a></li><!--                    <i class="bi bi-cart-fill"></i>-->
                 <li><a th:href="@{/Basket}" class="bi bi-cart-fill icon-large" id= "Busket" ></a></li>
             </ul>
         </nav>
     </header>
     <div class="line"></div>
     <div class = "mainBlogBid">
-        <form class="SendForm" action="#" th:object="${sendForm}" method="post">
+        <form class="SendForm" action="#" method="post">
             <div>Оформление заявки</div>
-            <input type="text" placeholder="Введите ваше имя" th:field="*{name}" id="Name"/>
-            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+            <input type="text" placeholder="Введите ваше имя" name="name" id="name"/>
+            <div class="error" id="nameError"></div>
             <br/>
 
-            <input type="text" placeholder="Введите номер двигателя" th:field="*{motor_number}" id="motorNumber"/>
+            <input type="text" placeholder="Введите номер двигателя" name="motorNumber" id="motorNumber"/>
+            <div class="error" id="motorNumberError"></div>
             <br/>
 
-            <input type="number" placeholder="Введите номер телефона" th:field="*{phone_number}" id="PhoneNumber"/>
-            <div th:if="${#fields.hasErrors('phone_number')}" th:errors="*{phone_number}" class="error"></div>
+            <input type="text" placeholder="Введите номер телефона" name="phoneNumber" id="phoneNumber"/>
+            <div class="error" id="phoneNumberError"></div>
             <br/>
 
-            <input type="email" class="text-field__input" placeholder="Введите вашу почту" th:field="*{email}" id="email"/>
-            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+            <input type="email" placeholder="Введите вашу почту" name="email" id="email"/>
+            <div class="error" id="emailError"></div>
             <br/>
 
-            <textarea placeholder="Опишите проблему" th:field="*{description}" id="Problem"></textarea>
-            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error"></div>
+            <textarea placeholder="Опишите проблему" name="description" id="description"></textarea>
+            <div class="error" id="descriptionError"></div>
             <br/>
 
             <button type="submit">Отправить заявку</button>
         </form>
+
     </div>
     <div id="loadingSpinner" class="loading-spinner" style="display: none;">
         <div class="spinner"></div>
